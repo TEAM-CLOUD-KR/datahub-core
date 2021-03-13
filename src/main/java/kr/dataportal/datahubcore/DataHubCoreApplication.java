@@ -12,8 +12,8 @@ public class DataHubCoreApplication {
 				.properties("" +
 						"spring.config.location=" +
 						"classpath:/application.yml," +
-						"optional:C:/repository/_secrets/c4k-blog.yml," +
-						"optional:/home/datahub/_secrets/c4k-blog.yml"
+						"optional:C:/repository/_secrets/datahub-core.yml," +
+						"optional:/home/datahub/_secrets/datahub-core.yml"
 				)
 				.run(args);
 	}
