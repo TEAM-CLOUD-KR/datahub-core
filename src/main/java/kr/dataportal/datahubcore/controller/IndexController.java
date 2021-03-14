@@ -11,15 +11,19 @@
 
 package kr.dataportal.datahubcore.controller;
 
-import kr.dataportal.datahubcore.entity.Test;
+import kr.dataportal.datahubcore.domain.DataSetGwanbo;
+import kr.dataportal.datahubcore.service.DataSetGwanboService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class IndexController {
+    private final DataSetGwanboService dataSetGwanboService;
 
     @GetMapping("/")
-    public Test Index() {
-        return new Test("taeyang", 100);
+    public DataSetGwanbo Index() {
+        return dataSetGwanboService.findOne("1317816664268000");
     }
 }
