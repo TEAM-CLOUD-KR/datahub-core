@@ -27,26 +27,12 @@ public class DataSetGwanbo {
     @Id
     private String id;
 
-    @Column(name = "publish_id", length = 45, nullable = false)
-    private String publishId;
 
-    @Column(name = "publish_title", length = 500, nullable = false)
-    private String publishTitle;
+    @Embedded
+    private Publish publish;
 
-    @Column(name = "publish_created_at", length = 8, nullable = false)
-    private String createdAt;
-
-    @Column(name = "publish_sequence", length = 45, nullable = true)
-    private String publishSequence;
-
-    @Column(name = "publish_author", length = 500, nullable = true)
-    private String publishAuthor;
-
-    @Column(name = "category_name", length = 45, nullable = false)
-    private String categoryName;
-
-    @Column(name = "category_id", length = 45, nullable = false)
-    private String categoryId;
+    @Embedded
+    private Category category;
 
     @Column(name = "binary", length = 255, nullable = false)
     private String binary;
