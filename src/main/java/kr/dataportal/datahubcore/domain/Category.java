@@ -11,10 +11,13 @@
 
 package kr.dataportal.datahubcore.domain;
 
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
+@Getter
 public class Category {
     @Column(name = "category_name", length = 45, nullable = false)
     private String categoryName;
