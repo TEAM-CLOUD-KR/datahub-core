@@ -11,17 +11,23 @@
 
 package kr.dataportal.datahubcore.domain.dataset;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Category {
     @Column(name = "category_name", length = 45, nullable = false)
-    private String categoryName;
+    private final String categoryName;
 
     @Column(name = "category_id", length = 45, nullable = false)
-    private String categoryId;
+    private final String categoryId;
+
+    public Category() {
+        this.categoryName = null;
+        this.categoryId = null;
+    }
 }

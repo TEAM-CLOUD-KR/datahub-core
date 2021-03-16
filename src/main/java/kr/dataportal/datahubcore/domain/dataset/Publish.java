@@ -11,26 +11,35 @@
 
 package kr.dataportal.datahubcore.domain.dataset;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Publish {
     @Column(name = "publish_id", length = 45, nullable = false)
-    private String id;
+    private final String id;
 
     @Column(name = "publish_title", length = 500, nullable = false)
-    private String title;
+    private final String title;
 
     @Column(name = "publish_created_at", length = 8, nullable = false)
-    private String createdAt;
+    private final String createdAt;
 
     @Column(name = "publish_sequence", length = 45, nullable = true)
-    private String sequence;
+    private final String sequence;
 
     @Column(name = "publish_author", length = 500, nullable = true)
-    private String author;
+    private final String author;
+
+    public Publish() {
+        this.id = null;
+        this.title = null;
+        this.createdAt = null;
+        this.sequence = null;
+        this.author = null;
+    }
 }

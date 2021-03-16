@@ -25,11 +25,15 @@ import java.util.List;
 public class DataSetGwanboService {
     private final DataSetGwanboRepository dataSetGwanboRepository;
 
-    public DataSetGwanbo findOne(String id) {
-        return dataSetGwanboRepository.findOne(id);
+    public DataSetGwanbo findById(String id) {
+        return dataSetGwanboRepository.findById(id);
     }
 
     public List<DataSetGwanbo> findAll() {
         return dataSetGwanboRepository.findAll();
+    }
+
+    public void save(DataSetGwanbo gwanbo) {
+        dataSetGwanboRepository.save(gwanbo);
     }
 }

@@ -24,7 +24,7 @@ public class DataSetGwanboRepository {
 
     private final EntityManager em;
 
-    public DataSetGwanbo findOne(String id) {
+    public DataSetGwanbo findById(String id) {
         List<DataSetGwanbo> gwanbos = em.createQuery("" +
                 " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo" +
                 " WHERE datasetgwanbo.id =: id", DataSetGwanbo.class)
@@ -42,5 +42,9 @@ public class DataSetGwanboRepository {
         return em.createQuery("" +
                 " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
                 .getResultList();
+    }
+
+    public void save(DataSetGwanbo gwanbo) {
+        em.persist(gwanbo);
     }
 }

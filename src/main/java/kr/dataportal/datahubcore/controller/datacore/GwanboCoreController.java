@@ -29,6 +29,6 @@ public class GwanboCoreController {
     @PostMapping("/gwanbo")
     public DataSetGeneral WriteDataSetGwanbo(@RequestBody DataSetGwanbo gwanbo) {
         System.out.println(gwanbo);
-        return new DataSetGeneral(dataSetGwanboService.findOne("1317816664268000"));
+        return new DataSetGeneral(dataSetGwanboService.findById("1317816664268000"));
     }
 }

@@ -11,27 +11,32 @@
 
 package kr.dataportal.datahubcore.domain.dataset;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "dataset_gwanbo")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class DataSetGwanbo {
     @Column(name = "id", length = 45, nullable = false)
     @Id
-    private String id;
+    private final String id;
 
     @Embedded
-    private Publish publish;
+    private final Publish publish;
 
     @Embedded
-    private Category category;
+    private final Category category;
 
-    @Column(name = "binary", length = 255, nullable = false)
-    private String binary;
+    @Column(name = "binary_file", length = 255, nullable = false)
+    private final String binaryFile;
+
+    public DataSetGwanbo() {
+        this.id = null;
+        this.publish = null;
+        this.category = null;
+        this.binaryFile = null;
+    }
 }
