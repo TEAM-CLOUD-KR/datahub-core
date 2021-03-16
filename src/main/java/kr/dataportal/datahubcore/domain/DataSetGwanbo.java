@@ -27,7 +27,6 @@ public class DataSetGwanbo {
     @Id
     private String id;
 
-
     @Embedded
     private Publish publish;
 

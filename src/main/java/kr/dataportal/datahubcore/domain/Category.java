@@ -21,6 +21,7 @@ import javax.persistence.Embeddable;
 public class Category {
     @Column(name = "category_name", length = 45, nullable = false)
     private String categoryName;
+
     @Column(name = "category_id", length = 45, nullable = false)
     private String categoryId;
 }
