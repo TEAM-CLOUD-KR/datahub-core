@@ -21,13 +21,13 @@ import javax.persistence.Embeddable;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Category {
     @Column(name = "category_name", length = 45, nullable = false)
-    private final String categoryName;
+    private final String name;
 
     @Column(name = "category_id", length = 45, nullable = false)
-    private final String categoryId;
+    private final String id;
 
     public Category() {
-        this.categoryName = null;
-        this.categoryId = null;
+        this.name = null;
+        this.id = null;
     }
 }
