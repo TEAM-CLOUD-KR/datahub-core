@@ -19,11 +19,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final String[] AUTH_WHITELIST = {
+            "/docs/**",
+            "/csrf/**",
+            "/webjars/**",
+            "/**swagger**/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/v2/api-docs",
+            "/dataset/**"
+    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers("/core/**").hasIpAddress("127.0.0.1")
                 .anyRequest().authenticated()
                 .and().csrf().disable();

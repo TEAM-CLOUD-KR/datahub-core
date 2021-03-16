@@ -33,6 +33,7 @@ public class DataSetGwanboService {
         return dataSetGwanboRepository.findAll();
     }
 
+    @Transactional(readOnly = false)
     public void save(DataSetGwanbo gwanbo) {
         dataSetGwanboRepository.save(gwanbo);
     }

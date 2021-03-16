@@ -11,6 +11,7 @@
 
 package kr.dataportal.datahubcore.controller.datacore;
 
+import kr.dataportal.datahubcore.domain.datacore.GeneralResultVO;
 import kr.dataportal.datahubcore.domain.dataset.DataSetGeneral;
 import kr.dataportal.datahubcore.domain.dataset.DataSetGwanbo;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
@@ -27,8 +28,8 @@ public class GwanboCoreController {
     private final DataSetGwanboService dataSetGwanboService;
 
     @PostMapping("/gwanbo")
-    public DataSetGeneral WriteDataSetGwanbo(@RequestBody DataSetGwanbo gwanbo) {
-        System.out.println(gwanbo);
-        return new DataSetGeneral(dataSetGwanboService.findById("1317816664268000"));
+    public GeneralResultVO WriteDataSetGwanbo(@RequestBody DataSetGwanbo gwanbo) {
+        dataSetGwanboService.save(gwanbo);
+        return new GeneralResultVO(200, dataSetGwanboService.findById(gwanbo.getId()));
     }
 }
