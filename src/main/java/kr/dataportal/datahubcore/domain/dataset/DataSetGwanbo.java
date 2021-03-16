@@ -9,12 +9,11 @@
         Aaron(JIN, Taeyang) -
 */
 
-package kr.dataportal.datahubcore.domain;
+package kr.dataportal.datahubcore.domain.dataset;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 

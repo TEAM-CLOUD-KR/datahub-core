@@ -11,7 +11,7 @@
 
 package kr.dataportal.datahubcore.repository;
 
-import kr.dataportal.datahubcore.domain.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.DataSetGwanbo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

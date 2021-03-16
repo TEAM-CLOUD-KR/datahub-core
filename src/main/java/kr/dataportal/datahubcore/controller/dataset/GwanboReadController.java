@@ -9,21 +9,23 @@
         Aaron(JIN, Taeyang) - Create core/IndexController
 */
 
-package kr.dataportal.datahubcore.controller;
+package kr.dataportal.datahubcore.controller.dataset;
 
-import kr.dataportal.datahubcore.domain.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.DataSetGeneral;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/dataset")
 @RequiredArgsConstructor
-public class IndexController {
+public class GwanboReadController {
     private final DataSetGwanboService dataSetGwanboService;
 
-    @GetMapping("/")
-    public DataSetGwanbo Index() {
-        return dataSetGwanboService.findOne("1317816664268000");
+    @GetMapping("/gwanbo")
+    public DataSetGeneral ReadDataSetGwanbo() {
+        return new DataSetGeneral(dataSetGwanboService.findOne("1317816664268000"));
     }
 }

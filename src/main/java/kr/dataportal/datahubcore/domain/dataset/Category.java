@@ -9,7 +9,7 @@
         Aaron(JIN, Taeyang) - 
 */
 
-package kr.dataportal.datahubcore.domain;
+package kr.dataportal.datahubcore.domain.dataset;
 
 import lombok.Getter;
 
