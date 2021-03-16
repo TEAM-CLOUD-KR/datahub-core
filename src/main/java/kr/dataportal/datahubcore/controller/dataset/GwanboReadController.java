@@ -19,12 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/dataset")
 @RequiredArgsConstructor
 public class GwanboReadController {
     private final DataSetGwanboService dataSetGwanboService;
 
-    @GetMapping("/gwanbo")
+    @GetMapping("/dataset/gwanbo")
     public DataSetGeneral ReadDataSetGwanbo() {
         return new DataSetGeneral(dataSetGwanboService.findById("1317816664268000"));
     }
