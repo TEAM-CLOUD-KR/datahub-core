@@ -11,9 +11,10 @@
 
 package kr.dataportal.datahubcore.controller.dataset;
 
-import kr.dataportal.datahubcore.domain.dataset.DataSetGeneral;
+import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class GwanboReadController {
     private final DataSetGwanboService dataSetGwanboService;
 
     @GetMapping("/gwanbo")
-    public DataSetGeneral ReadDataSetGwanbo() {
-        return new DataSetGeneral(dataSetGwanboService.findById("1317816664268000"));
+    public JSONResponse ReadDataSetGwanbo() {
+        return new JSONResponse(HttpStatus.OK, dataSetGwanboService.findById("1317816664268000"));
     }
 }

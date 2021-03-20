@@ -14,10 +14,11 @@ package kr.dataportal.datahubcore.domain.datacore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
-public class GeneralResultVO {
-    private final int status;
+public class JSONResponse {
+    private final HttpStatus status;
     private final Object data;
 }
