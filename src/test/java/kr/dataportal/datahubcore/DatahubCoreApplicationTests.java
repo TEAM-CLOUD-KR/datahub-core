@@ -1,8 +1,9 @@
 package kr.dataportal.datahubcore;
 
-import kr.dataportal.datahubcore.domain.dataset.Category;
-import kr.dataportal.datahubcore.domain.dataset.DataSetGwanbo;
-import kr.dataportal.datahubcore.domain.dataset.Publish;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.Category;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.Organization;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,16 +32,18 @@ class DatahubCoreApplicationTests {
     @Rollback(value = true)
     void DataSetGwanboService_저장_테스트() {
         DataSetGwanbo gwanbo = new DataSetGwanbo(
-                "test_id",
-                new Publish("publish_id", "publish_title",
-                        "20210316", "publish_sequence", "publish_author"),
-                new Category("category_name", "category_id"),
+                "test_seq",
+                "ebook_no",
+                new Publish("publish_seq", "publish_subject", "20210325"),
+                new Organization("org_name", "org_code"),
+                new Category("category_name", "category_seq"),
+                "LawName",
                 "binary"
         );
         dataSetGwanboService.save(gwanbo);
-        DataSetGwanbo one = dataSetGwanboService.findById("test_id");
+        DataSetGwanbo one = dataSetGwanboService.findBySeq("test_seq");
 
-        Assertions.assertThat(one.getPublish().getAuthor()).isEqualTo("publish_author");
+        Assertions.assertThat(one.getPublish().getSeq()).isEqualTo("publish_seq");
     }
 
 }
