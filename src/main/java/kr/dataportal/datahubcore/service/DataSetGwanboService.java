@@ -11,7 +11,7 @@
 
 package kr.dataportal.datahubcore.service;
 
-import kr.dataportal.datahubcore.domain.dataset.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.repository.DataSetGwanboRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,8 @@ import java.util.List;
 public class DataSetGwanboService {
     private final DataSetGwanboRepository dataSetGwanboRepository;
 
-    public DataSetGwanbo findById(String id) {
-        return dataSetGwanboRepository.findById(id);
+    public DataSetGwanbo findBySeq(String seq) {
+        return dataSetGwanboRepository.findBySeq(seq);
     }
 
     public List<DataSetGwanbo> findAll() {

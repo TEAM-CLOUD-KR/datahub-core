@@ -9,7 +9,7 @@
         Aaron(JIN, Taeyang) -
 */
 
-package kr.dataportal.datahubcore.domain.dataset;
+package kr.dataportal.datahubcore.domain.dataset.gwanbo;
 
 import lombok.*;
 
@@ -20,23 +20,25 @@ import javax.persistence.*;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class DataSetGwanbo {
-    @Column(name = "id", length = 45, nullable = false)
+    @Column(name = "seq", length = 45, nullable = false)
     @Id
-    private final String id;
+    private final String seq;
+
+    @Column(name = "ebook_no", length = 10, nullable = false)
+    private final String ebookNo;
 
     @Embedded
     private final Publish publish;
 
     @Embedded
+    private final Organization organization;
+
+    @Embedded
     private final Category category;
+
+    @Column(name = "law_name", length = 255, nullable = true)
+    private final String lawName;
 
     @Column(name = "binary_file", length = 255, nullable = false)
     private final String binaryFile;
-
-    public DataSetGwanbo() {
-        this.id = null;
-        this.publish = null;
-        this.category = null;
-        this.binaryFile = null;
-    }
 }

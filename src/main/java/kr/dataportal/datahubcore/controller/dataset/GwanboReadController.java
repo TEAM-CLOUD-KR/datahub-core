@@ -26,6 +26,6 @@ public class GwanboReadController {
 
     @GetMapping("/gwanbo")
     public DataSetGeneral ReadDataSetGwanbo() {
-        return new DataSetGeneral(dataSetGwanboService.findById("1317816664268000"));
+        return new DataSetGeneral(dataSetGwanboService.findBySeq(""));
     }
 }

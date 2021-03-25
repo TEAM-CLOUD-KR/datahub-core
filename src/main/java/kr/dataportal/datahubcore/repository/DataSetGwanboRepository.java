@@ -11,7 +11,7 @@
 
 package kr.dataportal.datahubcore.repository;
 
-import kr.dataportal.datahubcore.domain.dataset.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -24,11 +24,11 @@ public class DataSetGwanboRepository {
 
     private final EntityManager em;
 
-    public DataSetGwanbo findById(String id) {
+    public DataSetGwanbo findBySeq(String seq) {
         List<DataSetGwanbo> gwanbos = em.createQuery("" +
                 " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo" +
-                " WHERE datasetgwanbo.id =: id", DataSetGwanbo.class)
-                .setParameter("id", id)
+                " WHERE datasetgwanbo.seq =: seq", DataSetGwanbo.class)
+                .setParameter("seq", seq)
                 .getResultList();
 
         if (gwanbos.size() > 0) {

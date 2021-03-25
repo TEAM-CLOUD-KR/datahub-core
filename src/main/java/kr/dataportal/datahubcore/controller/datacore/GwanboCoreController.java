@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.controller.datacore;
 
 import kr.dataportal.datahubcore.domain.datacore.GeneralResultVO;
-import kr.dataportal.datahubcore.domain.dataset.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +29,6 @@ public class GwanboCoreController {
     @PostMapping("/gwanbo")
     public GeneralResultVO WriteDataSetGwanbo(@RequestBody DataSetGwanbo gwanbo) {
         dataSetGwanboService.save(gwanbo);
-        return new GeneralResultVO(200, dataSetGwanboService.findById(gwanbo.getId()));
+        return new GeneralResultVO(200, dataSetGwanboService.findBySeq(gwanbo.getSeq()));
     }
 }

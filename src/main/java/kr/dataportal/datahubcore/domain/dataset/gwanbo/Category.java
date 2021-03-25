@@ -9,7 +9,7 @@
         Aaron(JIN, Taeyang) - 
 */
 
-package kr.dataportal.datahubcore.domain.dataset;
+package kr.dataportal.datahubcore.domain.dataset.gwanbo;
 
 import lombok.*;
 
@@ -23,11 +23,11 @@ public class Category {
     @Column(name = "category_name", length = 45, nullable = false)
     private final String name;
 
-    @Column(name = "category_id", length = 45, nullable = false)
-    private final String id;
+    @Column(name = "category_seq", length = 45, nullable = false)
+    private final String seq;
 
     public Category() {
         this.name = null;
-        this.id = null;
+        this.seq = null;
     }
 }
