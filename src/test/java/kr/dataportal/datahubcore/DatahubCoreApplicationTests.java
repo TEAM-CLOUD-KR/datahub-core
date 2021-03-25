@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @SpringBootTest(properties = ("" +
         "spring.config.location=" +
         "classpath:/application.yml," +
@@ -46,4 +48,9 @@ class DatahubCoreApplicationTests {
         Assertions.assertThat(one.getPublish().getSeq()).isEqualTo("publish_seq");
     }
 
+    @Test
+    void DataSetGwanboService_전체조회_테스트() {
+        List<DataSetGwanbo> all = dataSetGwanboService.findAll();
+        Assertions.assertThat(all.size()).isGreaterThan(0);
+    }
 }

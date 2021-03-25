@@ -41,4 +41,14 @@ public class DataSetGwanbo {
 
     @Column(name = "binary_file", length = 255, nullable = false)
     private final String binaryFile;
+
+    public DataSetGwanbo() {
+        this.seq = null;
+        this.ebookNo = null;
+        this.publish = new Publish();
+        this.organization = new Organization();
+        this.category = new Category();
+        this.lawName = null;
+        this.binaryFile = null;
+    }
 }
