@@ -27,14 +27,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-resources",
             "/swagger-resources/**",
             "/v2/api-docs",
-            "/dataset/**"
+            "/dataset/**",
+            "/core/**"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers("/core/**").hasIpAddress("127.0.0.1")
+//                .antMatchers("/core/**").hasIpAddress("127.0.0.1")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
     }
