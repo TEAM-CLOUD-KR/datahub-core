@@ -27,6 +27,6 @@ public class GwanboReadController {
 
     @GetMapping("/gwanbo")
     public JSONResponse ReadDataSetGwanbo() {
-        return new JSONResponse(HttpStatus.OK, dataSetGwanboService.findBySeq(""));
+        return new JSONResponse(HttpStatus.OK, dataSetGwanboService.findAll().get(0));
     }
 }
