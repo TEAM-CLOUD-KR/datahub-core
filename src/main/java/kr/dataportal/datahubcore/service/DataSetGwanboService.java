@@ -11,6 +11,7 @@
 
 package kr.dataportal.datahubcore.service;
 
+import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.repository.DataSetGwanboRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,10 @@ public class DataSetGwanboService {
 
     public List<DataSetGwanbo> findAll() {
         return dataSetGwanboRepository.findAll();
+    }
+
+    public DataSetGwanbo findRandomize() {
+        return dataSetGwanboRepository.findRandomize();
     }
 
     @Transactional(readOnly = false)

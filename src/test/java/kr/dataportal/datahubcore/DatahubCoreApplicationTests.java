@@ -54,4 +54,10 @@ class DatahubCoreApplicationTests {
         List<DataSetGwanbo> all = dataSetGwanboService.findAll();
         Assertions.assertThat(all.size()).isGreaterThan(0);
     }
+
+    @Test
+    void DataSetGwanboService_랜덤조회_테스트() {
+        DataSetGwanbo randomize = dataSetGwanboService.findRandomize();
+        Assertions.assertThat(randomize.getSeq()).isNotNull();
+    }
 }

@@ -31,8 +31,6 @@ public class GwanboReadController {
 
     @GetMapping("/gwanbo")
     public JSONResponse ReadDataSetGwanbo() {
-        List<DataSetGwanbo> all = dataSetGwanboService.findAll();
-        Random random = new Random();
-        return new JSONResponse(HttpStatus.OK, all.get(random.nextInt(all.size() - 1)));
+        return new JSONResponse(HttpStatus.OK, dataSetGwanboService.findRandomize());
     }
 }

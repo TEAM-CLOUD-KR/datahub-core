@@ -11,12 +11,14 @@
 
 package kr.dataportal.datahubcore.repository;
 
+import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Random;
 
 @Repository
 @RequiredArgsConstructor
@@ -43,6 +45,21 @@ public class DataSetGwanboRepository {
                 " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
                 .getResultList();
     }
+
+    public DataSetGwanbo findRandomize() {
+        List<DataSetGwanbo> gwanbo = em.createQuery("" +
+                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
+                .setMaxResults(100)
+                .getResultList();
+
+        if (gwanbo.size() > 0) {
+            Random random = new Random();
+            return gwanbo.get(random.nextInt(gwanbo.size() - 1));
+        } else {
+            return null;
+        }
+    }
+
 
     public void save(DataSetGwanbo gwanbo) {
         em.persist(gwanbo);

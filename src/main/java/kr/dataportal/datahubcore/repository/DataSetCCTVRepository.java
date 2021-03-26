@@ -12,12 +12,12 @@
 package kr.dataportal.datahubcore.repository;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
-import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Random;
 
 @Repository
 @RequiredArgsConstructor
@@ -43,6 +43,20 @@ public class DataSetCCTVRepository {
         return em.createQuery("" +
                 " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
                 .getResultList();
+    }
+
+    public DataSetCCTV findRandomize() {
+        List<DataSetCCTV> cctv = em.createQuery("" +
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
+                .setMaxResults(100)
+                .getResultList();
+
+        if (cctv.size() > 0) {
+            Random random = new Random();
+            return cctv.get(random.nextInt(cctv.size() - 1));
+        } else {
+            return null;
+        }
     }
 
     public void save(DataSetCCTV cctv) {

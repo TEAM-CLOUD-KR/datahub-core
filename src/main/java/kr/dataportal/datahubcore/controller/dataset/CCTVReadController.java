@@ -33,8 +33,6 @@ public class CCTVReadController {
 
     @GetMapping("/cctv")
     public JSONResponse ReadDataSetGwanbo() {
-        List<DataSetCCTV> all = dataSetCCTVService.findAll();
-        Random random = new Random();
-        return new JSONResponse(HttpStatus.OK, all.get(random.nextInt(all.size() - 1)));
+        return new JSONResponse(HttpStatus.OK, dataSetCCTVService.findRandomize());
     }
 }

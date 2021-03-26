@@ -35,6 +35,10 @@ public class DataSetCCTVService {
         return dataSetCCTVRepository.findAll();
     }
 
+    public DataSetCCTV findRandomize() {
+        return dataSetCCTVRepository.findRandomize();
+    }
+
     @Transactional(readOnly = false)
     public void save(DataSetCCTV cctv) {
         dataSetCCTVRepository.save(cctv);
