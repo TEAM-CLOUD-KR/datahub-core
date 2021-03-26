@@ -26,7 +26,7 @@ public class DataSetGwanboRepository {
 
     public DataSetGwanbo findBySeq(String seq) {
         List<DataSetGwanbo> gwanbos = em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetCCTV datasetgwanbo" +
+                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo" +
                 " WHERE datasetgwanbo.seq =: seq", DataSetGwanbo.class)
                 .setParameter("seq", seq)
                 .getResultList();
@@ -40,7 +40,7 @@ public class DataSetGwanboRepository {
 
     public List<DataSetGwanbo> findAll() {
         return em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetCCTV datasetgwanbo", DataSetGwanbo.class)
+                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
                 .getResultList();
     }
 
