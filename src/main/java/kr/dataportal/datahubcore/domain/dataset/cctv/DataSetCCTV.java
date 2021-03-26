@@ -38,7 +38,7 @@ public class DataSetCCTV {
     @Embedded
     private final Camera camera;
 
-    @Column(name= "storage_peroid", length = 10, nullable = true)
+    @Column(name= "storage_period", length = 10, nullable = true)
     private final String storagePeriod;
 
     @Column(name ="regdate", length = 10, nullable = true)
