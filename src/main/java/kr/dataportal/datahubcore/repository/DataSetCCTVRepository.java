@@ -11,6 +11,7 @@
 
 package kr.dataportal.datahubcore.repository;
 
+import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -20,31 +21,31 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class DataSetGwanboRepository {
+public class DataSetCCTVRepository {
 
     private final EntityManager em;
 
-    public DataSetGwanbo findBySeq(String seq) {
-        List<DataSetGwanbo> gwanbos = em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetCCTV datasetgwanbo" +
-                " WHERE datasetgwanbo.seq =: seq", DataSetGwanbo.class)
+    public DataSetCCTV findBySeq(String seq) {
+        List<DataSetCCTV> cctv = em.createQuery("" +
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv" +
+                " WHERE datasetcctv.seq =: seq", DataSetCCTV.class)
                 .setParameter("seq", seq)
                 .getResultList();
 
-        if (gwanbos.size() > 0) {
-            return gwanbos.get(0);
+        if (cctv.size() > 0) {
+            return cctv.get(0);
         } else {
             return null;
         }
     }
 
-    public List<DataSetGwanbo> findAll() {
+    public List<DataSetCCTV> findAll() {
         return em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetCCTV datasetgwanbo", DataSetGwanbo.class)
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
                 .getResultList();
     }
 
-    public void save(DataSetGwanbo gwanbo) {
-        em.persist(gwanbo);
+    public void save(DataSetCCTV cctv) {
+        em.persist(cctv);
     }
 }

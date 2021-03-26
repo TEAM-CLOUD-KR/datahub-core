@@ -12,7 +12,9 @@
 package kr.dataportal.datahubcore.controller.dataset;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
+import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
+import kr.dataportal.datahubcore.service.DataSetCCTVService;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,12 +28,12 @@ import java.util.Random;
 @RestController
 @RequestMapping("/dataset")
 @RequiredArgsConstructor
-public class GwanboReadController {
-    private final DataSetGwanboService dataSetGwanboService;
+public class CCTVReadController {
+    private final DataSetCCTVService dataSetCCTVService;
 
-    @GetMapping("/gwanbo")
+    @GetMapping("/cctv")
     public JSONResponse ReadDataSetGwanbo() {
-        List<DataSetGwanbo> all = dataSetGwanboService.findAll();
+        List<DataSetCCTV> all = dataSetCCTVService.findAll();
         Random random = new Random();
         return new JSONResponse(HttpStatus.OK, all.get(random.nextInt(all.size() - 1)));
     }
