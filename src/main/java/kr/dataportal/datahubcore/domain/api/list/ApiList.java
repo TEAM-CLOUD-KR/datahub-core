@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.domain.api.custom_list;
+package kr.dataportal.datahubcore.domain.api.list;
 
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import lombok.AccessLevel;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "api_custom_list")
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
-public class APICustomList {
+public class ApiList {
     @Id
     @Column(name = "seq")
     private final int seq;
