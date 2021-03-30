@@ -20,7 +20,8 @@ public class ApiList {
     private final String name;
 
     @Column(name = "target_dataset")
-    private String targetDataset;
+    @Enumerated(EnumType.STRING)
+    private TargetDataSet targetDataset;
 
     @Column(name = "target_column")
     private String targetColumn;
