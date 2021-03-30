@@ -46,13 +46,14 @@ public class DataSetCCTVRepository {
     }
 
     public DataSetCCTV findRandomize() {
+        Random random = new Random();
         List<DataSetCCTV> cctv = em.createQuery("" +
                 " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
+                .setFirstResult(random.nextInt(10000))
                 .setMaxResults(100)
                 .getResultList();
 
         if (cctv.size() > 0) {
-            Random random = new Random();
             return cctv.get(random.nextInt(cctv.size() - 1));
         } else {
             return null;
