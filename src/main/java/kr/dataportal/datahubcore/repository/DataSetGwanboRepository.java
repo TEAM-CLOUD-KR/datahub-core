@@ -47,13 +47,14 @@ public class DataSetGwanboRepository {
     }
 
     public DataSetGwanbo findRandomize() {
+        Random random = new Random();
         List<DataSetGwanbo> gwanbo = em.createQuery("" +
                 " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
+                .setFirstResult(random.nextInt(10000))
                 .setMaxResults(100)
                 .getResultList();
 
         if (gwanbo.size() > 0) {
-            Random random = new Random();
             return gwanbo.get(random.nextInt(gwanbo.size() - 1));
         } else {
             return null;

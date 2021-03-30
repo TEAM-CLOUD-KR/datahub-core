@@ -16,9 +16,17 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+import java.time.LocalDateTime;
+
 @Getter
-@RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class JSONResponse {
     private final HttpStatus status;
+    private final LocalDateTime at;
     private final Object data;
+
+    public JSONResponse(HttpStatus status, Object data) {
+        this.status = status;
+        this.at = LocalDateTime.now();
+        this.data = data;
+    }
 }
