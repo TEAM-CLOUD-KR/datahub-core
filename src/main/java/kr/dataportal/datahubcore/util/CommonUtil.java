@@ -37,6 +37,9 @@ public class CommonUtil {
     }
 
     public static List<String> parseClassProperty(String target) {
+        if (!classMapping.containsKey(target)) {
+            return new ArrayList<>();
+        }
         try {
             return parseClassProperty(
                     ClassLoader.getSystemClassLoader().loadClass(
