@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
-import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 
 public class CommonUtil {
     private static final Map<String, String> classMapping
