@@ -15,6 +15,7 @@ import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.repository.DataSetCCTVRepository;
 import kr.dataportal.datahubcore.repository.DataSetGwanboRepository;
+import kr.dataportal.datahubcore.util.ParseProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +43,9 @@ public class DataSetCCTVService {
     @Transactional(readOnly = false)
     public void save(DataSetCCTV cctv) {
         dataSetCCTVRepository.save(cctv);
+    }
+
+    public List<String> selectAllColumn() {
+        return ParseProperty.getAll(DataSetCCTV.class);
     }
 }

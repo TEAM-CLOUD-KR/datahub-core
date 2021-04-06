@@ -16,6 +16,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "dataset_cctv")
@@ -38,19 +41,19 @@ public class DataSetCCTV {
     @Embedded
     private final Camera camera;
 
-    @Column(name= "storage_period", length = 10, nullable = true)
+    @Column(name = "storage_period", length = 10, nullable = true)
     private final String storagePeriod;
 
-    @Column(name ="regdate", length = 10, nullable = true)
+    @Column(name = "regdate", length = 10, nullable = true)
     private final String regdate;
 
-    @Column(name ="lat", length = 50, nullable = true)
+    @Column(name = "lat", length = 50, nullable = true)
     private final String lat;
 
-    @Column(name ="lng", length = 50, nullable = true)
+    @Column(name = "lng", length = 50, nullable = true)
     private final String lng;
 
-    @Column(name ="publish_date", length = 12, nullable = true)
+    @Column(name = "publish_date", length = 12, nullable = true)
     private final String publishDate;
 
     public DataSetCCTV() {

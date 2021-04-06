@@ -14,6 +14,9 @@ package kr.dataportal.datahubcore.domain.dataset.gwanbo;
 import lombok.*;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "dataset_gwanbo")

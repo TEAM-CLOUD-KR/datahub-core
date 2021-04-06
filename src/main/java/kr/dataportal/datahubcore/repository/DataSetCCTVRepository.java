@@ -12,6 +12,8 @@
 package kr.dataportal.datahubcore.repository;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
+import kr.dataportal.datahubcore.util.ParseProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
