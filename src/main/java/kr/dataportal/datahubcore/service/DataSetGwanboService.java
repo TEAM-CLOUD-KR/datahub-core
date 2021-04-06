@@ -42,8 +42,4 @@ public class DataSetGwanboService {
     public void save(DataSetGwanbo gwanbo) {
         dataSetGwanboRepository.save(gwanbo);
     }
-
-    public List<String> selectAllColumn() {
-        return Util.parseClassProperty(DataSetGwanbo.class);
-    }
 }

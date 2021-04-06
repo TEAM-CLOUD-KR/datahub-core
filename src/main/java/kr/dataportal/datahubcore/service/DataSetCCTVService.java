@@ -42,8 +42,4 @@ public class DataSetCCTVService {
     public void save(DataSetCCTV cctv) {
         dataSetCCTVRepository.save(cctv);
     }
-
-    public List<String> selectAllColumn() {
-        return Util.parseClassProperty(DataSetCCTV.class);
-    }
 }
