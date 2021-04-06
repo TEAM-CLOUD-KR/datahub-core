@@ -43,7 +43,7 @@ public class CommonUtil {
         try {
             return parseClassProperty(
                     ClassLoader.getSystemClassLoader().loadClass(
-                            classMapping.get("kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV")
+                            "kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV"
                     )
             );
         } catch (ClassNotFoundException e) {
