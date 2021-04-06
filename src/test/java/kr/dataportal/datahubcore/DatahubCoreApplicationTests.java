@@ -1,9 +1,11 @@
 package kr.dataportal.datahubcore;
 
+import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Category;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Organization;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
+import kr.dataportal.datahubcore.service.DataSetCCTVService;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,11 +26,9 @@ import java.util.List;
 class DatahubCoreApplicationTests {
     @Autowired
     private DataSetGwanboService dataSetGwanboService;
+    @Autowired
+    private DataSetCCTVService dataSetCCTVService;
 
-    @Test
-    void loadContext() {
-
-    }
 
     @Test
     @Transactional
@@ -50,14 +50,22 @@ class DatahubCoreApplicationTests {
     }
 
     @Test
-    void DataSetGwanboService_전체조회_테스트() {
-        List<DataSetGwanbo> all = dataSetGwanboService.findAll();
-        Assertions.assertThat(all.size()).isGreaterThan(0);
-    }
-
-    @Test
     void DataSetGwanboService_랜덤조회_테스트() {
         DataSetGwanbo randomize = dataSetGwanboService.findRandomize();
         Assertions.assertThat(randomize.getSeq()).isNotNull();
+    }
+
+    @Test
+    void DataSetGwanbo_컬럼_전체조회() {
+        List<String> columns = dataSetGwanboService.selectAllColumn();
+        Assertions.assertThat(columns).isNotNull();
+        Assertions.assertThat(columns.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void DataSetCCTV_컬럼_전체조회() {
+        List<String> columns = dataSetCCTVService.selectAllColumn();
+        Assertions.assertThat(columns).isNotNull();
+        Assertions.assertThat(columns.size()).isGreaterThan(0);
     }
 }
