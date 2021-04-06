@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Util {
+public class CommonUtil {
     public static List<String> parseClassProperty(Class<?> target) {
         List<String> ret = new ArrayList<String>();
 
@@ -18,12 +18,22 @@ public class Util {
                     Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass(field.getType().getName());
                     ret.addAll(parseClassProperty(aClass));
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    return new ArrayList<>();
                 }
             } else {
                 ret.add(field.getName());
             }
         }
         return ret;
+    }
+
+    public static List<String> parseClassProperty(String target) {
+        try {
+            return parseClassProperty(
+                    ClassLoader.getSystemClassLoader().loadClass(target)
+            );
+        } catch (ClassNotFoundException e) {
+            return new ArrayList<>();
+        }
     }
 }

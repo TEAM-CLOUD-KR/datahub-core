@@ -7,7 +7,7 @@ import kr.dataportal.datahubcore.domain.dataset.gwanbo.Organization;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
 import kr.dataportal.datahubcore.service.DataSetCCTVService;
 import kr.dataportal.datahubcore.service.DataSetGwanboService;
-import kr.dataportal.datahubcore.util.Util;
+import kr.dataportal.datahubcore.util.CommonUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +58,14 @@ class DatahubCoreApplicationTests {
 
     @Test
     void DataSetGwanbo_컬럼_전체조회() {
-        List<String> columns = Util.parseClassProperty(DataSetGwanbo.class);
+        List<String> columns = CommonUtil.parseClassProperty(DataSetGwanbo.class);
         Assertions.assertThat(columns).isNotNull();
         Assertions.assertThat(columns.size()).isGreaterThan(0);
     }
 
     @Test
     void DataSetCCTV_컬럼_전체조회() {
-        List<String> columns = Util.parseClassProperty(DataSetCCTV.class);
+        List<String> columns = CommonUtil.parseClassProperty(DataSetCCTV.class);
         Assertions.assertThat(columns).isNotNull();
         Assertions.assertThat(columns.size()).isGreaterThan(0);
     }

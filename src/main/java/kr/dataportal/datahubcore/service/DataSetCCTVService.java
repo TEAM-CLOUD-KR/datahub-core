@@ -13,7 +13,6 @@ package kr.dataportal.datahubcore.service;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.repository.DataSetCCTVRepository;
-import kr.dataportal.datahubcore.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

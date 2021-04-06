@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v2/api-docs",
             "/dataset/**",
             "/core/**",
+            "/common/util/**",
             "/"
     };
 
@@ -36,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(AUTH_WHITELIST).permitAll()
-//                .antMatchers("/core/**").hasIpAddress("127.0.0.1")
+                .antMatchers("/core/**").hasIpAddress("127.0.0.1")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
     }
