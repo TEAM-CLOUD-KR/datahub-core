@@ -37,7 +37,7 @@ public class CommonUtil {
     }
 
     public static List<String> parseClassProperty(String target) {
-        if (!classMapping.containsKey(target)) {
+        if (!classMapping.containsKey(target.toUpperCase())) {
             return new ArrayList<>();
         }
         try {
