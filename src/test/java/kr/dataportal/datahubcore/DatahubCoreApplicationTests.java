@@ -57,15 +57,29 @@ class DatahubCoreApplicationTests {
     }
 
     @Test
-    void DataSetGwanbo_컬럼_전체조회() {
+    void DataSetGwanbo_컬럼_전체조회_By_Class() {
         List<String> columns = CommonUtil.parseClassProperty(DataSetGwanbo.class);
         Assertions.assertThat(columns).isNotNull();
         Assertions.assertThat(columns.size()).isGreaterThan(0);
     }
 
     @Test
-    void DataSetCCTV_컬럼_전체조회() {
+    void DataSetCCTV_컬럼_전체조회_By_Class() {
         List<String> columns = CommonUtil.parseClassProperty(DataSetCCTV.class);
+        Assertions.assertThat(columns).isNotNull();
+        Assertions.assertThat(columns.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void DataSetGwanbo_컬럼_전체조회_By_String() {
+        List<String> columns = CommonUtil.parseClassProperty("DataSetGwanbo");
+        Assertions.assertThat(columns).isNotNull();
+        Assertions.assertThat(columns.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void DataSetCCTV_컬럼_전체조회_By_String() {
+        List<String> columns = CommonUtil.parseClassProperty("DataSetCCTV");
         Assertions.assertThat(columns).isNotNull();
         Assertions.assertThat(columns.size()).isGreaterThan(0);
     }
