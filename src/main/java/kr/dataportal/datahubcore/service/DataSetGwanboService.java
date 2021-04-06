@@ -11,10 +11,9 @@
 
 package kr.dataportal.datahubcore.service;
 
-import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.repository.DataSetGwanboRepository;
-import kr.dataportal.datahubcore.util.ParseProperty;
+import kr.dataportal.datahubcore.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +44,6 @@ public class DataSetGwanboService {
     }
 
     public List<String> selectAllColumn() {
-        return ParseProperty.getAll(DataSetGwanbo.class);
+        return Util.parseClassProperty(DataSetGwanbo.class);
     }
 }

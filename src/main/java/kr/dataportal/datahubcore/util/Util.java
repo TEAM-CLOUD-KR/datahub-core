@@ -1,15 +1,13 @@
 package kr.dataportal.datahubcore.util;
 
-import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseProperty {
-    public static List<String> getAll(Class<?> target) {
+public class Util {
+    public static List<String> parseClassProperty(Class<?> target) {
         List<String> ret = new ArrayList<String>();
 
         for (Field field : target.getDeclaredFields()) {
@@ -18,7 +16,7 @@ public class ParseProperty {
             } else if (field.isAnnotationPresent(Embedded.class)) {
                 try {
                     Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass(field.getType().getName());
-                    ret.addAll(getAll(aClass));
+                    ret.addAll(parseClassProperty(aClass));
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
