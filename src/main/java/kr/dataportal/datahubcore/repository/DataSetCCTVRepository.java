@@ -45,6 +45,14 @@ public class DataSetCCTVRepository {
                 .getResultList();
     }
 
+    public List<DataSetCCTV> findByPage(int page, int itemPerPage) {
+        return em.createQuery("" +
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv ORDER BY datasetcctv.seq desc", DataSetCCTV.class)
+                .setFirstResult(page * itemPerPage)
+                .setMaxResults(itemPerPage)
+                .getResultList();
+    }
+
     public DataSetCCTV findRandomize() {
         Random random = new Random();
         List<DataSetCCTV> cctv = em.createQuery("" +

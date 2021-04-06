@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class CCTVReadController {
     private final DataSetCCTVService dataSetCCTVService;
 
     @GetMapping("/cctv")
-    public JSONResponse ReadDataSetGwanbo() {
-        return new JSONResponse(HttpStatus.OK, dataSetCCTVService.findRandomize());
+    public JSONResponse ReadDataSetCCTV(@RequestParam(name = "page", required = false, defaultValue = "1") int page, @RequestParam(name = "item_per_page", required = false, defaultValue = "10") int itemPerPage) {
+        return new JSONResponse(HttpStatus.OK, dataSetCCTVService.findByPage(page, itemPerPage));
     }
 }

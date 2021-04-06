@@ -33,6 +33,10 @@ public class DataSetCCTVService {
         return dataSetCCTVRepository.findAll();
     }
 
+    public List<DataSetCCTV> findByPage(int page, int itemPerPage) {
+        return dataSetCCTVRepository.findByPage(page, itemPerPage);
+    }
+
     public DataSetCCTV findRandomize() {
         return dataSetCCTVRepository.findRandomize();
     }

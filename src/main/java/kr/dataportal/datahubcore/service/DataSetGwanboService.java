@@ -37,6 +37,10 @@ public class DataSetGwanboService {
         return dataSetGwanboRepository.findRandomize();
     }
 
+    public List<DataSetGwanbo> findByPage(int page, int itemPerPage) {
+        return dataSetGwanboRepository.findByPage(page, itemPerPage);
+    }
+
     @Transactional(readOnly = false)
     public void save(DataSetGwanbo gwanbo) {
         dataSetGwanboRepository.save(gwanbo);

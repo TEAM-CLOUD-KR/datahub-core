@@ -24,6 +24,12 @@ public class JSONResponse {
     private final LocalDateTime at;
     private final Object data;
 
+    public JSONResponse() {
+        this.status = null;
+        this.at = null;
+        this.data = null;
+    }
+
     public JSONResponse(HttpStatus status, Object data) {
         this.status = status;
         this.at = LocalDateTime.now();
