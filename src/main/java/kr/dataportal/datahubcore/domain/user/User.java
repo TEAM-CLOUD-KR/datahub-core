@@ -1,5 +1,6 @@
 package kr.dataportal.datahubcore.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class User {
     @Column(name = "email", length = 255, unique = true)
     private final String email;
 
+    @JsonIgnore
     @Column(name = "password", length = 255)
     private final String password;
 

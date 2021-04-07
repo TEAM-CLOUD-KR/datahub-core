@@ -15,6 +15,10 @@ public class UserService {
         return userRepository.signup(user);
     }
 
+    public User findBySeq(int seq) {
+        return userRepository.findBySeq(seq);
+    }
+
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }

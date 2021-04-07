@@ -2,6 +2,7 @@ package kr.dataportal.datahubcore.domain.api;
 
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
+import kr.dataportal.datahubcore.domain.user.User;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class ApiList {
     @Column(name = "name", length = 255)
     private String name;
 
-    @OneToOne(targetEntity = DataSetList.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = DataSetList.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "target_dataset")
     private DataSetList targetDataset;
 
@@ -40,8 +41,9 @@ public class ApiList {
     @Column(name = "organization")
     private String organization;
 
-    @Column(name = "publisher")
-    private final int publisher;
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "publisher")
+    private final User publisher;
 
     @Column(name = "publish_at", nullable = true)
     private final LocalDateTime publish_at;
@@ -57,13 +59,13 @@ public class ApiList {
         this.apiDesc = null;
         this.category = 0;
         this.organization = null;
-        this.publisher = 0;
+        this.publisher = null;
         this.publish_at = LocalDateTime.now();
         this.last_edit = LocalDateTime.now();
     }
 
     public ApiList(String name, DataSetList targetDataset, String targetColumn, PermissionGroup permissionGroup,
-                   String apiDesc, int category, String organization, int publisher) {
+                   String apiDesc, int category, String organization, User publisher) {
         this.name = name;
         this.targetDataset = targetDataset;
         this.targetColumn = targetColumn;

@@ -20,6 +20,20 @@ public class UserRepository {
         return user.getSeq();
     }
 
+    public User findBySeq(int seq) {
+        List<User> user = em.createQuery("" +
+                " SELECT user FROM User user" +
+                " WHERE user.seq =: seq", User.class)
+                .setParameter("seq", seq)
+                .getResultList();
+
+        if (user.size() > 0) {
+            return user.get(0);
+        } else {
+            return null;
+        }
+    }
+
     public User findByEmail(String email) {
         List<User> user = em.createQuery("" +
                 " SELECT user FROM User user" +

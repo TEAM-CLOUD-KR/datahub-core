@@ -8,11 +8,13 @@ import kr.dataportal.datahubcore.domain.dataset.gwanbo.Category;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Organization;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
+import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.ApiListPagingDTO;
 import kr.dataportal.datahubcore.service.api.ApiListService;
 import kr.dataportal.datahubcore.service.dataset.DataSetListService;
 import kr.dataportal.datahubcore.service.dataset.cctv.DataSetCCTVService;
 import kr.dataportal.datahubcore.service.dataset.gwanbo.DataSetGwanboService;
+import kr.dataportal.datahubcore.service.user.UserService;
 import kr.dataportal.datahubcore.util.CommonUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -41,6 +43,9 @@ class DatahubCoreApplicationTests {
 
     @Autowired
     private ApiListService apiListService;
+
+    @Autowired
+    private UserService userService;
 
 
     @Test
@@ -111,7 +116,30 @@ class DatahubCoreApplicationTests {
     @Test
     @Transactional(readOnly = false)
     @Rollback(value = true)
-    ApiList ApiList_저장() {
+    void 회원가입테스트() {
+        User user_1 = User.create("test@example.com", "pass1", "pass1", "abc");
+        Assertions.assertThat(user_1).isNotNull();
+        Assertions.assertThat(user_1.getEmail()).isEqualTo("test@example.com");
+
+        int signup_1 = userService.signup(user_1);
+        Assertions.assertThat(signup_1).isNotNull();
+
+        Assertions.assertThat(userService.findByEmail(user_1.getEmail()).getNickname()).isEqualTo(user_1.getNickname());
+
+        User user_2 = User.create("test@example.com", "pass1", "pass2", "abc");
+        Assertions.assertThat(user_2).isNull();
+    }
+
+    @Test
+    void 회원조회_BySeq() {
+        User bySeq = userService.findBySeq(4);
+        Assertions.assertThat(bySeq.getSeq()).isEqualTo(4);
+    }
+
+    @Test
+    @Transactional(readOnly = false)
+    @Rollback(value = true)
+    void ApiList_저장() {
         apiListService.save(new ApiList(
                 "API 이름 테스트123",
                 dataSetListService.findOne("dataset_cctv"),
@@ -120,17 +148,16 @@ class DatahubCoreApplicationTests {
                 "API DESC",
                 1,
                 "컴퓨터정보과",
-                4));
+                userService.findBySeq(4)));
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
         Assertions.assertThat(apiList).isNotNull();
-        return apiList;
     }
 
     @Test
     @Transactional(readOnly = false)
     @Rollback(value = true)
     void ApiList_수정() {
-        ApiList apiList = ApiList_저장();
+        ApiList apiList = apiListService.findBySeq(4);
         ApiList update = apiList.update(
                 "API 이름 수정",
                 dataSetListService.findOne("dataset_gwanbo"),
