@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/dataset/**",
             "/core/**",
             "/common/util/**",
+            "/api/**",
             "/"
     };
 
