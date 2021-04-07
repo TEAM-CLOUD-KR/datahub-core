@@ -9,10 +9,10 @@
         Aaron(JIN, Taeyang) - 
 */
 
-package kr.dataportal.datahubcore.service;
+package kr.dataportal.datahubcore.service.dataset.gwanbo;
 
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
-import kr.dataportal.datahubcore.repository.DataSetGwanboRepository;
+import kr.dataportal.datahubcore.repository.dataset.gwanbo.DataSetGwanboRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -9,10 +9,10 @@
         Aaron(JIN, Taeyang) - 
 */
 
-package kr.dataportal.datahubcore.service;
+package kr.dataportal.datahubcore.service.dataset.cctv;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
-import kr.dataportal.datahubcore.repository.DataSetCCTVRepository;
+import kr.dataportal.datahubcore.repository.dataset.cctv.DataSetCCTVRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

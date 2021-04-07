@@ -9,10 +9,9 @@
         Aaron(JIN, Taeyang) - 
 */
 
-package kr.dataportal.datahubcore.repository;
+package kr.dataportal.datahubcore.repository.dataset.cctv;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
-import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,54 +21,54 @@ import java.util.Random;
 
 @Repository
 @RequiredArgsConstructor
-public class DataSetGwanboRepository {
+public class DataSetCCTVRepository {
 
     private final EntityManager em;
 
-    public DataSetGwanbo findBySeq(String seq) {
-        List<DataSetGwanbo> gwanbos = em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo" +
-                " WHERE datasetgwanbo.seq =: seq", DataSetGwanbo.class)
+    public DataSetCCTV findBySeq(String seq) {
+        List<DataSetCCTV> cctv = em.createQuery("" +
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv" +
+                " WHERE datasetcctv.seq =: seq", DataSetCCTV.class)
                 .setParameter("seq", seq)
                 .getResultList();
 
-        if (gwanbos.size() > 0) {
-            return gwanbos.get(0);
+        if (cctv.size() > 0) {
+            return cctv.get(0);
         } else {
             return null;
         }
     }
 
-    public List<DataSetGwanbo> findAll() {
+    public List<DataSetCCTV> findAll() {
         return em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
                 .getResultList();
     }
 
-    public List<DataSetGwanbo> findByPage(int page, int itemPerPage) {
+    public List<DataSetCCTV> findByPage(int page, int itemPerPage) {
         return em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo order by datasetgwanbo.seq desc", DataSetGwanbo.class)
-                .setFirstResult(page * itemPerPage)
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv ORDER BY datasetcctv.seq desc", DataSetCCTV.class)
+                .setFirstResult((page - 1) * itemPerPage)
                 .setMaxResults(itemPerPage)
                 .getResultList();
     }
 
-    public DataSetGwanbo findRandomize() {
+    public DataSetCCTV findRandomize() {
         Random random = new Random();
-        List<DataSetGwanbo> gwanbo = em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
+        List<DataSetCCTV> cctv = em.createQuery("" +
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
                 .setFirstResult(random.nextInt(10000))
                 .setMaxResults(100)
                 .getResultList();
 
-        if (gwanbo.size() > 0) {
-            return gwanbo.get(random.nextInt(gwanbo.size() - 1));
+        if (cctv.size() > 0) {
+            return cctv.get(random.nextInt(cctv.size() - 1));
         } else {
             return null;
         }
     }
 
-    public void save(DataSetGwanbo gwanbo) {
-        em.persist(gwanbo);
+    public void save(DataSetCCTV cctv) {
+        em.persist(cctv);
     }
 }
