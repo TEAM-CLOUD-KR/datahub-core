@@ -20,7 +20,7 @@ public class ApiList {
     @Column(name = "name", length = 255)
     private String name;
 
-    @OneToOne(targetEntity = DataSetList.class, fetch = FetchType.LAZY)
+    @OneToOne(targetEntity = DataSetList.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "target_dataset")
     private DataSetList targetDataset;
 
