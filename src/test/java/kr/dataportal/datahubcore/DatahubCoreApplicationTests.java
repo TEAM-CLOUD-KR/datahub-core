@@ -144,9 +144,8 @@ class DatahubCoreApplicationTests {
     }
 
     @Test
-    void ApiList_Paing() {
+    void ApiList_Paging() {
         List<ApiList> byPage = apiListService.findByPage(new ApiListPagingDTO(1, 10));
-
         Assertions.assertThat(byPage).isNotNull();
         Assertions.assertThat(byPage.size()).isGreaterThan(0);
 
