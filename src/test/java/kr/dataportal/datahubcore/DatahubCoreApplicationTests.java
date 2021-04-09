@@ -166,7 +166,7 @@ class DatahubCoreApplicationTests {
 
     @Test
     @Transactional(readOnly = false)
-    @Rollback(value = false)
+    @Rollback(value = true)
     void ApiList_수정() {
         ApiList apiList = apiListService.findBySeq(14);
         ApiList update = apiList.update(
@@ -187,6 +187,5 @@ class DatahubCoreApplicationTests {
         List<ApiList> byPage = apiListService.findByPage(new ApiListPagingDTO(1, 10));
         Assertions.assertThat(byPage).isNotNull();
         Assertions.assertThat(byPage.size()).isGreaterThan(0);
-
     }
 }
