@@ -10,11 +10,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
 @Getter
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
     @Id
     @Column(name = "seq")
@@ -31,10 +31,26 @@ public class User {
     @Column(name = "nickname", length = 255, unique = true)
     private final String nickname;
 
+    @Column(name = "reg_date")
+    private final LocalDateTime regDate;
+
+    @Column(name = "erase_date")
+    private final LocalDateTime eraseDate;
+
     public User() {
         this.email = null;
         this.password = null;
         this.nickname = null;
+        regDate = LocalDateTime.now();
+        eraseDate = null;
+    }
+
+    public User(String email, String password, String nickname) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.regDate = LocalDateTime.now();
+        this.eraseDate = null;
     }
 
     public static User create(String email, String password_1, String password_2, String nickname) {
