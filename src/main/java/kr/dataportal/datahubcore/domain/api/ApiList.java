@@ -1,6 +1,8 @@
 package kr.dataportal.datahubcore.domain.api;
 
 import kr.dataportal.datahubcore.domain.PermissionGroup;
+import kr.dataportal.datahubcore.domain.common.Category1st;
+import kr.dataportal.datahubcore.domain.common.Category2nd;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import kr.dataportal.datahubcore.domain.user.User;
 import lombok.AccessLevel;
@@ -35,8 +37,13 @@ public class ApiList {
     @Column(name = "api_desc")
     private String apiDesc;
 
-    @Column(name = "category")
-    private int category;
+    @ManyToOne(targetEntity = Category1st.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_1st")
+    private Category1st category1st;
+
+    @ManyToOne(targetEntity = Category2nd.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_2nd")
+    private Category2nd category2nd;
 
     @Column(name = "organization")
     private String organization;
@@ -57,21 +64,24 @@ public class ApiList {
         this.targetColumn = null;
         this.permissionGroup = null;
         this.apiDesc = null;
-        this.category = 0;
+        this.category1st = null;
+        this.category2nd = null;
         this.organization = null;
         this.publisher = null;
         this.publish_at = LocalDateTime.now();
         this.last_edit = LocalDateTime.now();
     }
 
-    public ApiList(String name, DataSetList targetDataset, String targetColumn, PermissionGroup permissionGroup,
-                   String apiDesc, int category, String organization, User publisher) {
+    public ApiList(String name, DataSetList targetDataset, String targetColumn,
+                   PermissionGroup permissionGroup, String apiDesc, Category1st category1st,
+                   Category2nd category2nd, String organization, User publisher) {
         this.name = name;
         this.targetDataset = targetDataset;
         this.targetColumn = targetColumn;
         this.permissionGroup = permissionGroup;
         this.apiDesc = apiDesc;
-        this.category = category;
+        this.category1st = category1st;
+        this.category2nd = category2nd;
         this.organization = organization;
         this.publisher = publisher;
         this.publish_at = LocalDateTime.now();
@@ -79,13 +89,15 @@ public class ApiList {
     }
 
     public ApiList update(String name, DataSetList targetDataset, String targetColumn,
-                          PermissionGroup permissionGroup, String apiDesc, int category, String organization) {
+                          PermissionGroup permissionGroup, String apiDesc,
+                          Category1st category1st, Category2nd category2nd, String organization) {
         this.name = name;
         this.targetDataset = targetDataset;
         this.targetColumn = targetColumn;
         this.permissionGroup = permissionGroup;
         this.apiDesc = apiDesc;
-        this.category = category;
+        this.category1st = category1st;
+        this.category2nd = category2nd;
         this.organization = organization;
 
         return this;

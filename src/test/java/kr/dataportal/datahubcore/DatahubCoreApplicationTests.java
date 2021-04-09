@@ -2,6 +2,7 @@ package kr.dataportal.datahubcore;
 
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.common.Category2nd;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Category;
@@ -11,6 +12,8 @@ import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
 import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.ApiListPagingDTO;
 import kr.dataportal.datahubcore.service.api.ApiListService;
+import kr.dataportal.datahubcore.service.common.Category1stService;
+import kr.dataportal.datahubcore.service.common.Category2ndService;
 import kr.dataportal.datahubcore.service.dataset.DataSetListService;
 import kr.dataportal.datahubcore.service.dataset.cctv.DataSetCCTVService;
 import kr.dataportal.datahubcore.service.dataset.gwanbo.DataSetGwanboService;
@@ -46,6 +49,12 @@ class DatahubCoreApplicationTests {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Category1stService category1stService;
+
+    @Autowired
+    private Category2ndService category2ndService;
 
 
     @Test
@@ -140,13 +149,15 @@ class DatahubCoreApplicationTests {
     @Transactional(readOnly = false)
     @Rollback(value = true)
     void ApiList_저장() {
+        Category2nd category2nd = category2ndService.findOne("테스트");
         apiListService.save(new ApiList(
                 "API 이름 테스트123",
                 dataSetListService.findOne("dataset_cctv"),
                 "@All",
                 PermissionGroup.PERMISSION_PUBLIC,
                 "API DESC",
-                1,
+                category2nd.getParent(),
+                category2nd,
                 "컴퓨터정보과",
                 userService.findBySeq(4)));
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
@@ -155,16 +166,17 @@ class DatahubCoreApplicationTests {
 
     @Test
     @Transactional(readOnly = false)
-    @Rollback(value = true)
+    @Rollback(value = false)
     void ApiList_수정() {
-        ApiList apiList = apiListService.findBySeq(4);
+        ApiList apiList = apiListService.findBySeq(14);
         ApiList update = apiList.update(
                 "API 이름 수정",
                 dataSetListService.findOne("dataset_gwanbo"),
                 "['A','B','C']",
                 PermissionGroup.PERMISSION_DATAHUB,
                 "API DESC 수정",
-                2,
+                apiList.getCategory1st(),
+                apiList.getCategory2nd(),
                 "기관 수정"
         );
         Assertions.assertThat(update.getName()).isEqualTo("API 이름 수정");
