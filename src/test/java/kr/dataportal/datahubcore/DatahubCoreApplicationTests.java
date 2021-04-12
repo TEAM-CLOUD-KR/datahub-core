@@ -188,4 +188,11 @@ class DatahubCoreApplicationTests {
         Assertions.assertThat(byPage).isNotNull();
         Assertions.assertThat(byPage.size()).isGreaterThan(0);
     }
+
+    @Test
+    void ApiList_GetCount() {
+        Long count = apiListService.getCount();
+        Assertions.assertThat(count).isNotNull();
+        Assertions.assertThat(count).isGreaterThan(0);
+    }
 }

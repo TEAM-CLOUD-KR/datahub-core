@@ -17,4 +17,9 @@ public class ApiListController {
     public JSONResponse ApiListPaging(@RequestBody ApiListPagingDTO apiListPagingDTO) {
         return new JSONResponse(HttpStatus.OK, apiListService.findByPage(apiListPagingDTO));
     }
+
+    @GetMapping("/count")
+    public JSONResponse ApiListGetCount() {
+        return new JSONResponse(HttpStatus.OK, apiListService.getCount());
+    }
 }

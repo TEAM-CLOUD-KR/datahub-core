@@ -42,4 +42,8 @@ public class ApiListService {
     public void save(ApiList apiList) {
         apiListRepository.save(apiList);
     }
+
+    public Long getCount() {
+        return apiListRepository.getCount();
+    }
 }

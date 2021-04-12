@@ -50,6 +50,12 @@ public class ApiListRepository {
                 .getResultList();
     }
 
+    public Long getCount() {
+        return em.createQuery("" +
+                " SELECT COUNT(apilist) FROM ApiList apilist", Long.class)
+                .getSingleResult();
+    }
+
     public void save(ApiList apiList) {
         em.persist(apiList);
     }
