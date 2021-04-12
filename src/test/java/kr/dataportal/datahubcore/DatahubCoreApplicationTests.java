@@ -10,7 +10,7 @@ import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Organization;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
 import kr.dataportal.datahubcore.domain.user.User;
-import kr.dataportal.datahubcore.dto.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
 import kr.dataportal.datahubcore.service.api.ApiListService;
 import kr.dataportal.datahubcore.service.common.Category1stService;
 import kr.dataportal.datahubcore.service.common.Category2ndService;

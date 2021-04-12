@@ -1,11 +1,9 @@
 package kr.dataportal.datahubcore.repository.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
-import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
-import kr.dataportal.datahubcore.dto.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;

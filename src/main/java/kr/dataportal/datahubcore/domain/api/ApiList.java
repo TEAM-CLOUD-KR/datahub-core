@@ -24,7 +24,7 @@ public class ApiList {
     private String name;
 
     @ManyToOne(targetEntity = DataSetList.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "target_dataset")
+    @JoinColumn(name = "targetDataset")
     private DataSetList targetDataset;
 
     @Column(name = "target_column")

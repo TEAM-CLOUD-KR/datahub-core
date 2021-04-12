@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.service.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
-import kr.dataportal.datahubcore.dto.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
 import kr.dataportal.datahubcore.repository.api.ApiListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

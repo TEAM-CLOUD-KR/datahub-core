@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.dto;
+package kr.dataportal.datahubcore.dto.user;
 
 import lombok.AccessLevel;
 import lombok.Getter;

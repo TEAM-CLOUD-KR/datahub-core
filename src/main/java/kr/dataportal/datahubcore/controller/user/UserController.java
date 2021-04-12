@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.controller.user;
 
 import kr.dataportal.datahubcore.domain.user.User;
-import kr.dataportal.datahubcore.dto.UserSignupDto;
+import kr.dataportal.datahubcore.dto.user.UserSignupDto;
 import kr.dataportal.datahubcore.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
