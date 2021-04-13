@@ -5,12 +5,14 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "user")
@@ -25,8 +27,9 @@ public class User {
     private final String email;
 
     @JsonIgnore
+    @Setter
     @Column(name = "password", length = 255)
-    private final String password;
+    private String password;
 
     @Column(name = "nickname", length = 255, unique = true)
     private final String nickname;
@@ -53,12 +56,11 @@ public class User {
         this.eraseDate = null;
     }
 
-    public static User create(String email, String password_1, String password_2, String nickname) {
+    public static Optional<User> create(String email, String password_1, String password_2, String nickname) {
         if (password_1.equals(password_2)) {
-            return new User(email, password_1, nickname);
+            return Optional.of(new User(email, password_1, nickname));
         } else {
-            return null;
+            return Optional.empty();
         }
     }
-
 }

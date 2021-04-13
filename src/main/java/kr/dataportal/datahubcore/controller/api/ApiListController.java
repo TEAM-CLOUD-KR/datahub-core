@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 public class ApiListController {
     private final ApiListService apiListService;
 
+    // API 목록 조회 기능
     @PostMapping("/list")
     public JSONResponse ApiListPaging(@RequestBody ApiListPagingDTO apiListPagingDTO) {
         return new JSONResponse(HttpStatus.OK, apiListService.findByPage(apiListPagingDTO));
     }
 
+    // API 목록 개수 조회 기능
     @GetMapping("/count")
     public JSONResponse ApiListGetCount() {
         return new JSONResponse(HttpStatus.OK, apiListService.getCount());
