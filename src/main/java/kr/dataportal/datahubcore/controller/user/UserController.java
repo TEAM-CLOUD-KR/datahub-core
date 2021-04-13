@@ -11,16 +11,16 @@
 
 package kr.dataportal.datahubcore.controller.user;
 
+import io.swagger.annotations.Api;
 import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.user.UserSignupDto;
 import kr.dataportal.datahubcore.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import javax.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/user")
@@ -28,14 +28,9 @@ import springfox.documentation.annotations.ApiIgnore;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/signup")
-    @ApiIgnore
-    public String SignupView() {
-        return "register";
-    }
-
     @PostMapping("")
-    public String SignupAction(@RequestBody UserSignupDto user) {
+    @ApiIgnore
+    public String SignUpAction(@RequestBody UserSignupDto user) {
         User u = User.create(user.getEmail(), user.getFirstPassword(), user.getSecondPassword(), user.getNickname());
         if (u == null) {
             return "ERROR";
