@@ -1,7 +1,7 @@
 package kr.dataportal.datahubcore.implement.repository.user;
 
 import kr.dataportal.datahubcore.domain.user.User;
-import kr.dataportal.datahubcore.interfaces.UserInterface;
+import kr.dataportal.datahubcore.interfaces.user.UserInterface;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

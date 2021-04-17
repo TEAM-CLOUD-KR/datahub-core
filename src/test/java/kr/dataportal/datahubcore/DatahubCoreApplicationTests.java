@@ -131,11 +131,11 @@ class DatahubCoreApplicationTests {
     @Transactional(readOnly = false)
     @Rollback(value = true)
     void 회원가입테스트() {
-        Optional<User> user_1 = User.create("test@example.com", "pass1", "pass1", "abc");
+        Optional<User> user_1 = User.create("test1@example.com", "pass1", "pass1", "abc1");
 
         user_1.ifPresent(user -> {
             assertThat(user).isNotNull();
-            assertThat(user.getEmail()).isEqualTo("test@example.com");
+            assertThat(user.getEmail()).isEqualTo("test1@example.com");
 
             SignUpStatus signup_1 = userService.signUp(user);
             assertThat(signup_1).isEqualTo(SignUpStatus.SUCCESS);

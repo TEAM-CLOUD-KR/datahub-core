@@ -4,7 +4,7 @@ import kr.dataportal.datahubcore.domain.user.SignInStatus;
 import kr.dataportal.datahubcore.domain.user.SignUpStatus;
 import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
-import kr.dataportal.datahubcore.interfaces.UserInterface;
+import kr.dataportal.datahubcore.interfaces.user.UserInterface;
 import kr.dataportal.datahubcore.implement.repository.user.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

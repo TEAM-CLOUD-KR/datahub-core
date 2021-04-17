@@ -1,6 +1,7 @@
 package kr.dataportal.datahubcore.implement.repository.common;
 
 import kr.dataportal.datahubcore.domain.common.Category2nd;
+import kr.dataportal.datahubcore.interfaces.common.Category2ndInterface;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -12,9 +13,10 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
-public class Category2ndRepository {
+public class Category2ndRepository implements Category2ndInterface {
     private final EntityManager em;
 
+    @Override
     public Category2nd findOne(String text) {
         List<Category2nd> category2stList = em.createQuery("" +
                 " SELECT category2nd FROM Category2nd category2nd" +

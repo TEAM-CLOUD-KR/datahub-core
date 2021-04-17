@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.interfaces;
+package kr.dataportal.datahubcore.interfaces.dataset.gwanbo;
 
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 

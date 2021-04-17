@@ -1,7 +1,7 @@
 package kr.dataportal.datahubcore.implement.repository.dataset;
 
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
-import kr.dataportal.datahubcore.interfaces.DataSetListInterface;
+import kr.dataportal.datahubcore.interfaces.dataset.DataSetListInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

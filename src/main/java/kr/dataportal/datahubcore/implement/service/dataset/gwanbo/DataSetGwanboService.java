@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.implement.service.dataset.gwanbo;
 
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
-import kr.dataportal.datahubcore.interfaces.DataSetGwanboInterface;
+import kr.dataportal.datahubcore.interfaces.dataset.gwanbo.DataSetGwanboInterface;
 import kr.dataportal.datahubcore.implement.repository.dataset.gwanbo.DataSetGwanboRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

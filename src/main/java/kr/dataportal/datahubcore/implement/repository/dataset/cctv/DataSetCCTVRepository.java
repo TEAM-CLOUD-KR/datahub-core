@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.implement.repository.dataset.cctv;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
-import kr.dataportal.datahubcore.interfaces.DataSetCCTVInterface;
+import kr.dataportal.datahubcore.interfaces.dataset.cctv.DataSetCCTVInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

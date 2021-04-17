@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.interfaces;
+package kr.dataportal.datahubcore.interfaces.datahub;
 
 import kr.dataportal.datahubcore.domain.datahub.DatahubList;
 

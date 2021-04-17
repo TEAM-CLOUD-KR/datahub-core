@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.interfaces;
+package kr.dataportal.datahubcore.interfaces.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;

@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.interfaces;
+package kr.dataportal.datahubcore.interfaces.dataset.cctv;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 

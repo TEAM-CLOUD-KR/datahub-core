@@ -1,4 +1,4 @@
-package kr.dataportal.datahubcore.interfaces;
+package kr.dataportal.datahubcore.interfaces.user;
 
 import kr.dataportal.datahubcore.domain.user.SignUpStatus;
 import kr.dataportal.datahubcore.domain.user.User;
