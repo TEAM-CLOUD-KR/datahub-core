@@ -17,6 +17,7 @@ import kr.dataportal.datahubcore.dto.user.UserSignInDto;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import kr.dataportal.datahubcore.implement.service.common.Category1stService;
 import kr.dataportal.datahubcore.implement.service.common.Category2ndService;
+import kr.dataportal.datahubcore.implement.service.datahub.DatahubListService;
 import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
 import kr.dataportal.datahubcore.implement.service.dataset.cctv.DataSetCCTVService;
 import kr.dataportal.datahubcore.implement.service.dataset.gwanbo.DataSetGwanboService;
@@ -60,6 +61,9 @@ class DatahubCoreApplicationTests {
 
     @Autowired
     private Category2ndService category2ndService;
+
+    @Autowired
+    private DatahubListService datahubListService;
 
 
     @Test
@@ -183,6 +187,7 @@ class DatahubCoreApplicationTests {
                 category2nd.getParent(),
                 category2nd,
                 "컴퓨터정보과",
+                datahubListService.fineBySeq(1).get(),
                 userService.findBySeq(17).get()));
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
         assertThat(apiList).isNotNull();

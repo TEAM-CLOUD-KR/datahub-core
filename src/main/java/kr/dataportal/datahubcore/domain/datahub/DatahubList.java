@@ -20,4 +20,8 @@ public class DatahubList {
 
     @Column(name = "name")
     private final String name;
+
+    public DatahubList() {
+        this.name = null;
+    }
 }

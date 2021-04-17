@@ -3,6 +3,7 @@ package kr.dataportal.datahubcore.domain.api;
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.common.Category1st;
 import kr.dataportal.datahubcore.domain.common.Category2nd;
+import kr.dataportal.datahubcore.domain.datahub.DatahubList;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import kr.dataportal.datahubcore.domain.user.User;
 import lombok.AccessLevel;
@@ -48,6 +49,10 @@ public class ApiList {
     @Column(name = "organization")
     private String organization;
 
+    @ManyToOne(targetEntity = DatahubList.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "own_datahub")
+    private final DatahubList ownDatahub;
+
     @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "publisher")
     private final User publisher;
@@ -67,6 +72,7 @@ public class ApiList {
         this.category1st = null;
         this.category2nd = null;
         this.organization = null;
+        this.ownDatahub = null;
         this.publisher = null;
         this.publish_at = LocalDateTime.now();
         this.last_edit = LocalDateTime.now();
@@ -74,7 +80,7 @@ public class ApiList {
 
     public ApiList(String name, DataSetList targetDataset, String targetColumn,
                    PermissionGroup permissionGroup, String apiDesc, Category1st category1st,
-                   Category2nd category2nd, String organization, User publisher) {
+                   Category2nd category2nd, String organization, DatahubList ownDatahub, User publisher) {
         this.name = name;
         this.targetDataset = targetDataset;
         this.targetColumn = targetColumn;
@@ -83,6 +89,7 @@ public class ApiList {
         this.category1st = category1st;
         this.category2nd = category2nd;
         this.organization = organization;
+        this.ownDatahub = ownDatahub;
         this.publisher = publisher;
         this.publish_at = LocalDateTime.now();
         this.last_edit = LocalDateTime.now();
