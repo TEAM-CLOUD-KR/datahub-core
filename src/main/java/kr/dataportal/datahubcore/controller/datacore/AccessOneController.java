@@ -1,8 +1,8 @@
 package kr.dataportal.datahubcore.controller.datacore;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
-import kr.dataportal.datahubcore.service.dataset.cctv.DataSetCCTVService;
-import kr.dataportal.datahubcore.service.dataset.gwanbo.DataSetGwanboService;
+import kr.dataportal.datahubcore.implement.service.dataset.cctv.DataSetCCTVService;
+import kr.dataportal.datahubcore.implement.service.dataset.gwanbo.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

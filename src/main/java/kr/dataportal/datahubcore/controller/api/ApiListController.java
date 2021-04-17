@@ -2,7 +2,7 @@ package kr.dataportal.datahubcore.controller.api;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
-import kr.dataportal.datahubcore.service.api.ApiListService;
+import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

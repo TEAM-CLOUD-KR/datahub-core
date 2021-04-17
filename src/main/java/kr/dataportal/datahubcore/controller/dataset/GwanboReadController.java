@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.controller.dataset;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
-import kr.dataportal.datahubcore.service.dataset.gwanbo.DataSetGwanboService;
+import kr.dataportal.datahubcore.implement.service.dataset.gwanbo.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

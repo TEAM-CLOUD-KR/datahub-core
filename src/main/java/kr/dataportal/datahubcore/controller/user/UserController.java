@@ -15,11 +15,10 @@ import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
 import kr.dataportal.datahubcore.dto.user.UserSignupDto;
-import kr.dataportal.datahubcore.service.user.UserService;
+import kr.dataportal.datahubcore.implement.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Optional;
 
