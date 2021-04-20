@@ -8,4 +8,6 @@ public interface DatahubListInterface {
     void save(DatahubList datahubList);
 
     Optional<DatahubList> fineBySeq(int seq);
+
+    Optional<DatahubList> findByName(String name);
 }

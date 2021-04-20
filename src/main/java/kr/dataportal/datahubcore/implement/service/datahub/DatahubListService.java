@@ -22,4 +22,9 @@ public class DatahubListService implements DatahubListInterface {
     public Optional<DatahubList> fineBySeq(int seq) {
         return datahubListRepository.fineBySeq(seq);
     }
+
+    @Override
+    public Optional<DatahubList> findByName(String name) {
+        return datahubListRepository.findByName(name);
+    }
 }
