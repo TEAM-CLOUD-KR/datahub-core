@@ -1,7 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -25,8 +24,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-    // https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
-    implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '4.4.0'
+
+    compile("com.querydsl:querydsl-core") // querydsl
+    compile("com.querydsl:querydsl-jpa") // querydsl
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    annotationProcessor("jakarta.annotation:jakarta.annotation-api")
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     annotationProcessor 'org.projectlombok:lombok'
@@ -38,23 +43,17 @@ test {
     useJUnitPlatform()
 }
 
-//querydsl 추가 시작
-def querydslDir = "$buildDir/generated/querydsl"
+apply plugin: "io.spring.dependency-management"
 
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
-
+def generated = 'src/main/generated'
 sourceSets {
-    main.java.srcDir querydslDir
+    main.java.srcDirs += [generated]
 }
 
-configurations {
-    querydsl.extendsFrom compileClasspath
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file(generated)
 }
 
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
+clean.doLast {
+    file(generated).deleteDir()
 }
-//querydsl 추가 끝
