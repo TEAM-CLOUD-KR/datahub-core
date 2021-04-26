@@ -1,7 +1,8 @@
 package kr.dataportal.datahubcore.implement.repository.api;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.dataportal.datahubcore.domain.api.ApiList;
-import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.interfaces.api.ApiListInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApiListRepository implements ApiListInterface {
     private final EntityManager em;
+    private final JPAQueryFactory query;
 
     @Override
     public ApiList findBySeq(int seq) {
@@ -45,12 +47,13 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     @Override
-    public List<ApiList> findByPage(ApiListPagingDTO pagingDTO) {
+    public List<ApiList> findByPage(ApiListSearchDTO searchDTO) {
+//        ApiList apiList =
         return em.createQuery("" +
                 " SELECT apilist FROM ApiList apilist" +
                 " order by apilist.seq desc", ApiList.class)
-                .setFirstResult((pagingDTO.getPage() - 1) * pagingDTO.getItemPerPage())
-                .setMaxResults(pagingDTO.getItemPerPage())
+                .setFirstResult((searchDTO.getPage() - 1) * searchDTO.getItemPerPage())
+                .setMaxResults(searchDTO.getItemPerPage())
                 .getResultList();
     }
 

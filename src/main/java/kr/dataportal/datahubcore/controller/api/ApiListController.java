@@ -1,7 +1,7 @@
 package kr.dataportal.datahubcore.controller.api;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
-import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,8 +15,8 @@ public class ApiListController {
 
     // API 목록 조회 기능
     @PostMapping("/list")
-    public JSONResponse ApiListPaging(@RequestBody ApiListPagingDTO apiListPagingDTO) {
-        return new JSONResponse(HttpStatus.OK, apiListService.findByPage(apiListPagingDTO));
+    public JSONResponse ApiListPaging(@RequestBody ApiListSearchDTO searchDTO) {
+        return new JSONResponse(HttpStatus.OK, apiListService.findByPage(searchDTO));
     }
 
     // API 목록 개수 조회 기능

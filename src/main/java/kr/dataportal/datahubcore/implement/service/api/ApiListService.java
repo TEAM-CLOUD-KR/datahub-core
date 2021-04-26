@@ -12,7 +12,7 @@
 package kr.dataportal.datahubcore.implement.service.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
-import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.interfaces.api.ApiListInterface;
 import kr.dataportal.datahubcore.implement.repository.api.ApiListRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +38,8 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
-    public List<ApiList> findByPage(ApiListPagingDTO pagingDTO) {
-        return apiListRepository.findByPage(pagingDTO);
+    public List<ApiList> findByPage(ApiListSearchDTO searchDTO) {
+        return apiListRepository.findByPage(searchDTO);
     }
 
     @Override

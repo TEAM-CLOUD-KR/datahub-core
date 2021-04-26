@@ -1,7 +1,7 @@
 package kr.dataportal.datahubcore.interfaces.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
-import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
+import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface ApiListInterface {
 
     ApiList findByName(String name);
 
-    List<ApiList> findByPage(ApiListPagingDTO pagingDTO);
+    List<ApiList> findByPage(ApiListSearchDTO searchDTO);
 
     Long getCount();
 

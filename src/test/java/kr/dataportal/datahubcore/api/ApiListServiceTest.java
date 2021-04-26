@@ -3,7 +3,6 @@ package kr.dataportal.datahubcore.api;
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.common.Category2nd;
-import kr.dataportal.datahubcore.dto.api.ApiListPagingDTO;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import kr.dataportal.datahubcore.implement.service.common.Category1stService;
 import kr.dataportal.datahubcore.implement.service.common.Category2ndService;
