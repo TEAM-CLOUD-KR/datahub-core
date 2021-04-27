@@ -30,4 +30,11 @@ public class Category1stRepository implements Category1stInterface {
             return null;
         }
     }
+
+    @Override
+    public List<Category1st> findAll() {
+        return em.createQuery("" +
+                " SELECT category1st FROM Category1st category1st", Category1st.class)
+                .getResultList();
+    }
 }

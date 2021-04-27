@@ -1,6 +1,7 @@
 package kr.dataportal.datahubcore.implement.repository.datahub;
 
 import kr.dataportal.datahubcore.domain.datahub.DatahubList;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.interfaces.datahub.DatahubListInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,13 @@ public class DatahubListRepository implements DatahubListInterface {
     @Transactional(readOnly = false)
     public void save(DatahubList datahubList) {
         em.persist(datahubList);
+    }
+
+    @Override
+    public List<DatahubList> findAll() {
+        return em.createQuery("" +
+                " SELECT datahublist FROM DatahubList datahublist", DatahubList.class)
+                .getResultList();
     }
 
     @Override
@@ -48,6 +56,13 @@ public class DatahubListRepository implements DatahubListInterface {
             return Optional.ofNullable(resultList.get(0));
         else
             return Optional.empty();
+    }
+
+    @Override
+    public List<String> getDatahubOrganization() {
+        return em.createQuery("" +
+                "SELECT datahublist.name FROM DatahubList datahublist", String.class)
+                .getResultList();
     }
 
 }

@@ -6,6 +6,7 @@ import kr.dataportal.datahubcore.implement.repository.datahub.DatahubListReposit
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,11 @@ public class DatahubListService implements DatahubListInterface {
     }
 
     @Override
+    public List<DatahubList> findAll() {
+        return datahubListRepository.findAll();
+    }
+
+    @Override
     public Optional<DatahubList> fineBySeq(int seq) {
         return datahubListRepository.fineBySeq(seq);
     }
@@ -26,5 +32,10 @@ public class DatahubListService implements DatahubListInterface {
     @Override
     public Optional<DatahubList> findByName(String name) {
         return datahubListRepository.findByName(name);
+    }
+
+    @Override
+    public List<String> getDatahubOrganization() {
+        return datahubListRepository.getDatahubOrganization();
     }
 }
