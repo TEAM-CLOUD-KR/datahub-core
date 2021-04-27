@@ -16,7 +16,7 @@ public class ApiListController {
     // API 목록 조회 기능
     @PostMapping("/list")
     public JSONResponse ApiListPaging(@RequestBody ApiListSearchDTO searchDTO) {
-        return new JSONResponse(HttpStatus.OK, apiListService.findByPage(searchDTO));
+        return new JSONResponse(HttpStatus.OK, apiListService.search(searchDTO));
     }
 
     // API 목록 개수 조회 기능

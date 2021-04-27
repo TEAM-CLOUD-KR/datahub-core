@@ -2,19 +2,24 @@ package kr.dataportal.datahubcore.api;
 
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.common.Category1st;
 import kr.dataportal.datahubcore.domain.common.Category2nd;
+import kr.dataportal.datahubcore.domain.datahub.DatahubList;
+import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import kr.dataportal.datahubcore.implement.service.common.Category1stService;
 import kr.dataportal.datahubcore.implement.service.common.Category2ndService;
 import kr.dataportal.datahubcore.implement.service.datahub.DatahubListService;
 import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
 import kr.dataportal.datahubcore.implement.service.user.UserService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -89,11 +94,34 @@ public class ApiListServiceTest {
         assertThat(apiList.getSeq()).isEqualTo(14);
     }
 
+//    @Test
+//    void ApiList_Paging() {
+//        List<ApiList> byPage = apiListService.search(new ApiListSearchDTO(1, 10, PermissionGroup.PERMISSION_PUBLIC, ));
+//        assertThat(byPage).isNotNull();
+//        assertThat(byPage.size()).isGreaterThan(0);
+//    }
+
     @Test
-    void ApiList_Paging() {
-        List<ApiList> byPage = apiListService.findByPage(new ApiListPagingDTO(1, 10));
-        assertThat(byPage).isNotNull();
-        assertThat(byPage.size()).isGreaterThan(0);
+    void ApiList_Search() {
+        List<DatahubList> filteredDatahubList = new ArrayList<>();
+        List<Category1st> filteredCategory1st = new ArrayList<>();
+        List<String> filteredOrganization = new ArrayList<>();
+
+        List<ApiList> search1 = apiListService.search(new ApiListSearchDTO(
+                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, ""
+        ));
+
+        Assertions.assertThat(search1.size()).isEqualTo(2);
+
+        filteredDatahubList.add(datahubListService.fineBySeq(1).get());
+
+        filteredCategory1st.add(category1stService.findOne("과학기술"));
+
+        List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
+                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "API"
+        ));
+
+        Assertions.assertThat(search2.size()).isEqualTo(1);
     }
 
     @Test

@@ -38,8 +38,8 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
-    public List<ApiList> findByPage(ApiListSearchDTO searchDTO) {
-        return apiListRepository.findByPage(searchDTO);
+    public List<ApiList> search(ApiListSearchDTO searchDTO) {
+        return apiListRepository.search(searchDTO);
     }
 
     @Override

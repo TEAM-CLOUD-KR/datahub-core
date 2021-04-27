@@ -10,7 +10,7 @@ public interface ApiListInterface {
 
     ApiList findByName(String name);
 
-    List<ApiList> findByPage(ApiListSearchDTO searchDTO);
+    List<ApiList> search(ApiListSearchDTO searchDTO);
 
     Long getCount();
 

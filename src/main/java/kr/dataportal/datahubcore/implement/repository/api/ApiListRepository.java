@@ -1,7 +1,15 @@
 package kr.dataportal.datahubcore.implement.repository.api;
 
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import io.swagger.annotations.Api;
+import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.api.QApiList;
+import kr.dataportal.datahubcore.domain.common.Category1st;
+import kr.dataportal.datahubcore.domain.datahub.DatahubList;
 import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.interfaces.api.ApiListInterface;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApiListRepository implements ApiListInterface {
     private final EntityManager em;
-    private final JPAQueryFactory query;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public ApiList findBySeq(int seq) {
@@ -46,15 +54,67 @@ public class ApiListRepository implements ApiListInterface {
         }
     }
 
+    private BooleanExpression eqName(String name) {
+        if (name.isEmpty()) {
+            return null;
+        }
+        return QApiList.apiList.name.eq(name);
+    }
+
+    private BooleanExpression isFilteredOwnDatahub(DatahubList datahubList) {
+        return QApiList.apiList.ownDatahub.eq(datahubList);
+    }
+
+    private BooleanExpression isFilteredOwnDatahubs(List<DatahubList> datahubList) {
+        return datahubList != null
+                ? Expressions.anyOf(datahubList.stream().map(
+                this::isFilteredOwnDatahub).toArray(BooleanExpression[]::new)
+        )
+                : null;
+    }
+
+    private BooleanExpression isFilteredCategory(Category1st category) {
+        return QApiList.apiList.category1st.eq(category);
+    }
+
+    private BooleanExpression isFilteredCategories(List<Category1st> categories) {
+        return categories != null
+                ? Expressions.anyOf(categories.stream().map(
+                this::isFilteredCategory).toArray(BooleanExpression[]::new)
+        )
+                : null;
+    }
+
+    private BooleanExpression isFilteredOrganization(String organization) {
+        return QApiList.apiList.organization.eq(organization);
+    }
+
+    private BooleanExpression isFilteredOrganizations(List<String> organizations) {
+        return organizations != null
+                ? Expressions.anyOf(organizations.stream().map(
+                this::isFilteredOrganization).toArray(BooleanExpression[]::new)
+        )
+                : null;
+    }
+
+    private BooleanExpression isFilteredApiName(String name) {
+        return name.isEmpty() ? null : QApiList.apiList.name.contains(name);
+    }
+
     @Override
-    public List<ApiList> findByPage(ApiListSearchDTO searchDTO) {
-//        ApiList apiList =
-        return em.createQuery("" +
-                " SELECT apilist FROM ApiList apilist" +
-                " order by apilist.seq desc", ApiList.class)
-                .setFirstResult((searchDTO.getPage() - 1) * searchDTO.getItemPerPage())
-                .setMaxResults(searchDTO.getItemPerPage())
-                .getResultList();
+    public List<ApiList> search(ApiListSearchDTO searchDTO) {
+        QApiList apiList = QApiList.apiList;
+        return queryFactory
+                .selectFrom(apiList)
+                .where(
+                        isFilteredCategories(searchDTO.getCategory()),
+                        isFilteredOrganizations(searchDTO.getOrganization()),
+                        isFilteredOwnDatahubs(searchDTO.getOwnDatahub()),
+                        isFilteredApiName(searchDTO.getName())
+                )
+                .offset((long) (searchDTO.getPage() - 1) * searchDTO.getItemPerPage())
+                .limit((long) searchDTO.getItemPerPage())
+                .fetch();
     }
 
     @Override
