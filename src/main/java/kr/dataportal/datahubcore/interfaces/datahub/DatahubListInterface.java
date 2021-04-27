@@ -13,6 +13,4 @@ public interface DatahubListInterface {
     Optional<DatahubList> fineBySeq(int seq);
 
     Optional<DatahubList> findByName(String name);
-
-    List<String> getDatahubOrganization();
 }

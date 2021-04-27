@@ -58,11 +58,4 @@ public class DatahubListRepository implements DatahubListInterface {
             return Optional.empty();
     }
 
-    @Override
-    public List<String> getDatahubOrganization() {
-        return em.createQuery("" +
-                "SELECT datahublist.name FROM DatahubList datahublist", String.class)
-                .getResultList();
-    }
-
 }

@@ -15,4 +15,6 @@ public interface ApiListInterface {
     Long getCount();
 
     void save(ApiList apiList);
+    
+    List<String> getOrganizations();
 }

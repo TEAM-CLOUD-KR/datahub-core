@@ -49,6 +49,11 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
+    public List<String> getOrganizations() {
+        return apiListRepository.getOrganizations();
+    }
+
+    @Override
     public Long getCount() {
         return apiListRepository.getCount();
     }

@@ -128,4 +128,11 @@ public class ApiListRepository implements ApiListInterface {
     public void save(ApiList apiList) {
         em.persist(apiList);
     }
+
+    @Override
+    public List<String> getOrganizations() {
+        return em.createQuery("" +
+                " SELECT DISTINCT apilist.organization FROM ApiList apilist", String.class)
+                .getResultList();
+    }
 }

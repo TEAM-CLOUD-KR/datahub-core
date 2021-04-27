@@ -33,9 +33,4 @@ public class DatahubListService implements DatahubListInterface {
     public Optional<DatahubList> findByName(String name) {
         return datahubListRepository.findByName(name);
     }
-
-    @Override
-    public List<String> getDatahubOrganization() {
-        return datahubListRepository.getDatahubOrganization();
-    }
 }

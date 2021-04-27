@@ -22,7 +22,7 @@ public class ApiListController {
     @PostMapping("/list")
     public JSONResponse ApiListSearch(@RequestBody ApiListSearchDTO searchDTO) {
         return new JSONResponse(HttpStatus.OK, new ApiListSearchVO(
-                datahubListService.findAll(), category1stService.findAll(), datahubListService.getDatahubOrganization(),
+                datahubListService.findAll(), category1stService.findAll(), apiListService.getOrganizations(),
                 apiListService.getCount(), apiListService.search(searchDTO))
         );
     }
