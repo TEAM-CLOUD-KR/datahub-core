@@ -61,11 +61,11 @@ public class ApiListRepository implements ApiListInterface {
         return QApiList.apiList.name.eq(name);
     }
 
-    private BooleanExpression isFilteredOwnDatahub(DatahubList datahubList) {
-        return QApiList.apiList.ownDatahub.eq(datahubList);
+    private BooleanExpression isFilteredOwnDatahub(String datahubList) {
+        return QApiList.apiList.ownDatahub.name.eq(datahubList);
     }
 
-    private BooleanExpression isFilteredOwnDatahubs(List<DatahubList> datahubList) {
+    private BooleanExpression isFilteredOwnDatahubs(List<String> datahubList) {
         return datahubList != null
                 ? Expressions.anyOf(datahubList.stream().map(
                 this::isFilteredOwnDatahub).toArray(BooleanExpression[]::new)
@@ -73,11 +73,11 @@ public class ApiListRepository implements ApiListInterface {
                 : null;
     }
 
-    private BooleanExpression isFilteredCategory(Category1st category) {
-        return QApiList.apiList.category1st.eq(category);
+    private BooleanExpression isFilteredCategory(String category) {
+        return QApiList.apiList.category1st.text.eq(category);
     }
 
-    private BooleanExpression isFilteredCategories(List<Category1st> categories) {
+    private BooleanExpression isFilteredCategories(List<String> categories) {
         return categories != null
                 ? Expressions.anyOf(categories.stream().map(
                 this::isFilteredCategory).toArray(BooleanExpression[]::new)

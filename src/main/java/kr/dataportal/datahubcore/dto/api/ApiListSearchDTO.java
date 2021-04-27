@@ -13,8 +13,8 @@ import java.util.List;
 public class ApiListSearchDTO {
     private final Integer page;
     private final Integer itemPerPage;
-    private final List<DatahubList> ownDatahub;
-    private final List<Category1st> category;
+    private final List<String> ownDatahub;
+    private final List<String> category;
     private final List<String> organization;
     private final String name;
 }
