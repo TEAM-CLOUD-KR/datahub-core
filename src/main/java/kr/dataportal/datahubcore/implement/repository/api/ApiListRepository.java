@@ -132,7 +132,9 @@ public class ApiListRepository implements ApiListInterface {
     @Override
     public List<String> getOrganizations() {
         return em.createQuery("" +
-                " SELECT DISTINCT apilist.organization FROM ApiList apilist", String.class)
+                " SELECT DISTINCT apilist.organization FROM ApiList apilist" +
+                " WHERE apilist.organization IS NOT NULL" +
+                " AND apilist.organization <> ''", String.class)
                 .getResultList();
     }
 }
