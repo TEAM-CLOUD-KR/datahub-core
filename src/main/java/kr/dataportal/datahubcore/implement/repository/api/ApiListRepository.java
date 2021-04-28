@@ -98,7 +98,7 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     private BooleanExpression isFilteredApiName(String name) {
-        return name.isBlank()
+        return name == null || name.isBlank()
                 ? null
                 : QApiList.apiList.name.contains(name);
     }
@@ -119,10 +119,16 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     @Override
-    public Long getCount() {
-        return em.createQuery("" +
-                " SELECT COUNT(apilist) FROM ApiList apilist", Long.class)
-                .getSingleResult();
+    public Long getCount(ApiListSearchDTO searchDTO) {
+        return queryFactory
+                .selectFrom(QApiList.apiList)
+                .where(
+                        isFilteredCategories(searchDTO.getCategory()),
+                        isFilteredOrganizations(searchDTO.getOrganization()),
+                        isFilteredOwnDatahubs(searchDTO.getOwnDatahub()),
+                        isFilteredApiName(searchDTO.getName())
+                )
+                .fetchCount();
     }
 
     @Override

@@ -23,13 +23,7 @@ public class ApiListController {
     public JSONResponse ApiListSearch(@RequestBody ApiListSearchDTO searchDTO) {
         return new JSONResponse(HttpStatus.OK, new ApiListSearchVO(
                 datahubListService.findAll(), category1stService.findAll(), apiListService.getOrganizations(),
-                apiListService.getCount(), apiListService.search(searchDTO))
+                apiListService.getCount(searchDTO), apiListService.search(searchDTO))
         );
-    }
-
-    // API 목록 개수 조회 기능
-    @GetMapping("/count")
-    public JSONResponse ApiListGetCount() {
-        return new JSONResponse(HttpStatus.OK, apiListService.getCount());
     }
 }

@@ -12,7 +12,7 @@ public interface ApiListInterface {
 
     List<ApiList> search(ApiListSearchDTO searchDTO);
 
-    Long getCount();
+    Long getCount(ApiListSearchDTO searchDTO);
 
     void save(ApiList apiList);
     

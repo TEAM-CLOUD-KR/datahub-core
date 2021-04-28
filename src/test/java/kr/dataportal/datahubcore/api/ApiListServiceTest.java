@@ -127,8 +127,16 @@ public class ApiListServiceTest {
 
     @Test
     void ApiList_GetCount() {
-        Long count = apiListService.getCount();
+        Long count = apiListService.getCount(new ApiListSearchDTO(
+                1, 10, null, null, null, null
+        ));
         assertThat(count).isNotNull();
         assertThat(count).isGreaterThan(0);
+
+        Long count1 = apiListService.getCount(new ApiListSearchDTO(
+                1, 10, null, null, null, "제목"
+        ));
+        assertThat(count1).isNotNull();
+        assertThat(count1).isEqualTo(1);
     }
 }

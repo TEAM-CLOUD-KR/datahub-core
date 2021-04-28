@@ -54,7 +54,7 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
-    public Long getCount() {
-        return apiListRepository.getCount();
+    public Long getCount(ApiListSearchDTO searchDTO) {
+        return apiListRepository.getCount(searchDTO);
     }
 }
