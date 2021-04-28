@@ -98,14 +98,15 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     private BooleanExpression isFilteredApiName(String name) {
-        return name.isEmpty() ? null : QApiList.apiList.name.contains(name);
+        return name.isBlank()
+                ? null
+                : QApiList.apiList.name.contains(name);
     }
 
     @Override
     public List<ApiList> search(ApiListSearchDTO searchDTO) {
-        QApiList apiList = QApiList.apiList;
         return queryFactory
-                .selectFrom(apiList)
+                .selectFrom(QApiList.apiList)
                 .where(
                         isFilteredCategories(searchDTO.getCategory()),
                         isFilteredOrganizations(searchDTO.getOrganization()),

@@ -1,2 +1,11 @@
 server:
   port: 8443
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hiberate:
+        format_sql: true
+
+

@@ -101,28 +101,29 @@ public class ApiListServiceTest {
 //        assertThat(byPage.size()).isGreaterThan(0);
 //    }
 
-//    @Test
-//    void ApiList_Search() {
-//        List<DatahubList> filteredDatahubList = new ArrayList<>();
-//        List<Category1st> filteredCategory1st = new ArrayList<>();
-//        List<String> filteredOrganization = new ArrayList<>();
-//
-//        List<ApiList> search1 = apiListService.search(new ApiListSearchDTO(
-//                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, ""
-//        ));
-//
-//        Assertions.assertThat(search1.size()).isEqualTo(2);
-//
-//        filteredDatahubList.add(datahubListService.fineBySeq(1).get());
-//
-//        filteredCategory1st.add(category1stService.findOne("과학기술"));
-//
-//        List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
-//                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "API"
-//        ));
-//
-//        Assertions.assertThat(search2.size()).isEqualTo(1);
-//    }
+    @Test
+    void ApiList_Search() {
+        List<String> filteredDatahubList = new ArrayList<>();
+        List<String> filteredCategory1st = new ArrayList<>();
+        List<String> filteredOrganization = new ArrayList<>();
+
+        List<ApiList> search1 = apiListService.search(new ApiListSearchDTO(
+                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, ""
+        ));
+
+        Assertions.assertThat(search1.size()).isEqualTo(2);
+
+        filteredDatahubList.add(datahubListService.fineBySeq(1).get().getName());
+
+        filteredCategory1st.add(category1stService.findOne("과학기술").getText());
+        filteredCategory1st.add(category1stService.findOne("교육").getText());
+
+        List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
+                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "제목"
+        ));
+
+        Assertions.assertThat(search2.size()).isEqualTo(1);
+    }
 
     @Test
     void ApiList_GetCount() {
