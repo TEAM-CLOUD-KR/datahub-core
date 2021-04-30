@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,20 +20,23 @@ import static org.assertj.core.api.Assertions.assertThat;
         "optional:/home/datahub/_secrets/datahub-core.yml," +
         "optional:/Users/sun/repository/_secrets/datahub-core.yml"
 ))
+@Transactional(readOnly = true)
 public class DatahubListServiceTest {
     @Autowired
     DatahubListService datahubListService;
 
     @Test
+    @Transactional(readOnly = false)
+    @Rollback(value = true)
     void DatahubList_등록_테스트() {
         datahubListService.save(new DatahubList(
-                "TEST"
+                "TEST2"
         ));
 
-        Optional<DatahubList> test = datahubListService.findByName("TEST");
+        Optional<DatahubList> test = datahubListService.findByName("TEST2");
         test.ifPresent(datahubList -> {
             assertThat(datahubList).isNotNull();
-            assertThat(datahubList.getName()).isEqualTo("TEST");
+            assertThat(datahubList.getName()).isEqualTo("TEST2");
         });
     }
 

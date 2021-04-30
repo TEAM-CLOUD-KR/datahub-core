@@ -111,7 +111,7 @@ public class ApiListServiceTest {
                 1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, ""
         ));
 
-        Assertions.assertThat(search1.size()).isEqualTo(2);
+        Assertions.assertThat(search1.size()).isGreaterThan(0);
 
         filteredDatahubList.add(datahubListService.fineBySeq(1).get().getName());
 
@@ -119,7 +119,7 @@ public class ApiListServiceTest {
         filteredCategory1st.add(category1stService.findOne("교육").getText());
 
         List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
-                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "제목"
+                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "개발용 API 이름"
         ));
 
         Assertions.assertThat(search2.size()).isEqualTo(1);
@@ -134,7 +134,7 @@ public class ApiListServiceTest {
         assertThat(count).isGreaterThan(0);
 
         Long count1 = apiListService.getCount(new ApiListSearchDTO(
-                1, 10, null, null, null, "제목"
+                1, 10, null, null, null, "개발용 API 이름"
         ));
         assertThat(count1).isNotNull();
         assertThat(count1).isEqualTo(1);
