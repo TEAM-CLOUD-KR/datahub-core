@@ -12,6 +12,7 @@
 package kr.dataportal.datahubcore.domain.dataset.gwanbo;
 
 import lombok.*;
+import org.springframework.context.annotation.Description;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
@@ -23,11 +24,15 @@ import java.util.List;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class DataSetGwanbo {
-    @Column(name = "seq", length = 45, nullable = false)
+    @Column(name = "seq", length = 45, nullable = false,
+            columnDefinition = ""
+    )
     @Id
     private final String seq;
 
-    @Column(name = "ebook_no", length = 10, nullable = false)
+    @Column(name = "ebook_no", length = 10, nullable = false,
+            columnDefinition = ""
+    )
     private final String ebookNo;
 
     @Embedded
@@ -39,10 +44,14 @@ public class DataSetGwanbo {
     @Embedded
     private final Category category;
 
-    @Column(name = "law_name", length = 255, nullable = true)
+    @Column(name = "law_name", length = 255, nullable = true,
+            columnDefinition = ""
+    )
     private final String lawName;
 
-    @Column(name = "binary_file", length = 255, nullable = false)
+    @Column(name = "binary_file", length = 255, nullable = false,
+            columnDefinition = "관보 PDF 파일의 저장 위치"
+    )
     private final String binaryFile;
 
     public DataSetGwanbo() {

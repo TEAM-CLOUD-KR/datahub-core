@@ -5,6 +5,7 @@ import kr.dataportal.datahubcore.domain.dataset.gwanbo.Category;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Organization;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.Publish;
+import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import kr.dataportal.datahubcore.implement.service.dataset.gwanbo.DataSetGwanboService;
 import kr.dataportal.datahubcore.util.CommonUtil;
 import org.junit.jupiter.api.Test;
@@ -55,21 +56,21 @@ public class DataSetGwanboServiceTest {
 
     @Test
     void DataSetGwanbo_컬럼_전체조회_By_Class() {
-        List<String> columns = CommonUtil.parseClassProperty(DataSetGwanbo.class);
+        List<DataSetColumnDesc> columns = CommonUtil.parseClassProperty(DataSetGwanbo.class);
         assertThat(columns).isNotNull();
         assertThat(columns.size()).isGreaterThan(0);
     }
 
     @Test
     void DataSetCCTV_컬럼_전체조회_By_Class() {
-        List<String> columns = CommonUtil.parseClassProperty(DataSetCCTV.class);
+        List<DataSetColumnDesc> columns = CommonUtil.parseClassProperty(DataSetCCTV.class);
         assertThat(columns).isNotNull();
         assertThat(columns.size()).isGreaterThan(0);
     }
 
     @Test
     void DataSetGwanbo_컬럼_전체조회_By_String() {
-        List<String> columns = CommonUtil.parseClassProperty("DataSetGwanbo");
+        List<DataSetColumnDesc> columns = CommonUtil.parseClassProperty("DataSetGwanbo");
         assertThat(columns).isNotNull();
         assertThat(columns.size()).isGreaterThan(0);
     }

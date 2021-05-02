@@ -1,5 +1,6 @@
 package kr.dataportal.datahubcore.dataset.cctv;
 
+import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import kr.dataportal.datahubcore.util.CommonUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DataSetCCTVServiceTest {
     @Test
     void DataSetCCTV_컬럼_전체조회_By_String() {
-        List<String> columns = CommonUtil.parseClassProperty("DataSetCCTV");
+        List<DataSetColumnDesc> columns = CommonUtil.parseClassProperty("DataSetCCTV");
         assertThat(columns).isNotNull();
         assertThat(columns.size()).isGreaterThan(0);
     }

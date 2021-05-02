@@ -20,10 +20,14 @@ import javax.persistence.Embeddable;
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Category {
-    @Column(name = "category_name", length = 45, nullable = false)
+    @Column(name = "category_name", length = 45, nullable = false,
+            columnDefinition = ""
+    )
     private final String name;
 
-    @Column(name = "category_seq", length = 45, nullable = false)
+    @Column(name = "category_seq", length = 45, nullable = false,
+            columnDefinition = ""
+    )
     private final String seq;
 
     public Category() {
