@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -140,5 +141,13 @@ public class ApiListServiceTest {
         ));
         assertThat(count1).isNotNull();
         assertThat(count1).isEqualTo(1);
+    }
+
+    @Test
+    void ApiList_findByUserAndPath() {
+        Optional<ApiList> byUserAndPath = apiListService.findByUserAndPath("a", "b");
+        byUserAndPath.ifPresent(
+                item -> assertThat(item.getSeq()).isEqualTo(14)
+        );
     }
 }
