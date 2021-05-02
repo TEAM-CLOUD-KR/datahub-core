@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ApiListInterface {
-    ApiList findBySeq(int seq);
+    Optional<ApiList> findBySeq(int seq);
 
     ApiList findByName(String name);
 

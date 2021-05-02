@@ -26,7 +26,7 @@ public class ApiListRepository implements ApiListInterface {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public ApiList findBySeq(int seq) {
+    public Optional<ApiList> findBySeq(int seq) {
         List<ApiList> apiList = em.createQuery("" +
                 " SELECT apilist FROM ApiList apilist" +
                 " WHERE apilist.seq=:seq", ApiList.class)
@@ -34,9 +34,9 @@ public class ApiListRepository implements ApiListInterface {
                 .getResultList();
 
         if (apiList.size() > 0) {
-            return apiList.get(0);
+            return Optional.ofNullable(apiList.get(0));
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 

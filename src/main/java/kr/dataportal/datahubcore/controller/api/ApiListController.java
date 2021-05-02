@@ -35,6 +35,21 @@ public class ApiListController {
         );
     }
 
+    // API 상세 조회 기능
+    @GetMapping("/{seq}")
+    public JSONResponse ApiDetail(@PathVariable String seq) {
+        try {
+            Optional<ApiList> bySeq = apiListService.findBySeq(Integer.parseInt(seq));
+            return bySeq.map(
+                    item -> new JSONResponse(HttpStatus.OK, item)
+            ).orElse(
+                    new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND Item By Seq")
+            );
+        } catch (NumberFormatException e) {
+            return new JSONResponse(HttpStatus.BAD_REQUEST, "seq is not Integer");
+        }
+    }
+
     // 사용자 정의 API Class 매퍼
     private final Map<DataSetList, ClassLoader> apiMapper = new HashMap<>();
 

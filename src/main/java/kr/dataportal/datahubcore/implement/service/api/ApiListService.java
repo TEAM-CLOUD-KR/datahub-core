@@ -29,7 +29,7 @@ public class ApiListService implements ApiListInterface {
     private final ApiListRepository apiListRepository;
 
     @Override
-    public ApiList findBySeq(int seq) {
+    public Optional<ApiList> findBySeq(int seq) {
         return apiListRepository.findBySeq(seq);
     }
 
