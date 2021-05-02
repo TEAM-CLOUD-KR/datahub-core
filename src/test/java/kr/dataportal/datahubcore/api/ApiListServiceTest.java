@@ -65,7 +65,8 @@ public class ApiListServiceTest {
                 category2nd,
                 "컴퓨터정보과",
                 datahubListService.fineBySeq(1).get(),
-                userService.findBySeq(17).get()));
+                userService.findBySeq(17).get(),
+                "TEST"));
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
         assertThat(apiList).isNotNull();
     }
@@ -83,7 +84,8 @@ public class ApiListServiceTest {
                 "API DESC 수정",
                 apiList.getCategory1st(),
                 apiList.getCategory2nd(),
-                "기관 수정"
+                "기관 수정",
+                "TEST"
         );
         assertThat(update.getName()).isEqualTo("API 이름 수정");
     }

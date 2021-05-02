@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -52,6 +53,20 @@ public class ApiListRepository implements ApiListInterface {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public Optional<ApiList> findByUserAndPath(String user, String path) {
+        List<ApiList> apiList = em.createQuery("" +
+                " SELECT apilist FROM ApiList apilist" +
+                " WHERE apilist.path=:path", ApiList.class)
+                .setParameter("path", "/".concat(user).concat("/").concat(path))
+                .getResultList();
+
+        if (apiList.size() > 0)
+            return Optional.ofNullable(apiList.get(0));
+        else
+            return Optional.empty();
     }
 
     private BooleanExpression eqName(String name) {

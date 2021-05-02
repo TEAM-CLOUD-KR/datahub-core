@@ -1,8 +1,10 @@
 package kr.dataportal.datahubcore.domain.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.dataportal.datahubcore.domain.user.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 
@@ -17,6 +19,7 @@ public class Category2nd {
 
     @ManyToOne(targetEntity = Category1st.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "parent")
+    @JsonIgnore
     private final Category1st parent;
 
     public Category2nd() {
