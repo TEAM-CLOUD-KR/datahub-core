@@ -61,11 +61,11 @@ public class ApiListController {
     private final Map<DataSetList, ClassLoader> apiMapper = new HashMap<>();
 
     // 사용자 정의 API 조회 기능
-    @GetMapping("/{user}/{apiPath}")
+    @GetMapping("/custom/{user}/{apiPath}")
     public JSONResponse UserCustomizeApi(@PathVariable String user, @PathVariable String apiPath) {
         Optional<ApiList> byPath = apiListService.findByUserAndPath(user, apiPath);
         return byPath.map(
-                apiList -> new JSONResponse(HttpStatus.OK, apiList)
+                apiList -> new JSONResponse(HttpStatus.OK, apiList.getOwnDatahub())
         ).orElseGet(
                 () -> new JSONResponse(HttpStatus.NOT_FOUND, "CAN NOT FOUND THE PATH")
         );
