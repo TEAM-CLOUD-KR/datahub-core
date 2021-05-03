@@ -65,7 +65,7 @@ public class ApiListController {
     public JSONResponse UserCustomizeApi(@PathVariable String user, @PathVariable String apiPath) {
         Optional<ApiList> byPath = apiListService.findByUserAndPath(user, apiPath);
         return byPath.map(
-                apiList -> new JSONResponse(HttpStatus.OK, apiList.getOwnDatahub())
+                apiList -> new JSONResponse(HttpStatus.OK, apiList.getTargetDataset())
         ).orElseGet(
                 () -> new JSONResponse(HttpStatus.NOT_FOUND, "CAN NOT FOUND THE PATH")
         );
