@@ -25,13 +25,13 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class DataSetGwanbo {
     @Column(name = "seq", length = 45, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "seq_desc"
     )
     @Id
     private final String seq;
 
     @Column(name = "ebook_no", length = 10, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "ebook_no Desc"
     )
     private final String ebookNo;
 
@@ -45,7 +45,7 @@ public class DataSetGwanbo {
     private final Category category;
 
     @Column(name = "law_name", length = 255, nullable = true,
-            columnDefinition = ""
+            columnDefinition = "law_name Desc"
     )
     private final String lawName;
 

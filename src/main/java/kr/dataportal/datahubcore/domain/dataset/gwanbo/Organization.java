@@ -21,12 +21,12 @@ import javax.persistence.Embeddable;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Organization {
     @Column(name = "organization_name", length = 45, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "organization_name Desc"
     )
     private final String name;
 
     @Column(name = "organization_code", length = 45, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "organization_code Desc"
     )
     private final String code;
 

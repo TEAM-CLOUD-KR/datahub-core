@@ -4,16 +4,19 @@ import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
+import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import kr.dataportal.datahubcore.implement.service.common.Category1stService;
 import kr.dataportal.datahubcore.implement.service.datahub.DatahubListService;
 import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
+import kr.dataportal.datahubcore.util.CommonUtil;
 import kr.dataportal.datahubcore.vo.api.ApiListSearchVO;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,11 +43,17 @@ public class ApiListController {
     public JSONResponse ApiDetail(@PathVariable String seq) {
         try {
             Optional<ApiList> bySeq = apiListService.findBySeq(Integer.parseInt(seq));
-            return bySeq.map(
-                    item -> new JSONResponse(HttpStatus.OK, item)
-            ).orElse(
-                    new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND Item By Seq")
-            );
+            if (bySeq.isPresent()) {
+                Map<String, Object> ret = new HashMap<>();
+                ApiList apiList = bySeq.get();
+                List<DataSetColumnDesc> dataSetColumnDesc =
+                        CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataSet());
+                ret.put("detail", apiList);
+                ret.put("dataset_column", dataSetColumnDesc);
+                return new JSONResponse(HttpStatus.OK, ret);
+            } else {
+                return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND Item By Seq");
+            }
         } catch (NumberFormatException e) {
             return new JSONResponse(HttpStatus.BAD_REQUEST, "seq is not Integer");
         }

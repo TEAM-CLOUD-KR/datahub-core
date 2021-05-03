@@ -21,17 +21,17 @@ import javax.persistence.Embeddable;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Publish {
     @Column(name = "publish_seq", length = 45, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "publish_seq Desc"
     )
     private final String seq;
 
     @Column(name = "publish_subject", length = 500, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "publish_subject Desc"
     )
     private final String subject;
 
     @Column(name = "publish_regdate", length = 8, nullable = false,
-            columnDefinition = ""
+            columnDefinition = "publish_regdate Desc"
     )
     private final String regdate;
 
