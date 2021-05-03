@@ -61,7 +61,7 @@ public class ApiListController {
     private final Map<DataSetList, ClassLoader> apiMapper = new HashMap<>();
 
     // 사용자 정의 API 조회 기능
-    @GetMapping("/custom/{user}/{apiPath}")
+    @GetMapping("/v2/{user}/{apiPath}")
     public JSONResponse UserCustomizeApi(@PathVariable String user, @PathVariable String apiPath) {
         Optional<ApiList> byPath = apiListService.findByUserAndPath(user, apiPath);
         return byPath.map(
