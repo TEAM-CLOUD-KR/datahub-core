@@ -3,6 +3,7 @@ package kr.dataportal.datahubcore.controller.api;
 import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
+import kr.dataportal.datahubcore.dto.api.ApiListDetailAndDataSetColumn;
 import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
@@ -44,13 +45,10 @@ public class ApiListController {
         try {
             Optional<ApiList> bySeq = apiListService.findBySeq(Integer.parseInt(seq));
             if (bySeq.isPresent()) {
-                Map<String, Object> ret = new HashMap<>();
                 ApiList apiList = bySeq.get();
                 List<DataSetColumnDesc> dataSetColumnDesc =
                         CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataSet());
-                ret.put("detail", apiList);
-                ret.put("dataset_column", dataSetColumnDesc);
-                return new JSONResponse(HttpStatus.OK, ret);
+                return new JSONResponse(HttpStatus.OK, new ApiListDetailAndDataSetColumn(apiList, dataSetColumnDesc));
             } else {
                 return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND Item By Seq");
             }
