@@ -38,7 +38,7 @@ public class CommonUtil {
 
         for (Field field : target.getDeclaredFields()) {
             if (field.isAnnotationPresent(Column.class)) {
-                ret.add(new DataSetColumnDesc(field.getAnnotation(Column.class).name(), parseColumnDesc(field)));
+                ret.add(new DataSetColumnDesc(field.getAnnotation(Column.class).name(), parseColumnDesc(field), field.getType().getTypeName()));
             } else if (field.isAnnotationPresent(Embedded.class)) {
                 try {
                     Class<?> aClass = Class.forName(field.getType().getName());
@@ -48,7 +48,7 @@ public class CommonUtil {
                     return new ArrayList<>();
                 }
             } else {
-                ret.add(new DataSetColumnDesc(field.getName(), parseColumnDesc(field)));
+                ret.add(new DataSetColumnDesc(field.getName(), parseColumnDesc(field), field.getType().getTypeName()));
             }
         }
         return ret;
