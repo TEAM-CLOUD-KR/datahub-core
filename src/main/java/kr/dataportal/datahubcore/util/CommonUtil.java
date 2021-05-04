@@ -1,5 +1,6 @@
 package kr.dataportal.datahubcore.util;
 
+import jdk.jfr.Description;
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
@@ -25,11 +26,21 @@ public class CommonUtil {
         }
     }
 
-    public static String parseColumnDesc(Field field) {
+    private static DataSetColumnDesc createDataSetColumnDesc(Field field) {
         if (field.isAnnotationPresent(Column.class)) {
-            return field.getAnnotation(Column.class).columnDefinition();
+            return new DataSetColumnDesc(
+                    field.getAnnotation(Column.class).name(),
+                    field.getAnnotation(Column.class).columnDefinition(),
+                    field.getType().getSimpleName(),
+                    field.getAnnotation(Description.class).value()
+            );
         } else {
-            return "";
+            return new DataSetColumnDesc(
+                    field.getName(),
+                    "-",
+                    field.getType().getSimpleName(),
+                    field.getAnnotation(Description.class).value()
+            );
         }
     }
 
@@ -37,9 +48,7 @@ public class CommonUtil {
         List<DataSetColumnDesc> ret = new ArrayList<>();
 
         for (Field field : target.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Column.class)) {
-                ret.add(new DataSetColumnDesc(field.getAnnotation(Column.class).name(), parseColumnDesc(field), field.getType().getSimpleName()));
-            } else if (field.isAnnotationPresent(Embedded.class)) {
+            if (field.isAnnotationPresent(Embedded.class)) {
                 try {
                     Class<?> aClass = Class.forName(field.getType().getName());
                     ret.addAll(parseClassProperty(aClass));
@@ -48,7 +57,7 @@ public class CommonUtil {
                     return new ArrayList<>();
                 }
             } else {
-                ret.add(new DataSetColumnDesc(field.getName(), parseColumnDesc(field), field.getType().getSimpleName()));
+                ret.add(createDataSetColumnDesc(field));
             }
         }
         return ret;

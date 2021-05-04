@@ -20,4 +20,5 @@ public class DataSetColumnDesc {
     private final String columnEn;
     private final String columnKr;
     private final String columnType;
+    private final String columnDesc;
 }

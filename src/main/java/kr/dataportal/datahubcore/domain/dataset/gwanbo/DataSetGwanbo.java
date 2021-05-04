@@ -11,8 +11,8 @@
 
 package kr.dataportal.datahubcore.domain.dataset.gwanbo;
 
+import jdk.jfr.Description;
 import lombok.*;
-import org.springframework.context.annotation.Description;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
@@ -25,8 +25,9 @@ import java.util.List;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class DataSetGwanbo {
     @Column(name = "seq", length = 45, nullable = false,
-            columnDefinition = "seq_desc"
+            columnDefinition = "고유번호"
     )
+    @Description("seq_desc")
     @Id
     private final String seq;
 
