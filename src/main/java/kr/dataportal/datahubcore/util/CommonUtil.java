@@ -32,16 +32,18 @@ public class CommonUtil {
                 type = field.getType().getSimpleName(),
                 desc = "";
         int length = -1;
+        boolean nullable = false;
 
         if (field.isAnnotationPresent(Column.class)) {
             en = field.getAnnotation(Column.class).name();
             kr = field.getAnnotation(Column.class).columnDefinition();
             length = field.getAnnotation(Column.class).length();
+            nullable = field.getAnnotation(Column.class).nullable();
         }
         if (field.isAnnotationPresent(Description.class)) {
             desc = field.getAnnotation(Description.class).value();
         }
-        return new DataSetColumnDesc(en, kr, type, length, desc);
+        return new DataSetColumnDesc(en, kr, type, length, nullable, desc);
     }
 
     public static List<DataSetColumnDesc> parseClassProperty(Class<?> target) {
