@@ -21,6 +21,6 @@ public class DataSetColumnDesc {
     private final String columnKr;
     private final String columnType;
     private final int columnLength;
-    private final boolean nullable;
+    private final Boolean nullable;
     private final String columnDesc;
 }
