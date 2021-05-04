@@ -3,6 +3,8 @@ package kr.dataportal.datahubcore.controller.api;
 import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
+import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
 import kr.dataportal.datahubcore.dto.api.ApiListDetailAndDataSetColumn;
 import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
@@ -10,6 +12,8 @@ import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import kr.dataportal.datahubcore.implement.service.common.Category1stService;
 import kr.dataportal.datahubcore.implement.service.datahub.DatahubListService;
 import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
+import kr.dataportal.datahubcore.implement.service.dataset.cctv.DataSetCCTVService;
+import kr.dataportal.datahubcore.implement.service.dataset.gwanbo.DataSetGwanboService;
 import kr.dataportal.datahubcore.util.CommonUtil;
 import kr.dataportal.datahubcore.vo.api.ApiListSearchVO;
 import lombok.*;
@@ -29,6 +33,8 @@ public class ApiListController {
     private final DatahubListService datahubListService;
     private final Category1stService category1stService;
     private final DataSetListService dataSetListService;
+    private final DataSetGwanboService dataSetGwanboService;
+    private final DataSetCCTVService dataSetCCTVService;
 
     // API 목록 조회 기능
     @PostMapping("/list")
@@ -62,13 +68,24 @@ public class ApiListController {
 
     // 사용자 정의 API 조회 기능
     @GetMapping("/v2/{user}/{apiPath}")
-    public JSONResponse UserCustomizeApi(@PathVariable String user, @PathVariable String apiPath) {
+    public JSONResponse UserCustomizeApi(@PathVariable String user, @PathVariable String apiPath,
+                                         @RequestParam(required = false, defaultValue = "1") int page,
+                                         @RequestParam(required = false, defaultValue = "10") int itemPerPage
+    ) {
         Optional<ApiList> byPath = apiListService.findByUserAndPath(user, apiPath);
-        return byPath.map(
-                apiList -> new JSONResponse(HttpStatus.OK,
-                        dataSetListService.findOne(apiList.getTargetDataset().getDataSet()))
-        ).orElseGet(
-                () -> new JSONResponse(HttpStatus.NOT_FOUND, "CAN NOT FOUND THE PATH")
-        );
+        if (byPath.isPresent()) {
+            Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(byPath.get().getTargetDataset().getDataSet());
+            if (classByClassName.isPresent()) {
+                Class<?> extractClass = classByClassName.get();
+                if (DataSetGwanbo.class.equals(extractClass)) {
+                    return new JSONResponse(HttpStatus.OK, dataSetGwanboService.findByPage(page, itemPerPage));
+                } else if (DataSetCCTV.class.equals(extractClass)) {
+                    return new JSONResponse(HttpStatus.OK, dataSetCCTVService.findByPage(page, itemPerPage));
+                }
+            } else {
+                return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND THE DATASET");
+            }
+        }
+        return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND THE PATH");
     }
 }

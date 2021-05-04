@@ -7,10 +7,7 @@ import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class CommonUtil {
@@ -19,6 +16,14 @@ public class CommonUtil {
         put("DATASETCCTV", DataSetCCTV.class.getName());
         put("DATASETGWANBO", DataSetGwanbo.class.getName());
     }};
+
+    public static Optional<Class<?>> getClassByClassName(String name) {
+        try {
+            return Optional.of(Class.forName(classMapping.get(name.toUpperCase())));
+        } catch (ClassNotFoundException | NullPointerException e) {
+            return Optional.empty();
+        }
+    }
 
     public static String parseColumnDesc(Field field) {
         if (field.isAnnotationPresent(Column.class)) {
