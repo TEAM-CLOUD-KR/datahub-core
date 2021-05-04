@@ -31,15 +31,17 @@ public class CommonUtil {
                 kr = "-",
                 type = field.getType().getSimpleName(),
                 desc = "";
+        int length = -1;
 
         if (field.isAnnotationPresent(Column.class)) {
             en = field.getAnnotation(Column.class).name();
             kr = field.getAnnotation(Column.class).columnDefinition();
+            length = field.getAnnotation(Column.class).length();
         }
         if (field.isAnnotationPresent(Description.class)) {
             desc = field.getAnnotation(Description.class).value();
         }
-        return new DataSetColumnDesc(en, kr, type, desc);
+        return new DataSetColumnDesc(en, kr, type, length, desc);
     }
 
     public static List<DataSetColumnDesc> parseClassProperty(Class<?> target) {
