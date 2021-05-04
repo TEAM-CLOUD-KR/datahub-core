@@ -27,21 +27,19 @@ public class CommonUtil {
     }
 
     private static DataSetColumnDesc createDataSetColumnDesc(Field field) {
+        String en = field.getName(),
+                kr = "-",
+                type = field.getType().getSimpleName(),
+                desc = "";
+
         if (field.isAnnotationPresent(Column.class)) {
-            return new DataSetColumnDesc(
-                    field.getAnnotation(Column.class).name(),
-                    field.getAnnotation(Column.class).columnDefinition(),
-                    field.getType().getSimpleName(),
-                    field.getAnnotation(Description.class).value()
-            );
-        } else {
-            return new DataSetColumnDesc(
-                    field.getName(),
-                    "-",
-                    field.getType().getSimpleName(),
-                    field.getAnnotation(Description.class).value()
-            );
+            en = field.getAnnotation(Column.class).name();
+            kr = field.getAnnotation(Column.class).columnDefinition();
         }
+        if (field.isAnnotationPresent(Description.class)) {
+            desc = field.getAnnotation(Description.class).value();
+        }
+        return new DataSetColumnDesc(en, kr, type, desc);
     }
 
     public static List<DataSetColumnDesc> parseClassProperty(Class<?> target) {
