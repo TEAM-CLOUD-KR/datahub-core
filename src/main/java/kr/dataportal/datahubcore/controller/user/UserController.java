@@ -12,6 +12,7 @@
 package kr.dataportal.datahubcore.controller.user;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
+import kr.dataportal.datahubcore.domain.user.SignInStatus;
 import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
 import kr.dataportal.datahubcore.dto.user.UserSignupDto;
@@ -31,10 +32,10 @@ public class UserController {
     @PostMapping("/signin")
     public JSONResponse SignInAction(@RequestBody UserSignInDto user) {
         return switch (userService.signIn(user)) {
-            case SUCCESS -> new JSONResponse(HttpStatus.OK, "로그인 성공");
-            case WRONG_EMAIL -> new JSONResponse(HttpStatus.UNAUTHORIZED, "존재하지 않는 이메일입니다.");
-            case WRONG_PASSWORD -> new JSONResponse(HttpStatus.UNAUTHORIZED, "암호가 일치하지 않습니다.");
-            case FAIL -> new JSONResponse(HttpStatus.INTERNAL_SERVER_ERROR, "로그인 과정에서 알 수 없는 오류가 발생하였습니다.");
+            case SUCCESS -> new JSONResponse(HttpStatus.OK, SignInStatus.SUCCESS);
+            case WRONG_EMAIL -> new JSONResponse(HttpStatus.UNAUTHORIZED, SignInStatus.WRONG_EMAIL);
+            case WRONG_PASSWORD -> new JSONResponse(HttpStatus.UNAUTHORIZED, SignInStatus.WRONG_PASSWORD);
+            case FAIL -> new JSONResponse(HttpStatus.INTERNAL_SERVER_ERROR, SignInStatus.FAIL);
         };
     }
 
