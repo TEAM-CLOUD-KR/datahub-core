@@ -14,6 +14,7 @@ package kr.dataportal.datahubcore.controller.user;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.user.SignInStatus;
 import kr.dataportal.datahubcore.domain.user.User;
+import kr.dataportal.datahubcore.dto.user.SignInResponse;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
 import kr.dataportal.datahubcore.dto.user.UserSignupDto;
 import kr.dataportal.datahubcore.implement.service.user.UserService;
@@ -32,10 +33,10 @@ public class UserController {
     @PostMapping("/signin")
     public JSONResponse SignInAction(@RequestBody UserSignInDto user) {
         return switch (userService.signIn(user)) {
-            case SUCCESS -> new JSONResponse(HttpStatus.OK, SignInStatus.SUCCESS);
-            case WRONG_EMAIL -> new JSONResponse(HttpStatus.UNAUTHORIZED, SignInStatus.WRONG_EMAIL);
-            case WRONG_PASSWORD -> new JSONResponse(HttpStatus.UNAUTHORIZED, SignInStatus.WRONG_PASSWORD);
-            case FAIL -> new JSONResponse(HttpStatus.INTERNAL_SERVER_ERROR, SignInStatus.FAIL);
+            case SUCCESS -> new JSONResponse(HttpStatus.OK, new SignInResponse(userService.findByEmail(user.getEmail()).get(), SignInStatus.SUCCESS));
+            case WRONG_EMAIL -> new JSONResponse(HttpStatus.UNAUTHORIZED, new SignInResponse(null, SignInStatus.WRONG_EMAIL));
+            case WRONG_PASSWORD -> new JSONResponse(HttpStatus.UNAUTHORIZED, new SignInResponse(null, SignInStatus.WRONG_PASSWORD));
+            case FAIL -> new JSONResponse(HttpStatus.INTERNAL_SERVER_ERROR, new SignInResponse(null, SignInStatus.FAIL));
         };
     }
 
