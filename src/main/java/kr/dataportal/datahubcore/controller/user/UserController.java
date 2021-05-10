@@ -13,6 +13,7 @@ package kr.dataportal.datahubcore.controller.user;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.user.SignInStatus;
+import kr.dataportal.datahubcore.domain.user.SignUpStatus;
 import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.user.SignInResponse;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
@@ -45,13 +46,14 @@ public class UserController {
         Optional<User> u = User.create(user.getEmail(), user.getFirstPassword(), user.getSecondPassword(), user.getNickname());
         return u.map(
                 createUser -> switch (userService.signUp(createUser)) {
-                    case SUCCESS -> new JSONResponse(HttpStatus.OK, "회원가입 성공");
-                    case CONFLICT_EMAIL -> new JSONResponse(HttpStatus.CONFLICT, "이미 등록된 이메일입니다.");
-                    case CONFLICT_NICKNAME -> new JSONResponse(HttpStatus.CONFLICT, "이미 등록된 닉네임입니다.");
-                    case FAIL -> new JSONResponse(HttpStatus.INTERNAL_SERVER_ERROR, "회원가입 과정에서 알 수 없는 오류가 발생하였습니다.");
+                    case SUCCESS -> new JSONResponse(HttpStatus.OK, SignUpStatus.SUCCESS);
+                    case CONFLICT_EMAIL -> new JSONResponse(HttpStatus.CONFLICT, SignUpStatus.CONFLICT_EMAIL);
+                    case CONFLICT_NICKNAME -> new JSONResponse(HttpStatus.CONFLICT, SignUpStatus.CONFLICT_NICKNAME);
+                    case MISMATCH_PASSWORD -> null;
+                    case FAIL -> new JSONResponse(HttpStatus.INTERNAL_SERVER_ERROR, SignUpStatus.FAIL);
                 }
         ).orElseGet(
-                () -> new JSONResponse(HttpStatus.FORBIDDEN, "두 암호가 일치하지 않습니다.")
+                () -> new JSONResponse(HttpStatus.FORBIDDEN, SignUpStatus.MISMATCH_PASSWORD)
         );
     }
 }

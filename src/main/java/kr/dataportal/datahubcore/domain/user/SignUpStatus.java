@@ -1,5 +1,5 @@
 package kr.dataportal.datahubcore.domain.user;
 
 public enum SignUpStatus {
-    SUCCESS, CONFLICT_EMAIL, CONFLICT_NICKNAME, FAIL
+    SUCCESS, CONFLICT_EMAIL, CONFLICT_NICKNAME, MISMATCH_PASSWORD, FAIL
 }
