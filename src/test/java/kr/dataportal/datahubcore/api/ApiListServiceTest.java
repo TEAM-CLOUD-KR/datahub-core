@@ -76,7 +76,7 @@ public class ApiListServiceTest {
     @Transactional(readOnly = false)
     @Rollback(value = true)
     void ApiList_수정() {
-        ApiList apiList = apiListService.findBySeq(14);
+        ApiList apiList = apiListService.findBySeq(14).get();
         ApiList update = apiList.update(
                 "API 이름 수정",
                 dataSetListService.findOne("dataset_gwanbo"),
@@ -93,7 +93,7 @@ public class ApiListServiceTest {
 
     @Test
     void ApiList_단건조회() {
-        ApiList apiList = apiListService.findBySeq(14);
+        ApiList apiList = apiListService.findBySeq(14).get();
         assertThat(apiList.getSeq()).isEqualTo(14);
     }
 

@@ -7,11 +7,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class DataSetListService implements DataSetListInterface {
     private final DataSetListRepository dataSetListRepository;
+
+    @Override
+    public List<String> findAll(String name) {
+        return dataSetListRepository.findAll(name);
+    }
 
     @Override
     public DataSetList findOne(String dataSetName) {
