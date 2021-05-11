@@ -21,17 +21,17 @@ import javax.persistence.Embeddable;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Publish {
     @Column(name = "publish_seq", length = 45, nullable = false,
-            columnDefinition = "publish_seq Desc"
+            columnDefinition = "관보 고유번호"
     )
     private final String seq;
 
     @Column(name = "publish_subject", length = 500, nullable = false,
-            columnDefinition = "publish_subject Desc"
+            columnDefinition = "관보 제목"
     )
     private final String subject;
 
     @Column(name = "publish_regdate", length = 8, nullable = false,
-            columnDefinition = "publish_regdate Desc"
+            columnDefinition = "관보 발행일자"
     )
     private final String regdate;
 

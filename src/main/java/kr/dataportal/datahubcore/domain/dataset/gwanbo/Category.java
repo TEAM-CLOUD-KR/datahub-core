@@ -21,12 +21,12 @@ import javax.persistence.Embeddable;
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
 public class Category {
     @Column(name = "category_name", length = 45, nullable = false,
-            columnDefinition = "category_name Desc"
+            columnDefinition = "카테고리 이름"
     )
     private final String name;
 
     @Column(name = "category_seq", length = 45, nullable = false,
-            columnDefinition = "category_seq Desc"
+            columnDefinition = "카테고리 고유번호"
     )
     private final String seq;
 

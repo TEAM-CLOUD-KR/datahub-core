@@ -32,7 +32,7 @@ public class DataSetGwanbo {
     private final String seq;
 
     @Column(name = "ebook_no", length = 10, nullable = false,
-            columnDefinition = "ebook_no Desc"
+            columnDefinition = "관보 발행 호수"
     )
     private final String ebookNo;
 
@@ -46,7 +46,7 @@ public class DataSetGwanbo {
     private final Category category;
 
     @Column(name = "law_name", length = 255, nullable = true,
-            columnDefinition = "law_name Desc"
+            columnDefinition = "관련 법령"
     )
     private final String lawName;
 
