@@ -23,10 +23,7 @@ import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,9 +54,16 @@ public class ApiListController {
             Optional<ApiList> bySeq = apiListService.findBySeq(Integer.parseInt(seq));
             if (bySeq.isPresent()) {
                 ApiList apiList = bySeq.get();
+                List<DataSetColumnDesc> retColumnDesc = new ArrayList<>();
                 List<DataSetColumnDesc> dataSetColumnDesc =
                         CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataSet());
-                return new JSONResponse(HttpStatus.OK, new ApiListDetailAndDataSetColumn(apiList, dataSetColumnDesc));
+                List<String> columns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
+                for (int i = 0; i < dataSetColumnDesc.size(); i++) {
+                    if (columns.contains(dataSetColumnDesc.get(i).getColumnEn())) {
+                        retColumnDesc.add(dataSetColumnDesc.get(i));
+                    }
+                }
+                return new JSONResponse(HttpStatus.OK, new ApiListDetailAndDataSetColumn(apiList, retColumnDesc));
             } else {
                 return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND Item By Seq");
             }
