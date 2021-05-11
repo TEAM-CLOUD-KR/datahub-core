@@ -45,8 +45,8 @@ public class ApiListService implements ApiListInterface {
 
     @Override
     @Transactional(readOnly = false)
-    public void save(ApiList apiList) {
-        apiListRepository.save(apiList);
+    public int save(ApiList apiList) {
+        return apiListRepository.save(apiList);
     }
 
     @Override

@@ -15,7 +15,7 @@ public interface ApiListInterface {
 
     Long getCount(ApiListSearchDTO searchDTO);
 
-    void save(ApiList apiList);
+    int save(ApiList apiList);
     
     List<String> getOrganizations();
 }

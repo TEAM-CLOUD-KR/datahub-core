@@ -138,8 +138,9 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     @Override
-    public void save(ApiList apiList) {
+    public int save(ApiList apiList) {
         em.persist(apiList);
+        return apiList.getSeq();
     }
 
     @Override
