@@ -83,8 +83,7 @@ public class ApiListController {
                     apiListCreateDTO.getOrganization(),
                     userService.findBySeq(apiListCreateDTO.getPublisher()).get()
             );
-            apiListService.save(apiList);
-            return new JSONResponse(HttpStatus.OK, apiList.getSeq());
+            return new JSONResponse(HttpStatus.OK, apiListService.save(apiList));
         } catch (Exception e) {
             return new JSONResponse(HttpStatus.BAD_REQUEST, "");
         }
