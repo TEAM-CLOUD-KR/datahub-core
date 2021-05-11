@@ -65,8 +65,8 @@ public class ApiListServiceTest {
                 category2nd.getParent(),
                 category2nd,
                 "컴퓨터정보과",
-                userService.findBySeq(17).get(),
-                "TEST"));
+                userService.findBySeq(17).get())
+        );
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
         assertThat(apiList).isNotNull();
     }
@@ -142,11 +142,11 @@ public class ApiListServiceTest {
         assertThat(count1).isEqualTo(1);
     }
 
-    @Test
-    void ApiList_findByUserAndPath() {
-        Optional<ApiList> byUserAndPath = apiListService.findByUserAndPath("a", "b");
-        byUserAndPath.ifPresent(
-                item -> assertThat(item.getSeq()).isEqualTo(14)
-        );
-    }
+//    @Test
+//    void ApiList_findByUserAndPath() {
+//        Optional<ApiList> byUserAndPath = apiListService.findByUserAndPath("a", "b");
+//        byUserAndPath.ifPresent(
+//                item -> assertThat(item.getSeq()).isEqualTo(14)
+//        );
+//    }
 }

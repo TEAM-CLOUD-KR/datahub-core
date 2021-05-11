@@ -11,8 +11,6 @@ public interface ApiListInterface {
 
     ApiList findByName(String name);
 
-    Optional<ApiList> findByUserAndPath(String user, String path);
-
     List<ApiList> search(ApiListSearchDTO searchDTO);
 
     Long getCount(ApiListSearchDTO searchDTO);

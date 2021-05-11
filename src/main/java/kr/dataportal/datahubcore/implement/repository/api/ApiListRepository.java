@@ -56,20 +56,6 @@ public class ApiListRepository implements ApiListInterface {
         }
     }
 
-    @Override
-    public Optional<ApiList> findByUserAndPath(String user, String path) {
-        List<ApiList> apiList = em.createQuery("" +
-                " SELECT apilist FROM ApiList apilist" +
-                " WHERE apilist.path=:path", ApiList.class)
-                .setParameter("path", "/".concat(user).concat("/").concat(path))
-                .getResultList();
-
-        if (apiList.size() > 0)
-            return Optional.ofNullable(apiList.get(0));
-        else
-            return Optional.empty();
-    }
-
     private BooleanExpression eqName(String name) {
         if (name.isEmpty()) {
             return null;

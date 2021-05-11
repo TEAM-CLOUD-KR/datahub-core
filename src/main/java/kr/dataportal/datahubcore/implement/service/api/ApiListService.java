@@ -39,11 +39,6 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
-    public Optional<ApiList> findByUserAndPath(String user, String path) {
-        return apiListRepository.findByUserAndPath(user, path);
-    }
-
-    @Override
     public List<ApiList> search(ApiListSearchDTO searchDTO) {
         return apiListRepository.search(searchDTO);
     }

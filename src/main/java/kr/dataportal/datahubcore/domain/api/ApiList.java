@@ -59,9 +59,6 @@ public class ApiList {
     @Column(name = "last_edit", nullable = true)
     private final LocalDateTime last_edit;
 
-    @Column(name = "path", nullable = false)
-    private String path;
-
     public ApiList() {
         this.name = null;
         this.targetDataset = null;
@@ -74,12 +71,11 @@ public class ApiList {
         this.publisher = null;
         this.publish_at = LocalDateTime.now();
         this.last_edit = LocalDateTime.now();
-        this.path = null;
     }
 
     public ApiList(String name, DataSetList targetDataset, String targetColumn,
                    PermissionGroup permissionGroup, String apiDesc, Category1st category1st,
-                   Category2nd category2nd, String organization, User publisher, String path) {
+                   Category2nd category2nd, String organization, User publisher) {
         this.name = name;
         this.targetDataset = targetDataset;
         this.targetColumn = targetColumn;
@@ -91,7 +87,6 @@ public class ApiList {
         this.publisher = publisher;
         this.publish_at = LocalDateTime.now();
         this.last_edit = LocalDateTime.now();
-        this.path = path;
     }
 
     public ApiList update(String name, DataSetList targetDataset, String targetColumn,
@@ -105,7 +100,6 @@ public class ApiList {
         this.category1st = category1st;
         this.category2nd = category2nd;
         this.organization = organization;
-        this.path = path;
 
         return this;
     }
