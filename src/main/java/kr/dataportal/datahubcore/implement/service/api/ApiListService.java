@@ -44,7 +44,6 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
-    @Transactional(readOnly = false)
     public int save(ApiList apiList) {
         return apiListRepository.save(apiList);
     }

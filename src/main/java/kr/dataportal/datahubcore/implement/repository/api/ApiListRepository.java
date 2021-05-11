@@ -15,6 +15,7 @@ import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.interfaces.api.ApiListInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -138,8 +139,10 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public int save(ApiList apiList) {
         em.persist(apiList);
+        em.flush();
         return apiList.getSeq();
     }
 
