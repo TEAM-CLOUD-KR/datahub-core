@@ -18,6 +18,7 @@ import kr.dataportal.datahubcore.domain.user.User;
 import kr.dataportal.datahubcore.dto.user.SignInResponse;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
 import kr.dataportal.datahubcore.dto.user.UserSignupDto;
+import kr.dataportal.datahubcore.implement.service.map.MapUserDatahubService;
 import kr.dataportal.datahubcore.implement.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final MapUserDatahubService mapUserDatahubService;
 
     @PostMapping("/signin")
     public JSONResponse SignInAction(@RequestBody UserSignInDto user) {
@@ -55,5 +57,10 @@ public class UserController {
         ).orElseGet(
                 () -> new JSONResponse(HttpStatus.FORBIDDEN, SignUpStatus.MISMATCH_PASSWORD)
         );
+    }
+
+    @PostMapping("/datahub")
+    public JSONResponse UserDataHubNameAction(@RequestParam int userSeq) {
+        return new JSONResponse(HttpStatus.OK, mapUserDatahubService.findAllDataHubName(userSeq));
     }
 }
