@@ -10,6 +10,7 @@ import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.api.QApiList;
 import kr.dataportal.datahubcore.domain.common.Category1st;
 import kr.dataportal.datahubcore.domain.datahub.DatahubList;
+import kr.dataportal.datahubcore.domain.map.QMapApiListDatahub;
 import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.interfaces.api.ApiListInterface;
 import lombok.RequiredArgsConstructor;
@@ -77,7 +78,7 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     private BooleanExpression isFilteredOwnDatahub(String datahubList) {
-        return QApiList.apiList.ownDatahub.name.eq(datahubList);
+        return QMapApiListDatahub.mapApiListDatahub.datahubList.name.eq(datahubList);
     }
 
     private BooleanExpression isFilteredOwnDatahubs(List<String> datahubList) {
@@ -122,6 +123,8 @@ public class ApiListRepository implements ApiListInterface {
     public List<ApiList> search(ApiListSearchDTO searchDTO) {
         return queryFactory
                 .selectFrom(QApiList.apiList)
+                .leftJoin(QMapApiListDatahub.mapApiListDatahub)
+                .on(QApiList.apiList.seq.eq(QMapApiListDatahub.mapApiListDatahub.apiList.seq))
                 .where(
                         isFilteredCategories(searchDTO.getCategory()),
                         isFilteredOrganizations(searchDTO.getOrganization()),
@@ -137,6 +140,8 @@ public class ApiListRepository implements ApiListInterface {
     public Long getCount(ApiListSearchDTO searchDTO) {
         return queryFactory
                 .selectFrom(QApiList.apiList)
+                .leftJoin(QMapApiListDatahub.mapApiListDatahub)
+                .on(QApiList.apiList.seq.eq(QMapApiListDatahub.mapApiListDatahub.apiList.seq))
                 .where(
                         isFilteredCategories(searchDTO.getCategory()),
                         isFilteredOrganizations(searchDTO.getOrganization()),

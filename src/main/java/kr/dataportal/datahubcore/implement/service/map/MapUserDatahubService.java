@@ -19,8 +19,8 @@ public class MapUserDatahubService implements MapUserDatahubInterface {
     }
 
     @Override
-    public List<String> findAllDataHubName(int userSeq) {
-        return mapUserDatahubRepository.findAllDataHubName(userSeq);
+    public List<String> findAllDataHubNameByUserSeq(int userSeq) {
+        return mapUserDatahubRepository.findAllDataHubNameByUserSeq(userSeq);
     }
 
     @Override

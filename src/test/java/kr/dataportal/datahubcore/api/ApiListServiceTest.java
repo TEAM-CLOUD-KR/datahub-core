@@ -65,7 +65,6 @@ public class ApiListServiceTest {
                 category2nd.getParent(),
                 category2nd,
                 "컴퓨터정보과",
-                datahubListService.fineBySeq(1).get(),
                 userService.findBySeq(17).get(),
                 "TEST"));
         ApiList apiList = apiListService.findByName("API 이름 테스트123");

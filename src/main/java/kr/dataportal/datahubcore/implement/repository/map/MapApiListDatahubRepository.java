@@ -1,28 +1,28 @@
 package kr.dataportal.datahubcore.implement.repository.map;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kr.dataportal.datahubcore.domain.api.QApiList;
+import kr.dataportal.datahubcore.domain.map.MapApiListDatahub;
 import kr.dataportal.datahubcore.domain.map.MapUserDatahub;
 import kr.dataportal.datahubcore.domain.map.QMapUserDatahub;
+import kr.dataportal.datahubcore.interfaces.map.MapApiListDatahubInterface;
 import kr.dataportal.datahubcore.interfaces.map.MapUserDatahubInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class MapUserDatahubRepository implements MapUserDatahubInterface {
+public class MapApiListDatahubRepository implements MapApiListDatahubInterface {
     private final EntityManager em;
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<MapUserDatahub> findAll(int userSeq) {
+    public List<MapApiListDatahub> findAll(int userSeq) {
         return em.createQuery("" +
                 " SELECT item FROM MapUserDatahub item" +
-                " WHERE item.user.seq =: seq", MapUserDatahub.class)
+                " WHERE item.user.seq =: seq", MapApiListDatahub.class)
                 .setParameter("seq", userSeq)
                 .getResultList();
     }
@@ -39,7 +39,7 @@ public class MapUserDatahubRepository implements MapUserDatahubInterface {
     }
 
     @Override
-    public MapUserDatahub findOne(String dataSetName) {
+    public MapApiListDatahub findOne(String dataSetName) {
         return null;
     }
 }

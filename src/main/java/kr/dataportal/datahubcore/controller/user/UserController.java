@@ -61,6 +61,6 @@ public class UserController {
 
     @GetMapping("/datahub")
     public JSONResponse UserDataHubNameAction(@RequestParam int userSeq) {
-        return new JSONResponse(HttpStatus.OK, mapUserDatahubService.findAllDataHubName(userSeq));
+        return new JSONResponse(HttpStatus.OK, mapUserDatahubService.findAllDataHubNameByUserSeq(userSeq));
     }
 }
