@@ -104,7 +104,12 @@ public class ApiListController {
     ) {
         Optional<ApiList> byPath = apiListService.findBySeq(apiSeq);
         if (byPath.isPresent()) {
-            Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(byPath.get().getTargetDataset().getDataSet());
+            ApiList apiList = byPath.get();
+            Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(apiList.getTargetDataset().getDataSet());
+
+            // targetColumn 임시 변수 :: 추후 수정 예정 / current: not used
+            List<String> columns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
+
             if (classByClassName.isPresent()) {
                 Class<?> extractClass = classByClassName.get();
                 if (DataSetGwanbo.class.equals(extractClass)) {
