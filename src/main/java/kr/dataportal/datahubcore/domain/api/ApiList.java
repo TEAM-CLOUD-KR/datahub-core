@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 public class ApiList {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seq")
     private int seq;
 
