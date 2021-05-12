@@ -19,7 +19,6 @@ public class DataSetListRepository implements DataSetListInterface {
 
     @Override
     public List<String> findAll(String name) {
-        System.out.println(name);
         return queryFactory
                 .select(QDataSetList.dataSetList.dataSet)
                 .from(QDataSetList.dataSetList)

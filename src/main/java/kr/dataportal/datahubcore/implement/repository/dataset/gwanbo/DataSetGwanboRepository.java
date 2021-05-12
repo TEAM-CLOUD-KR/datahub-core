@@ -11,20 +11,34 @@
 
 package kr.dataportal.datahubcore.implement.repository.dataset.gwanbo;
 
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.StringPath;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.sun.el.lang.ExpressionBuilder;
+import kr.dataportal.datahubcore.domain.dataset.QDataSetList;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.QDataSetGwanbo;
 import kr.dataportal.datahubcore.interfaces.dataset.gwanbo.DataSetGwanboInterface;
+import kr.dataportal.datahubcore.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 @Repository
 @RequiredArgsConstructor
 public class DataSetGwanboRepository implements DataSetGwanboInterface {
-
     private final EntityManager em;
+    private final JPAQueryFactory queryFactory;
 
     @Override
     public DataSetGwanbo findBySeq(String seq) {
@@ -48,13 +62,54 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
                 .getResultList();
     }
 
+    private Expression<?>[] getDeclaredColumns(Class<?> target, List<String> filter, boolean recursion) {
+        List<Expression<?>> ret = new ArrayList<>();
+        for (Field field : target.getDeclaredFields()) {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                if (field.getType().equals(StringPath.class)) {
+                    String fieldName = CommonUtil.camelToSnake(field.getName());
+                    if (recursion) {
+                        String s = target.getSimpleName().toLowerCase().substring(1) + "_" + fieldName;
+                        if (filter.contains(s)) {
+                            ret.add(Expressions.asSimple("datasetGwanbo." + field.getName()));
+                        }
+                    } else {
+                        if (filter.contains(fieldName)) {
+                            ret.add(Expressions.asSimple("datasetGwanbo." + field.getName()));
+                        }
+                    }
+                } else {
+                    ret.addAll(Arrays.asList(getDeclaredColumns(field.getType(), filter, true)));
+                }
+            }
+        }
+        return ret.toArray(new Expression<?>[0]);
+    }
+
+    private Expression<?>[] filteredColumn(Class<?> target, List<String> filter) {
+        return getDeclaredColumns(target, filter, false);
+    }
+
     @Override
-    public List<DataSetGwanbo> findByPage(int page, int itemPerPage) {
-        return em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo order by datasetgwanbo.seq desc", DataSetGwanbo.class)
-                .setFirstResult((page - 1) * itemPerPage)
-                .setMaxResults(itemPerPage)
-                .getResultList();
+    public List<DataSetGwanbo> search(List<String> targetColumns, int page, int itemPerPage) {
+//        Expression<?>[] expressions = filteredColumn(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns);
+//
+//        try {
+//            Field fd = QDataSetGwanbo.dataSetGwanbo.getClass().getDeclaredField("seq");
+//            System.out.println("fd = " + fd);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        StringPath sp = QDataSetGwanbo.dataSetGwanbo.seq;
+//        System.out.println("sp = " + sp);
+
+        queryFactory
+                .selectFrom(QDataSetGwanbo.dataSetGwanbo)
+                .offset((long) (page - 1) * itemPerPage)
+                .limit((long) itemPerPage)
+                .fetch();
+
+        return new ArrayList<>();
     }
 
     @Override

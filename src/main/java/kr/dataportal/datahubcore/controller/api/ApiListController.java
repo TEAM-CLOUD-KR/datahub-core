@@ -108,12 +108,12 @@ public class ApiListController {
             Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(apiList.getTargetDataset().getDataSet());
 
             // targetColumn 임시 변수 :: 추후 수정 예정 / current: not used
-            List<String> columns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
+            List<String> targetColumns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
 
             if (classByClassName.isPresent()) {
                 Class<?> extractClass = classByClassName.get();
                 if (DataSetGwanbo.class.equals(extractClass)) {
-                    return new JSONResponse(HttpStatus.OK, dataSetGwanboService.findByPage(page, itemPerPage));
+                    return new JSONResponse(HttpStatus.OK, dataSetGwanboService.search(targetColumns, page, itemPerPage));
                 } else if (DataSetCCTV.class.equals(extractClass)) {
                     return new JSONResponse(HttpStatus.OK, dataSetCCTVService.findByPage(page, itemPerPage));
                 }

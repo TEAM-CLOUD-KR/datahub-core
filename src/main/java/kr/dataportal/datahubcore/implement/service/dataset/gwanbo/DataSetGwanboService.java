@@ -12,6 +12,7 @@
 package kr.dataportal.datahubcore.implement.service.dataset.gwanbo;
 
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
+import kr.dataportal.datahubcore.dto.dataset.DataSetSearchDTO;
 import kr.dataportal.datahubcore.interfaces.dataset.gwanbo.DataSetGwanboInterface;
 import kr.dataportal.datahubcore.implement.repository.dataset.gwanbo.DataSetGwanboRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,12 +35,13 @@ public class DataSetGwanboService implements DataSetGwanboInterface {
         return dataSetGwanboRepository.findAll();
     }
 
-    public DataSetGwanbo findRandomize() {
-        return dataSetGwanboRepository.findRandomize();
+    @Override
+    public List<DataSetGwanbo> search(List<String> targetColumns, int page, int itemPerPage) {
+        return dataSetGwanboRepository.search(targetColumns, page, itemPerPage);
     }
 
-    public List<DataSetGwanbo> findByPage(int page, int itemPerPage) {
-        return dataSetGwanboRepository.findByPage(page, itemPerPage);
+    public DataSetGwanbo findRandomize() {
+        return dataSetGwanboRepository.findRandomize();
     }
 
     @Transactional(readOnly = false)
