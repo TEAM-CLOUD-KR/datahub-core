@@ -57,6 +57,14 @@ public class ApiListRepository implements ApiListInterface {
         }
     }
 
+    @Override
+    public List<ApiList> findByPublisher(int publisherSeq) {
+        return queryFactory
+                .selectFrom(QApiList.apiList)
+                .where(QApiList.apiList.publisher.seq.eq(publisherSeq))
+                .fetch();
+    }
+
     private BooleanExpression eqName(String name) {
         if (name.isEmpty()) {
             return null;

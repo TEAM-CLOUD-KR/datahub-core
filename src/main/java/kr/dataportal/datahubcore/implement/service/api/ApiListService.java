@@ -39,6 +39,11 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
+    public List<ApiList> findByPublisher(int publisherSeq) {
+        return apiListRepository.findByPublisher(publisherSeq);
+    }
+
+    @Override
     public List<ApiList> search(ApiListSearchDTO searchDTO) {
         return apiListRepository.search(searchDTO);
     }

@@ -142,6 +142,12 @@ public class ApiListServiceTest {
         assertThat(count1).isEqualTo(1);
     }
 
+    @Test
+    void ApiList_findByPublisher() {
+        List<ApiList> byPublisher = apiListService.findByPublisher(36);
+        assertThat(byPublisher.size()).isGreaterThan(0);
+    }
+
 //    @Test
 //    void ApiList_findByUserAndPath() {
 //        Optional<ApiList> byUserAndPath = apiListService.findByUserAndPath("a", "b");

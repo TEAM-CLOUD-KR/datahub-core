@@ -93,9 +93,6 @@ public class ApiListController {
         }
     }
 
-    // 사용자 정의 API Class 매퍼
-    private final Map<DataSetList, ClassLoader> apiMapper = new HashMap<>();
-
     // 사용자 정의 API 조회 기능
     @GetMapping("/v2/{apiSeq}")
     public JSONResponse UserCustomizeApi(@PathVariable int apiSeq,
@@ -122,5 +119,12 @@ public class ApiListController {
             }
         }
         return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND THE PATH");
+    }
+
+    // 사용자가 권한을 가진 Api 목록 조회 기능
+    @GetMapping("/user")
+    public JSONResponse UserOwnApiList(@RequestParam int userSeq) {
+        List<ApiList> byPublisher = apiListService.findByPublisher(userSeq);
+        return new JSONResponse(HttpStatus.OK, byPublisher);
     }
 }

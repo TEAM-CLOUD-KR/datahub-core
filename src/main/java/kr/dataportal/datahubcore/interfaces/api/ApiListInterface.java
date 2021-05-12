@@ -11,6 +11,8 @@ public interface ApiListInterface {
 
     ApiList findByName(String name);
 
+    List<ApiList> findByPublisher(int publisherSeq);
+
     List<ApiList> search(ApiListSearchDTO searchDTO);
 
     Long getCount(ApiListSearchDTO searchDTO);
