@@ -88,7 +88,6 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
 
     @Override
     public List<DataSetGwanbo> search(List<String> targetColumns, int page, int itemPerPage) {
-//        Expression<?>[] expressions = filteredColumn(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns);
 //        String qur = createSearchQuery(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns, DataSetGwanbo.class);
 //        System.out.println("qur = " + qur);
 //        List<Object[]> resultList = em.createQuery(qur, Object[].class)
