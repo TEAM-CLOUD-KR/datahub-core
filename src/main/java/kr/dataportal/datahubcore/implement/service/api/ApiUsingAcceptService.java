@@ -27,6 +27,11 @@ public class ApiUsingAcceptService implements ApiUsingAcceptInterface {
     private final ApiUsingAcceptRepository apiUsingAcceptRepository;
 
     @Override
+    public int save(ApiUsingList apiUsingList) {
+        return apiUsingAcceptRepository.save(apiUsingList);
+    }
+
+    @Override
     public List<ApiUsingList> findByPublisher(int userSeq) {
         return apiUsingAcceptRepository.findByPublisher(userSeq);
     }

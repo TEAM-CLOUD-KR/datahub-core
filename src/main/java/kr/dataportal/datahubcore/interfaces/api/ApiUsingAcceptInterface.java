@@ -16,5 +16,6 @@ import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import java.util.List;
 
 public interface ApiUsingAcceptInterface {
+    int save(ApiUsingList apiUsingList);
     List<ApiUsingList> findByPublisher(int userSeq);
 }

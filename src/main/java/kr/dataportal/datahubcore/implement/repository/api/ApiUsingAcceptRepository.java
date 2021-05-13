@@ -28,6 +28,13 @@ public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
     private final JPAQueryFactory queryFactory;
 
     @Override
+    public int save(ApiUsingList apiUsingList) {
+        em.persist(apiUsingList);
+        em.flush();
+        return apiUsingList.getSeq();
+    }
+
+    @Override
     public List<ApiUsingList> findByPublisher(int userSeq) {
         return queryFactory
                 .selectFrom(QApiUsingList.apiUsingList)
