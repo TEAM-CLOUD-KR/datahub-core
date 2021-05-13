@@ -16,4 +16,9 @@ public class ApiUsingAcceptController {
     public JSONResponse ApiUsingAcceptView(@RequestParam int userSeq) {
         return new JSONResponse(HttpStatus.OK, apiUsingAcceptService.findByPublisher(userSeq));
     }
+
+    @PostMapping("")
+    public JSONResponse ApiUsingRequest() {
+        return new JSONResponse(HttpStatus.OK, "");
+    }
 }
