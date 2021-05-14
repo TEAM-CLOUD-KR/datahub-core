@@ -1,14 +1,15 @@
 package kr.dataportal.datahubcore.controller.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
-import kr.dataportal.datahubcore.dto.api.ApiListCreateDTO;
-import kr.dataportal.datahubcore.dto.api.ApiListDetailAndDataSetColumn;
-import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
+import kr.dataportal.datahubcore.domain.user.User;
+import kr.dataportal.datahubcore.dto.api.*;
 import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
+import kr.dataportal.datahubcore.implement.service.api.ApiUsingAcceptService;
 import kr.dataportal.datahubcore.implement.service.common.Category1stService;
 import kr.dataportal.datahubcore.implement.service.common.Category2ndService;
 import kr.dataportal.datahubcore.implement.service.datahub.DatahubListService;
@@ -39,6 +40,7 @@ public class ApiListController {
     private final DataSetGwanboService dataSetGwanboService;
     private final DataSetCCTVService dataSetCCTVService;
     private final UserService userService;
+    private final ApiUsingAcceptService apiUsingAcceptService;
 
     // API 목록 조회 기능
     @PostMapping("/list")
@@ -128,5 +130,34 @@ public class ApiListController {
     public JSONResponse UserOwnApiList(@RequestParam int userSeq) {
         List<ApiList> byPublisher = apiListService.findByPublisher(userSeq);
         return new JSONResponse(HttpStatus.OK, byPublisher);
+    }
+
+
+    @GetMapping("/dev")
+    public JSONResponse ApiUsingAcceptView(@RequestParam int userSeq) {
+        return new JSONResponse(HttpStatus.OK, apiUsingAcceptService.findByPublisher(userSeq));
+    }
+
+    @PostMapping("/dev")
+    public JSONResponse ApiUsingRequest(@RequestBody ApiUsingAcceptCreateDTO apiUsingAcceptCreateDTO) {
+        Optional<ApiList> apiList = apiListService.findBySeq(apiUsingAcceptCreateDTO.getApiSeq());
+        if (apiList.isEmpty()) {
+            return new JSONResponse(HttpStatus.BAD_REQUEST, ApiDevRequestResponseEnum.FAIL);
+        }
+        Optional<User> user = userService.findBySeq(apiUsingAcceptCreateDTO.getUserSeq());
+        if (user.isEmpty()) {
+            return new JSONResponse(HttpStatus.BAD_REQUEST, ApiDevRequestResponseEnum.FAIL);
+        }
+
+        ApiUsingList apiUsingList = new ApiUsingList(
+                apiList.get(), user.get(), apiUsingAcceptCreateDTO.getPurpose()
+        );
+
+        int save = apiUsingAcceptService.save(apiUsingList);
+        if (save == 0) {
+            return new JSONResponse(HttpStatus.BAD_REQUEST, ApiDevRequestResponseEnum.FAIL);
+        }
+
+        return new JSONResponse(HttpStatus.OK, ApiDevRequestResponseEnum.SUCCESS);
     }
 }
