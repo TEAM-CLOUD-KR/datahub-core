@@ -4,6 +4,7 @@ import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.user.User;
+import kr.dataportal.datahubcore.dto.api.ApiDevRequestResponseEnum;
 import kr.dataportal.datahubcore.dto.api.ApiUsingAcceptCreateDTO;
 import kr.dataportal.datahubcore.implement.service.api.ApiListService;
 import kr.dataportal.datahubcore.implement.service.api.ApiUsingAcceptService;
@@ -37,11 +38,11 @@ public class ApiUsingAcceptController {
     public JSONResponse ApiUsingRequest(@RequestBody ApiUsingAcceptCreateDTO apiUsingAcceptCreateDTO) {
         Optional<ApiList> apiList = apiListService.findBySeq(apiUsingAcceptCreateDTO.getApiSeq());
         if (apiList.isEmpty()) {
-            return new JSONResponse(HttpStatus.BAD_REQUEST, "ERROR");
+            return new JSONResponse(HttpStatus.BAD_REQUEST, ApiDevRequestResponseEnum.FAIL);
         }
         Optional<User> user = userService.findBySeq(apiUsingAcceptCreateDTO.getUserSeq());
         if (user.isEmpty()) {
-            return new JSONResponse(HttpStatus.BAD_REQUEST, "ERROR");
+            return new JSONResponse(HttpStatus.BAD_REQUEST, ApiDevRequestResponseEnum.FAIL);
         }
 
         ApiUsingList apiUsingList = new ApiUsingList(
@@ -50,9 +51,9 @@ public class ApiUsingAcceptController {
 
         int save = apiUsingAcceptService.save(apiUsingList);
         if (save == 0) {
-            return new JSONResponse(HttpStatus.BAD_REQUEST, "ERROR");
+            return new JSONResponse(HttpStatus.BAD_REQUEST, ApiDevRequestResponseEnum.FAIL);
         }
 
-        return new JSONResponse(HttpStatus.OK, "SUCCESS");
+        return new JSONResponse(HttpStatus.OK, ApiDevRequestResponseEnum.SUCCESS);
     }
 }
