@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "api_using_list")
 @Getter
-@RequiredArgsConstructor
 public class ApiUsingList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +31,25 @@ public class ApiUsingList {
 
     @Column(name = "accept")
     @Enumerated(EnumType.STRING)
-    private ApiUsingAcceptEnum accept;
+    private final ApiUsingAcceptEnum accept = ApiUsingAcceptEnum.N;
+
+    @Column(name = "service_key")
+    private final String serviceKey;
+
+    @Column(name = "purpose")
+    private final String purpose;
+
+    public ApiUsingList(ApiList api, User requestUser, String purpose) {
+        this.api = api;
+        this.requestUser = requestUser;
+        this.serviceKey = "TEST";
+        this.purpose = purpose.isBlank() ? "" : purpose;
+    }
 
     public ApiUsingList() {
         this.api = new ApiList();
         this.requestUser = new User();
+        this.serviceKey = null;
+        this.purpose = null;
     }
 }

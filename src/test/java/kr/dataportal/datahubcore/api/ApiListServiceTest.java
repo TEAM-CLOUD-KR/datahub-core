@@ -58,14 +58,14 @@ public class ApiListServiceTest {
         Category2nd category2nd = category2ndService.findOne("테스트");
         apiListService.save(new ApiList(
                 "API 이름 테스트123",
-                dataSetListService.findOne("dataset_cctv"),
+                dataSetListService.findOne("datasetcctv"),
                 "@All",
                 PermissionGroup.PERMISSION_PUBLIC,
                 "API DESC",
                 category2nd.getParent(),
                 category2nd,
                 "컴퓨터정보과",
-                userService.findBySeq(17).get())
+                userService.findBySeq(36).get())
         );
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
         assertThat(apiList).isNotNull();
@@ -75,7 +75,7 @@ public class ApiListServiceTest {
     @Transactional(readOnly = false)
     @Rollback(value = true)
     void ApiList_수정() {
-        ApiList apiList = apiListService.findBySeq(14).get();
+        ApiList apiList = apiListService.findBySeq(56).get();
         ApiList update = apiList.update(
                 "API 이름 수정",
                 dataSetListService.findOne("dataset_gwanbo"),
@@ -92,8 +92,8 @@ public class ApiListServiceTest {
 
     @Test
     void ApiList_단건조회() {
-        ApiList apiList = apiListService.findBySeq(14).get();
-        assertThat(apiList.getSeq()).isEqualTo(14);
+        ApiList apiList = apiListService.findBySeq(56).get();
+        assertThat(apiList.getSeq()).isEqualTo(56);
     }
 
 //    @Test
@@ -121,7 +121,7 @@ public class ApiListServiceTest {
         filteredCategory1st.add(category1stService.findOne("교육").getText());
 
         List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
-                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "개발용 API 이름"
+                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "가나다라마바사"
         ));
 
         Assertions.assertThat(search2.size()).isEqualTo(1);
@@ -136,7 +136,7 @@ public class ApiListServiceTest {
         assertThat(count).isGreaterThan(0);
 
         Long count1 = apiListService.getCount(new ApiListSearchDTO(
-                1, 10, null, null, null, "개발용 API 이름"
+                1, 10, null, null, null, "가나다라마바사"
         ));
         assertThat(count1).isNotNull();
         assertThat(count1).isEqualTo(1);

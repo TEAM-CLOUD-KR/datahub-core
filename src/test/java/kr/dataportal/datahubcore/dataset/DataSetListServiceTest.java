@@ -21,7 +21,7 @@ public class DataSetListServiceTest {
 
     @Test
     void DataSetList_findOne() {
-        DataSetList dataSetList = dataSetListService.findOne("dataset_cctv");
-        assertThat(dataSetList.getDataSet()).isEqualTo("dataset_cctv");
+        DataSetList dataSetList = dataSetListService.findOne("datasetcctv");
+        assertThat(dataSetList.getDataSet()).isEqualTo("DataSetCCTV");
     }
 }
