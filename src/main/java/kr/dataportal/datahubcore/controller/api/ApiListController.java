@@ -135,7 +135,7 @@ public class ApiListController {
 
     @GetMapping("/dev")
     public JSONResponse ApiUsingAcceptView(@RequestParam int userSeq) {
-        return new JSONResponse(HttpStatus.OK, apiUsingAcceptService.findByPublisher(userSeq));
+        return new JSONResponse(HttpStatus.OK, apiUsingAcceptService.findByRequestUser(userSeq));
     }
 
     @PostMapping("/dev")

@@ -17,5 +17,8 @@ import java.util.List;
 
 public interface ApiUsingAcceptInterface {
     int save(ApiUsingList apiUsingList);
+
     List<ApiUsingList> findByPublisher(int userSeq);
+
+    List<ApiUsingList> findByRequestUser(int userSeq);
 }

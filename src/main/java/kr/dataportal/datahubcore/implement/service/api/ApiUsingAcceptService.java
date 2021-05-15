@@ -35,4 +35,9 @@ public class ApiUsingAcceptService implements ApiUsingAcceptInterface {
     public List<ApiUsingList> findByPublisher(int userSeq) {
         return apiUsingAcceptRepository.findByPublisher(userSeq);
     }
+
+    @Override
+    public List<ApiUsingList> findByRequestUser(int userSeq) {
+        return apiUsingAcceptRepository.findByRequestUser(userSeq);
+    }
 }

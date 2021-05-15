@@ -43,4 +43,14 @@ public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
                 )
                 .fetch();
     }
+
+    @Override
+    public List<ApiUsingList> findByRequestUser(int userSeq) {
+        return queryFactory
+                .selectFrom(QApiUsingList.apiUsingList)
+                .where(
+                        QApiUsingList.apiUsingList.requestUser.seq.eq(userSeq)
+                )
+                .fetch();
+    }
 }
