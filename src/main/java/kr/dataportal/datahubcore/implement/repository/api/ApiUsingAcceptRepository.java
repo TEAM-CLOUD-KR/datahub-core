@@ -17,17 +17,20 @@ import kr.dataportal.datahubcore.domain.api.QApiUsingList;
 import kr.dataportal.datahubcore.interfaces.api.ApiUsingAcceptInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Repository
 public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
     private final EntityManager em;
     private final JPAQueryFactory queryFactory;
 
     @Override
+    @Transactional(readOnly = false)
     public int save(ApiUsingList apiUsingList) {
         em.persist(apiUsingList);
         em.flush();

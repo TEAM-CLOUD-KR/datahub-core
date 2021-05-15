@@ -6,11 +6,13 @@ import kr.dataportal.datahubcore.domain.common.Category2nd;
 import kr.dataportal.datahubcore.domain.datahub.DatahubList;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import kr.dataportal.datahubcore.domain.user.User;
+import kr.dataportal.datahubcore.util.CommonUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Entity
 @Table(name = "api_using_list")
@@ -42,7 +44,7 @@ public class ApiUsingList {
     public ApiUsingList(ApiList api, User requestUser, String purpose) {
         this.api = api;
         this.requestUser = requestUser;
-        this.serviceKey = "TEST";
+        this.serviceKey = CommonUtil.generateRandomAlphaNumber(64);
         this.purpose = purpose.isBlank() ? "" : purpose;
     }
 
