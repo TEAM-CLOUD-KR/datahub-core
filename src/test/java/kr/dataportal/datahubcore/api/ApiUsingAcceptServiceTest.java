@@ -61,4 +61,10 @@ public class ApiUsingAcceptServiceTest {
         int save = apiUsingAcceptService.save(apiUsingList);
         assertThat(save).isNotEqualTo(0);
     }
+
+    @Test
+    void ApiUsingAcceptService_findByApiAndRequestUser() {
+        ApiUsingList byApiAndRequestUser = apiUsingAcceptService.findByApiAndRequestUser(10, 10);
+        assertThat(byApiAndRequestUser).isNull();
+    }
 }

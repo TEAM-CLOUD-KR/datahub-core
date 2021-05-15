@@ -44,7 +44,7 @@ public class ApiUsingList {
     public ApiUsingList(ApiList api, User requestUser, String purpose) {
         this.api = api;
         this.requestUser = requestUser;
-        this.serviceKey = CommonUtil.generateRandomAlphaNumber(64);
+        this.serviceKey = CommonUtil.generateRandomAlphaNumber(32);
         this.purpose = purpose.isBlank() ? "" : purpose;
     }
 
