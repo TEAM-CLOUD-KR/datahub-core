@@ -132,10 +132,14 @@ public class ApiListController {
         return new JSONResponse(HttpStatus.OK, byPublisher);
     }
 
-
     @GetMapping("/dev")
     public JSONResponse ApiUsingAcceptView(@RequestParam int userSeq) {
         return new JSONResponse(HttpStatus.OK, apiUsingAcceptService.findByRequestUser(userSeq));
+    }
+
+    @GetMapping("/dev/search")
+    public JSONResponse ApiUsingAcceptSearch(@RequestParam int apiSeq, @RequestParam int userSeq) {
+        return new JSONResponse(HttpStatus.OK, apiUsingAcceptService.findByApiAndRequestUser(apiSeq, userSeq));
     }
 
     @PostMapping("/dev")
