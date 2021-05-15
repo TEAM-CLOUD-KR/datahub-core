@@ -21,4 +21,6 @@ public interface ApiUsingAcceptInterface {
     List<ApiUsingList> findByPublisher(int userSeq);
 
     List<ApiUsingList> findByRequestUser(int userSeq);
+
+    ApiUsingList findByApiAndRequestUser(int apiSeq, int userSeq);
 }

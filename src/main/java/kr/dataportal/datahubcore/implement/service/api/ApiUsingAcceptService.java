@@ -40,4 +40,9 @@ public class ApiUsingAcceptService implements ApiUsingAcceptInterface {
     public List<ApiUsingList> findByRequestUser(int userSeq) {
         return apiUsingAcceptRepository.findByRequestUser(userSeq);
     }
+
+    @Override
+    public ApiUsingList findByApiAndRequestUser(int apiSeq, int userSeq) {
+        return apiUsingAcceptRepository.findByApiAndRequestUser(apiSeq, userSeq);
+    }
 }
