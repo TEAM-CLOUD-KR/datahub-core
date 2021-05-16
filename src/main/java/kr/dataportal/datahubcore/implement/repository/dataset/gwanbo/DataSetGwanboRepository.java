@@ -56,43 +56,9 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
                 .getResultList();
     }
 
-    private List<String> getDeclaredColumns(Class<?> target, List<String> filter, String dataset, boolean recursion) {
-        List<String> ret = new ArrayList<>();
-        for (Field field : target.getDeclaredFields()) {
-            if (!Modifier.isStatic(field.getModifiers())) {
-                if (field.getType().equals(StringPath.class)) {
-                    if (recursion) {
-                        String s = target.getSimpleName().toLowerCase().substring(1) + "_" + field.getName();
-                        if (filter.contains(s)) {
-                            ret.add(dataset + "." + target.getSimpleName().toLowerCase().substring(1) +
-                                    "." + field.getName() + " AS " + s);
-                        }
-                    } else {
-                        String fieldName = CommonUtil.camelToSnake(field.getName());
-                        if (filter.contains(fieldName)) {
-                            ret.add(dataset + "." + field.getName() + " AS " + field.getName());
-                        }
-                    }
-                } else {
-                    ret.addAll(getDeclaredColumns(field.getType(), filter, dataset, true));
-                }
-            }
-        }
-        return ret;
-    }
-
-    private List<String> filteredColumn(Class<?> target, List<String> filter, String dataset) {
-        return getDeclaredColumns(target, filter, dataset, false);
-    }
-
-    private String createSearchQuery(Class<?> target, List<String> filter, Class<?> dataset) {
-        String s = filteredColumn(target, filter, dataset.getSimpleName().toLowerCase()).toString();
-        return "SELECT new Map(" + s.substring(1, s.length() - 1) + ") FROM " + dataset.getSimpleName() + " " + dataset.getSimpleName().toLowerCase();
-    }
-
     @Override
     public List<DataSetGwanbo> search(List<String> targetColumns, int page, int itemPerPage) {
-        String qur = createSearchQuery(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns, DataSetGwanbo.class);
+        String qur = CommonUtil.createSearchQuery(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns, DataSetGwanbo.class);
 
         return em.createQuery(qur)
                 .setFirstResult((page - 1) * itemPerPage)

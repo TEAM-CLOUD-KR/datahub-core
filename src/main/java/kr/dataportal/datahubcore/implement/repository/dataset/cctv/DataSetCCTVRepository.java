@@ -12,7 +12,11 @@
 package kr.dataportal.datahubcore.implement.repository.dataset.cctv;
 
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
+import kr.dataportal.datahubcore.domain.dataset.cctv.QDataSetCCTV;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
+import kr.dataportal.datahubcore.domain.dataset.gwanbo.QDataSetGwanbo;
 import kr.dataportal.datahubcore.interfaces.dataset.cctv.DataSetCCTVInterface;
+import kr.dataportal.datahubcore.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -52,6 +56,16 @@ public class DataSetCCTVRepository implements DataSetCCTVInterface {
     public List<DataSetCCTV> findByPage(int page, int itemPerPage) {
         return em.createQuery("" +
                 " SELECT datasetcctv FROM DataSetCCTV datasetcctv ORDER BY datasetcctv.seq desc", DataSetCCTV.class)
+                .setFirstResult((page - 1) * itemPerPage)
+                .setMaxResults(itemPerPage)
+                .getResultList();
+    }
+
+    @Override
+    public List<DataSetCCTV> search(List<String> targetColumns, int page, int itemPerPage) {
+        String qur = CommonUtil.createSearchQuery(QDataSetCCTV.dataSetCCTV.getClass(), targetColumns, DataSetCCTV.class);
+
+        return em.createQuery(qur)
                 .setFirstResult((page - 1) * itemPerPage)
                 .setMaxResults(itemPerPage)
                 .getResultList();

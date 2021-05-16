@@ -42,6 +42,11 @@ public class DataSetCCTVService implements DataSetCCTVInterface {
     }
 
     @Override
+    public List<DataSetCCTV> search(List<String> targetColumns, int page, int itemPerPage) {
+        return dataSetCCTVRepository.search(targetColumns, page, itemPerPage);
+    }
+
+    @Override
     public DataSetCCTV findRandomize() {
         return dataSetCCTVRepository.findRandomize();
     }

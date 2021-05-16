@@ -1,5 +1,6 @@
 package kr.dataportal.datahubcore.util;
 
+import com.querydsl.core.types.dsl.StringPath;
 import jdk.jfr.Description;
 import kr.dataportal.datahubcore.domain.dataset.cctv.DataSetCCTV;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
@@ -8,6 +9,7 @@ import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 
@@ -127,4 +129,39 @@ public class CommonUtil {
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
     }
+
+    private static List<String> getDeclaredColumns(Class<?> target, List<String> filter, String dataset, boolean recursion) {
+        List<String> ret = new ArrayList<>();
+        for (Field field : target.getDeclaredFields()) {
+            if (!Modifier.isStatic(field.getModifiers())) {
+                if (field.getType().equals(StringPath.class)) {
+                    if (recursion) {
+                        String s = target.getSimpleName().toLowerCase().substring(1) + "_" + field.getName();
+                        if (filter.contains(s)) {
+                            ret.add(dataset + "." + target.getSimpleName().toLowerCase().substring(1) +
+                                    "." + field.getName() + " AS " + s);
+                        }
+                    } else {
+                        String fieldName = CommonUtil.camelToSnake(field.getName());
+                        if (filter.contains(fieldName)) {
+                            ret.add(dataset + "." + field.getName() + " AS " + field.getName());
+                        }
+                    }
+                } else {
+                    ret.addAll(getDeclaredColumns(field.getType(), filter, dataset, true));
+                }
+            }
+        }
+        return ret;
+    }
+
+    private static List<String> filteredColumn(Class<?> target, List<String> filter, String dataset) {
+        return getDeclaredColumns(target, filter, dataset, false);
+    }
+
+    public static String createSearchQuery(Class<?> target, List<String> filter, Class<?> dataset) {
+        String s = filteredColumn(target, filter, dataset.getSimpleName().toLowerCase()).toString();
+        return "SELECT new Map(" + s.substring(1, s.length() - 1) + ") FROM " + dataset.getSimpleName() + " " + dataset.getSimpleName().toLowerCase();
+    }
+
 }
