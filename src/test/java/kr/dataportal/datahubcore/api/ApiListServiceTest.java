@@ -2,6 +2,7 @@ package kr.dataportal.datahubcore.api;
 
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import kr.dataportal.datahubcore.domain.common.Category1st;
 import kr.dataportal.datahubcore.domain.common.Category2nd;
 import kr.dataportal.datahubcore.domain.datahub.DatahubList;
@@ -144,7 +145,7 @@ public class ApiListServiceTest {
 
     @Test
     void ApiList_findByPublisher() {
-        List<ApiList> byPublisher = apiListService.findByPublisher(36);
+        List<ApiUsingList> byPublisher = apiListService.findByPublisher(36);
         assertThat(byPublisher.size()).isGreaterThan(0);
     }
 

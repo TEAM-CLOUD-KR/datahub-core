@@ -12,6 +12,7 @@
 package kr.dataportal.datahubcore.implement.service.api;
 
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import kr.dataportal.datahubcore.dto.api.ApiListSearchDTO;
 import kr.dataportal.datahubcore.interfaces.api.ApiListInterface;
 import kr.dataportal.datahubcore.implement.repository.api.ApiListRepository;
@@ -39,7 +40,7 @@ public class ApiListService implements ApiListInterface {
     }
 
     @Override
-    public List<ApiList> findByPublisher(int publisherSeq) {
+    public List<ApiUsingList> findByPublisher(int publisherSeq) {
         return apiListRepository.findByPublisher(publisherSeq);
     }
 

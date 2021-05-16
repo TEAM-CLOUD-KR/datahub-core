@@ -7,7 +7,9 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.swagger.annotations.Api;
 import kr.dataportal.datahubcore.domain.PermissionGroup;
 import kr.dataportal.datahubcore.domain.api.ApiList;
+import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import kr.dataportal.datahubcore.domain.api.QApiList;
+import kr.dataportal.datahubcore.domain.api.QApiUsingList;
 import kr.dataportal.datahubcore.domain.common.Category1st;
 import kr.dataportal.datahubcore.domain.datahub.DatahubList;
 import kr.dataportal.datahubcore.domain.map.QMapApiListDatahub;
@@ -58,9 +60,9 @@ public class ApiListRepository implements ApiListInterface {
     }
 
     @Override
-    public List<ApiList> findByPublisher(int publisherSeq) {
+    public List<ApiUsingList> findByPublisher(int publisherSeq) {
         return queryFactory
-                .selectFrom(QApiList.apiList)
+                .selectFrom(QApiUsingList.apiUsingList)
                 .where(QApiList.apiList.publisher.seq.eq(publisherSeq))
                 .fetch();
     }

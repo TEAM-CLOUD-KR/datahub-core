@@ -128,7 +128,7 @@ public class ApiListController {
     // 사용자가 권한을 가진 Api 목록 조회 기능
     @GetMapping("/user")
     public JSONResponse UserOwnApiList(@RequestParam int userSeq) {
-        List<ApiList> byPublisher = apiListService.findByPublisher(userSeq);
+        List<ApiUsingList> byPublisher = apiListService.findByPublisher(userSeq);
         return new JSONResponse(HttpStatus.OK, byPublisher);
     }
 
