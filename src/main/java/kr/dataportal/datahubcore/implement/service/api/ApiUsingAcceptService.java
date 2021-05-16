@@ -33,7 +33,7 @@ public class ApiUsingAcceptService implements ApiUsingAcceptInterface {
 
     @Override
     public ApiUsingList findByApiAndServiceKey(int apiSeq, String serviceKey) {
-        return null;
+        return apiUsingAcceptRepository.findByApiAndServiceKey(apiSeq, serviceKey);
     }
 
     @Override
