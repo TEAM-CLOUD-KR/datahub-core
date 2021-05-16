@@ -107,7 +107,6 @@ public class ApiListController {
         ApiUsingList byApi = apiUsingAcceptService.findByApiAndServiceKey(apiSeq, serviceKey);
         if (byApi == null) {
             return new JSONResponse(HttpStatus.UNAUTHORIZED, "SERVICE KEY IS NOT MATCHED");
-
         }
 
         Optional<ApiList> byPath = apiListService.findBySeq(apiSeq);

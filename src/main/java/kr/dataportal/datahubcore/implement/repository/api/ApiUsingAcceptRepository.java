@@ -42,7 +42,8 @@ public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
         return queryFactory
                 .selectFrom(QApiUsingList.apiUsingList)
                 .where(
-                        QApiUsingList.apiUsingList.api.seq.eq(apiSeq)
+                        QApiUsingList.apiUsingList.api.seq.eq(apiSeq),
+                        QApiUsingList.apiUsingList.serviceKey.eq(serviceKey)
                 ).fetchOne();
     }
 
