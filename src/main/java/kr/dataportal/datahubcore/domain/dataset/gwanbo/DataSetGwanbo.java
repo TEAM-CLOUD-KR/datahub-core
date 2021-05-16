@@ -23,6 +23,7 @@ import java.util.List;
 @Table(name = "dataset_gwanbo")
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PUBLIC)
+@ToString
 public class DataSetGwanbo {
     @Column(name = "seq", length = 45, nullable = false,
             columnDefinition = "고유번호"

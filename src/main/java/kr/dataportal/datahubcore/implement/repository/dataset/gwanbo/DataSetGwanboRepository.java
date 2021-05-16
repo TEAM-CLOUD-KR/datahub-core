@@ -11,6 +11,8 @@
 
 package kr.dataportal.datahubcore.implement.repository.dataset.gwanbo;
 
+import com.google.common.reflect.TypeToken;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.dataportal.datahubcore.domain.dataset.gwanbo.DataSetGwanbo;
@@ -24,6 +26,7 @@ import javax.persistence.EntityManager;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -61,12 +64,12 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
                     if (recursion) {
                         String s = target.getSimpleName().toLowerCase().substring(1) + "_" + field.getName();
                         if (filter.contains(s)) {
-                            ret.add(dataset + "." + field.getName());
+                            ret.add(dataset + "." + field.getName() + " AS " + field.getName());
                         }
                     } else {
                         String fieldName = CommonUtil.camelToSnake(field.getName());
                         if (filter.contains(fieldName)) {
-                            ret.add(dataset + "." + field.getName());
+                            ret.add(dataset + "." + field.getName() + " AS " + field.getName());
                         }
                     }
                 } else {
@@ -83,23 +86,22 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
 
     private String createSearchQuery(Class<?> target, List<String> filter, Class<?> dataset) {
         String s = filteredColumn(target, filter, dataset.getSimpleName().toLowerCase()).toString();
-        return "SELECT " + s.substring(1, s.length() - 1) + " FROM " + dataset.getSimpleName() + " " + dataset.getSimpleName().toLowerCase();
+        return "SELECT new Map(" + s.substring(1, s.length() - 1) + ") FROM " + dataset.getSimpleName() + " " + dataset.getSimpleName().toLowerCase();
     }
 
     @Override
     public List<DataSetGwanbo> search(List<String> targetColumns, int page, int itemPerPage) {
-//        String qur = createSearchQuery(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns, DataSetGwanbo.class);
-//        System.out.println("qur = " + qur);
-//        List<Object[]> resultList = em.createQuery(qur, Object[].class)
-//                .setFirstResult((page - 1) * itemPerPage)
-//                .setMaxResults(itemPerPage)
-//                .getResultList();
-//        System.out.println("resultList = " + resultList.get(1)[0]);
-        return queryFactory
-                .selectFrom(QDataSetGwanbo.dataSetGwanbo)
-                .offset((long) (page - 1) * itemPerPage)
-                .limit(itemPerPage)
-                .fetch();
+        String qur = createSearchQuery(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns, DataSetGwanbo.class);
+
+        return em.createQuery(qur)
+                .setFirstResult((page - 1) * itemPerPage)
+                .setMaxResults(itemPerPage)
+                .getResultList();
+//        return queryFactory
+//                .selectFrom(QDataSetGwanbo.dataSetGwanbo)
+//                .offset((long) (page - 1) * itemPerPage)
+//                .limit(itemPerPage)
+//                .fetch();
     }
 
     @Override
