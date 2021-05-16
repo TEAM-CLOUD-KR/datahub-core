@@ -64,7 +64,8 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
                     if (recursion) {
                         String s = target.getSimpleName().toLowerCase().substring(1) + "_" + field.getName();
                         if (filter.contains(s)) {
-                            ret.add(dataset + "." + field.getName() + " AS " + field.getName());
+                            ret.add(dataset + "." + target.getSimpleName().toLowerCase().substring(1) +
+                                    "." + field.getName() + " AS " + s);
                         }
                     } else {
                         String fieldName = CommonUtil.camelToSnake(field.getName());

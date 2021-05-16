@@ -84,8 +84,9 @@ public class DataSetGwanboServiceTest {
 
     @Test
     void DataSetGwanbo_Search() {
-        ApiList apiList = apiListService.findBySeq(56).get();
+        ApiList apiList = apiListService.findBySeq(58).get();
         List<String> targetColumns = new ArrayList<>(Arrays.asList(apiList.getTargetColumn().split(",")));
         List<DataSetGwanbo> search = dataSetGwanboService.search(targetColumns, 1, 1);
+        System.out.println("search = " + search);
     }
 }
