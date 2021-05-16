@@ -38,6 +38,15 @@ public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
     }
 
     @Override
+    public ApiUsingList findByApiAndServiceKey(int apiSeq, String serviceKey) {
+        return queryFactory
+                .selectFrom(QApiUsingList.apiUsingList)
+                .where(
+                        QApiUsingList.apiUsingList.api.seq.eq(apiSeq)
+                ).fetchOne();
+    }
+
+    @Override
     public List<ApiUsingList> findByPublisher(int userSeq) {
         return queryFactory
                 .selectFrom(QApiUsingList.apiUsingList)

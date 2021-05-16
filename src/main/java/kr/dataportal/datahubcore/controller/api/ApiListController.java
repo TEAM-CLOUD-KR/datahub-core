@@ -100,15 +100,20 @@ public class ApiListController {
     // 사용자 정의 API 조회 기능
     @GetMapping("/v2/{apiSeq}")
     public JSONResponse UserCustomizeApi(@PathVariable int apiSeq,
+                                         @RequestParam(required = true) String serviceKey,
                                          @RequestParam(required = false, defaultValue = "1") int page,
                                          @RequestParam(required = false, defaultValue = "10") int itemPerPage
     ) {
+        ApiUsingList byApi = apiUsingAcceptService.findByApiAndServiceKey(apiSeq, serviceKey);
+        if (byApi == null) {
+            return new JSONResponse(HttpStatus.UNAUTHORIZED, "SERVICE KEY IS NOT MATCHED");
+        }
+
         Optional<ApiList> byPath = apiListService.findBySeq(apiSeq);
         if (byPath.isPresent()) {
             ApiList apiList = byPath.get();
             Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(apiList.getTargetDataset().getDataSet());
 
-            // targetColumn 임시 변수 :: 추후 수정 예정 / current: not used
             List<String> targetColumns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
 
             if (classByClassName.isPresent()) {

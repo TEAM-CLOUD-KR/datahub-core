@@ -18,6 +18,8 @@ import java.util.List;
 public interface ApiUsingAcceptInterface {
     int save(ApiUsingList apiUsingList);
 
+    ApiUsingList findByApiAndServiceKey(int apiSeq, String serviceKey);
+
     List<ApiUsingList> findByPublisher(int userSeq);
 
     List<ApiUsingList> findByRequestUser(int userSeq);
