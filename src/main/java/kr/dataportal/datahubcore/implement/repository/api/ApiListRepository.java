@@ -63,6 +63,10 @@ public class ApiListRepository implements ApiListInterface {
     public List<ApiUsingList> findByPublisher(int publisherSeq) {
         return queryFactory
                 .selectFrom(QApiUsingList.apiUsingList)
+                .join(QApiList.apiList)
+                .on(QApiUsingList.apiUsingList.requestUser.seq.eq(
+                        QApiList.apiList.publisher.seq
+                ))
                 .where(QApiList.apiList.publisher.seq.eq(publisherSeq))
                 .fetch();
     }
