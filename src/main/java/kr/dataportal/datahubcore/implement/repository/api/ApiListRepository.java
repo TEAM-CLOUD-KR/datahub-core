@@ -33,7 +33,7 @@ public class ApiListRepository implements ApiListInterface {
     public Optional<ApiList> findBySeq(int seq) {
         List<ApiList> apiList = em.createQuery("" +
                 " SELECT apilist FROM ApiList apilist" +
-                " WHERE apilist.seq=:seq", ApiList.class)
+                " WHERE apilist.seq=:seq ORDER BY apilist.last_edit desc ", ApiList.class)
                 .setParameter("seq", seq)
                 .getResultList();
 
@@ -48,7 +48,7 @@ public class ApiListRepository implements ApiListInterface {
     public ApiList findByName(String name) {
         List<ApiList> apiList = em.createQuery("" +
                 " SELECT apilist FROM ApiList apilist" +
-                " WHERE apilist.name=:name", ApiList.class)
+                " WHERE apilist.name=:name ORDER BY apilist.last_edit desc ", ApiList.class)
                 .setParameter("name", name)
                 .getResultList();
 
@@ -64,6 +64,7 @@ public class ApiListRepository implements ApiListInterface {
         return queryFactory
                 .selectFrom(QApiUsingList.apiUsingList)
                 .where(QApiUsingList.apiUsingList.api.publisher.seq.eq(publisherSeq))
+                .orderBy(QApiUsingList.apiUsingList.seq.desc())
                 .fetch();
     }
 
@@ -128,6 +129,7 @@ public class ApiListRepository implements ApiListInterface {
                         isFilteredOwnDatahubs(searchDTO.getOwnDatahub()),
                         isFilteredApiName(searchDTO.getName())
                 )
+                .orderBy(QApiList.apiList.last_edit.desc())
                 .offset((long) (searchDTO.getPage() - 1) * searchDTO.getItemPerPage())
                 .limit((long) searchDTO.getItemPerPage())
                 .fetch();
@@ -145,6 +147,7 @@ public class ApiListRepository implements ApiListInterface {
                         isFilteredOwnDatahubs(searchDTO.getOwnDatahub()),
                         isFilteredApiName(searchDTO.getName())
                 )
+                .orderBy(QApiList.apiList.last_edit.desc())
                 .fetchCount();
     }
 

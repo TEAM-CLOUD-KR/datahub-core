@@ -22,7 +22,7 @@ public class MapApiListDatahubRepository implements MapApiListDatahubInterface {
     public List<MapApiListDatahub> findAll(int userSeq) {
         return em.createQuery("" +
                 " SELECT item FROM MapUserDatahub item" +
-                " WHERE item.user.seq =: seq", MapApiListDatahub.class)
+                " WHERE item.user.seq =: seq order by item.seq desc", MapApiListDatahub.class)
                 .setParameter("seq", userSeq)
                 .getResultList();
     }

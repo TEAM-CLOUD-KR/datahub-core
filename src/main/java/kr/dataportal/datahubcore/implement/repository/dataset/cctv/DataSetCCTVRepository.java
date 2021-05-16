@@ -48,7 +48,7 @@ public class DataSetCCTVRepository implements DataSetCCTVInterface {
     @Override
     public List<DataSetCCTV> findAll() {
         return em.createQuery("" +
-                " SELECT datasetcctv FROM DataSetCCTV datasetcctv", DataSetCCTV.class)
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv order by datasetcctv.seq desc", DataSetCCTV.class)
                 .getResultList();
     }
 

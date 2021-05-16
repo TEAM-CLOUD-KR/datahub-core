@@ -38,7 +38,7 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
     public DataSetGwanbo findBySeq(String seq) {
         List<DataSetGwanbo> gwanbos = em.createQuery("" +
                 " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo" +
-                " WHERE datasetgwanbo.seq =: seq", DataSetGwanbo.class)
+                " WHERE datasetgwanbo.seq =: seq order by datasetgwanbo.publish.regdate desc", DataSetGwanbo.class)
                 .setParameter("seq", seq)
                 .getResultList();
 
@@ -52,7 +52,7 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
     @Override
     public List<DataSetGwanbo> findAll() {
         return em.createQuery("" +
-                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo", DataSetGwanbo.class)
+                " SELECT datasetgwanbo FROM DataSetGwanbo datasetgwanbo order by datasetgwanbo.publish.regdate desc", DataSetGwanbo.class)
                 .getResultList();
     }
 

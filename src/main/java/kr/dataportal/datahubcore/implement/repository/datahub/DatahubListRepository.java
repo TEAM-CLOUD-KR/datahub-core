@@ -26,7 +26,7 @@ public class DatahubListRepository implements DatahubListInterface {
     @Override
     public List<DatahubList> findAll() {
         return em.createQuery("" +
-                " SELECT datahublist FROM DatahubList datahublist", DatahubList.class)
+                " SELECT datahublist FROM DatahubList datahublist order by datahublist.seq desc", DatahubList.class)
                 .getResultList();
     }
 

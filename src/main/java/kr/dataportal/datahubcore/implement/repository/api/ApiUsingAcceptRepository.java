@@ -54,6 +54,7 @@ public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
                 .where(
                         QApiUsingList.apiUsingList.api.publisher.seq.eq(userSeq)
                 )
+                .orderBy(QApiUsingList.apiUsingList.seq.desc())
                 .fetch();
     }
 
@@ -64,6 +65,7 @@ public class ApiUsingAcceptRepository implements ApiUsingAcceptInterface {
                 .where(
                         QApiUsingList.apiUsingList.requestUser.seq.eq(userSeq)
                 )
+                .orderBy(QApiUsingList.apiUsingList.seq.desc())
                 .fetch();
     }
 
