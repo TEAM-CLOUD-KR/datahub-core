@@ -33,7 +33,7 @@ public class ApiUsingList {
 
     @Column(name = "accept")
     @Enumerated(EnumType.STRING)
-    private final ApiUsingAcceptEnum accept = ApiUsingAcceptEnum.N;
+    private final ApiUsingAcceptEnum accept = ApiUsingAcceptEnum.Y;
 
     @Column(name = "service_key")
     private final String serviceKey;
