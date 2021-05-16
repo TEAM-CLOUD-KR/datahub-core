@@ -116,7 +116,7 @@ public class ApiListController {
                 if (DataSetGwanbo.class.equals(extractClass)) {
                     return new JSONResponse(HttpStatus.OK, dataSetGwanboService.search(targetColumns, page, itemPerPage));
                 } else if (DataSetCCTV.class.equals(extractClass)) {
-                    return new JSONResponse(HttpStatus.OK, dataSetCCTVService.findByPage(page, itemPerPage));
+                    return new JSONResponse(HttpStatus.OK, dataSetCCTVService.search(targetColumns, page, itemPerPage));
                 }
             } else {
                 return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND THE DATASET");
