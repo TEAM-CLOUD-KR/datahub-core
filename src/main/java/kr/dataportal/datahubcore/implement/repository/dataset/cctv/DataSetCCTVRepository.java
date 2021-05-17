@@ -48,14 +48,14 @@ public class DataSetCCTVRepository implements DataSetCCTVInterface {
     @Override
     public List<DataSetCCTV> findAll() {
         return em.createQuery("" +
-                " SELECT datasetcctv FROM DataSetCCTV datasetcctv order by datasetcctv.seq desc", DataSetCCTV.class)
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv order by datasetcctv.regdate desc", DataSetCCTV.class)
                 .getResultList();
     }
 
     @Override
     public List<DataSetCCTV> findByPage(int page, int itemPerPage) {
         return em.createQuery("" +
-                " SELECT datasetcctv FROM DataSetCCTV datasetcctv ORDER BY datasetcctv.seq desc", DataSetCCTV.class)
+                " SELECT datasetcctv FROM DataSetCCTV datasetcctv ORDER BY datasetcctv.regdate desc", DataSetCCTV.class)
                 .setFirstResult((page - 1) * itemPerPage)
                 .setMaxResults(itemPerPage)
                 .getResultList();
@@ -64,7 +64,7 @@ public class DataSetCCTVRepository implements DataSetCCTVInterface {
     @Override
     public List<DataSetCCTV> search(List<String> targetColumns, int page, int itemPerPage) {
         String qur = CommonUtil.createSearchQuery(QDataSetCCTV.dataSetCCTV.getClass(), targetColumns, DataSetCCTV.class);
-
+        qur += " order by datasetcctv.regdate desc";
         return em.createQuery(qur)
                 .setFirstResult((page - 1) * itemPerPage)
                 .setMaxResults(itemPerPage)

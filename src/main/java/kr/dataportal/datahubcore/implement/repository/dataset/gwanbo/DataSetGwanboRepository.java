@@ -59,7 +59,8 @@ public class DataSetGwanboRepository implements DataSetGwanboInterface {
     @Override
     public List<DataSetGwanbo> search(List<String> targetColumns, int page, int itemPerPage) {
         String qur = CommonUtil.createSearchQuery(QDataSetGwanbo.dataSetGwanbo.getClass(), targetColumns, DataSetGwanbo.class);
-
+        qur += " order by datasetgwanbo.publish.regdate desc";
+        
         return em.createQuery(qur)
                 .setFirstResult((page - 1) * itemPerPage)
                 .setMaxResults(itemPerPage)
