@@ -18,9 +18,9 @@ public class DataSetListRepository implements DataSetListInterface {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<String> findAll(String name) {
+    public List<DataSetList> findAll(String name) {
         return queryFactory
-                .select(QDataSetList.dataSetList.dataSet)
+                .select(QDataSetList.dataSetList)
                 .from(QDataSetList.dataSetList)
                 .where(
                         QDataSetList.dataSetList.dataSet.contains(name)
