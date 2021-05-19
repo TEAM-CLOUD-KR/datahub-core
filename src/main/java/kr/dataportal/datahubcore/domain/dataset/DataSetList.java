@@ -10,5 +10,5 @@ import javax.persistence.*;
 public class DataSetList {
     @Id
     @Column(name = "dataset", length = 255)
-    private String dataSet;
+    private String dataset;
 }
