@@ -60,7 +60,7 @@ public class ApiListController {
                 ApiList apiList = bySeq.get();
                 List<DataSetColumnDesc> retColumnDesc = new ArrayList<>();
                 List<DataSetColumnDesc> dataSetColumnDesc =
-                        CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataSet());
+                        CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataset());
                 List<String> columns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
                 for (int i = 0; i < dataSetColumnDesc.size(); i++) {
                     if (columns.contains(dataSetColumnDesc.get(i).getColumnEn())) {
@@ -113,7 +113,7 @@ public class ApiListController {
         Optional<ApiList> byPath = apiListService.findBySeq(apiSeq);
         if (byPath.isPresent()) {
             ApiList apiList = byPath.get();
-            Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(apiList.getTargetDataset().getDataSet());
+            Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(apiList.getTargetDataset().getDataset());
 
             List<String> targetColumns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
 

@@ -23,7 +23,7 @@ public class DataSetListRepository implements DataSetListInterface {
                 .select(QDataSetList.dataSetList)
                 .from(QDataSetList.dataSetList)
                 .where(
-                        QDataSetList.dataSetList.dataSet.contains(name)
+                        QDataSetList.dataSetList.dataset.contains(name)
                 )
                 .fetch();
     }
@@ -32,7 +32,7 @@ public class DataSetListRepository implements DataSetListInterface {
     public DataSetList findOne(String dataSetName) {
         List<DataSetList> dataset = em.createQuery("" +
                 " SELECT dl FROM DataSetList dl" +
-                " WHERE dl.dataSet =: dataset", DataSetList.class)
+                " WHERE dl.dataset =: dataset", DataSetList.class)
                 .setParameter("dataset", dataSetName)
                 .getResultList();
 
