@@ -20,9 +20,13 @@ public class DataSetList {
     @Column(name = "dataset_column")
     private final String datasetColumn;
 
+    @Column(name = "desc")
+    private final String desc;
+
     public DataSetList() {
         this.dataset = null;
         this.datasetRaw = null;
         this.datasetColumn = null;
+        this.desc = null;
     }
 }
