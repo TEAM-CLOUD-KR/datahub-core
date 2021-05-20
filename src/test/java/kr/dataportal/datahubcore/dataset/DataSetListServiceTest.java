@@ -5,6 +5,8 @@ import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +22,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DataSetListServiceTest {
     @Autowired
     private DataSetListService dataSetListService;
+
+    @Test
+    @Rollback(value = true)
+    @Transactional(readOnly = false)
+    void DataSetList_save() {
+        DataSetList test = new DataSetList("test", "{'a':'b'}", "['a']");
+        dataSetListService.save(test);
+        DataSetList test1 = dataSetListService.findOne("test");
+        assertThat(test1).isNotNull();
+        assertThat(test1.getDataset()).isEqualTo("test");
+    }
 
     @Test
     void DataSetList_findOne() {

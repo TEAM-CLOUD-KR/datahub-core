@@ -12,6 +12,8 @@
 package kr.dataportal.datahubcore.controller.dataset;
 
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
+import kr.dataportal.datahubcore.domain.dataset.DataSetList;
+import kr.dataportal.datahubcore.dto.dataset.DataSetCreateDTO;
 import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
 import kr.dataportal.datahubcore.implement.service.dataset.gwanbo.DataSetGwanboService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class DataSetListController {
     private final DataSetListService dataSetListService;
+
+    @PostMapping("")
+    public JSONResponse DataSetCreateAction(@RequestBody DataSetCreateDTO dataSetCreateDTO) {
+        DataSetList dataSetList = new DataSetList(
+                dataSetCreateDTO.getDataset(),
+                dataSetCreateDTO.getDatasetRaw(),
+                dataSetCreateDTO.getDatasetColumn()
+        );
+        dataSetListService.save(dataSetList);
+        return new JSONResponse(HttpStatus.OK, "SUCCESS");
+    }
 
     @GetMapping("/search")
     public JSONResponse DataSetSearchAction(@RequestParam(name = "name", required = false, defaultValue = "") String name) {
