@@ -72,30 +72,30 @@ public class ApiListServiceTest {
         assertThat(apiList).isNotNull();
     }
 
-    @Test
-    @Transactional(readOnly = false)
-    @Rollback(value = true)
-    void ApiList_수정() {
-        ApiList apiList = apiListService.findBySeq(56).get();
-        ApiList update = apiList.update(
-                "API 이름 수정",
-                dataSetListService.findOne("dataset_gwanbo"),
-                "['A','B','C']",
-                PermissionGroup.PERMISSION_DATAHUB,
-                "API DESC 수정",
-                apiList.getCategory1st(),
-                apiList.getCategory2nd(),
-                "기관 수정",
-                "TEST"
-        );
-        assertThat(update.getName()).isEqualTo("API 이름 수정");
-    }
+//    @Test
+//    @Transactional(readOnly = false)
+//    @Rollback(value = true)
+//    void ApiList_수정() {
+//        ApiList apiList = apiListService.findBySeq(56).get();
+//        ApiList update = apiList.update(
+//                "API 이름 수정",
+//                dataSetListService.findOne("dataset_gwanbo"),
+//                "['A','B','C']",
+//                PermissionGroup.PERMISSION_DATAHUB,
+//                "API DESC 수정",
+//                apiList.getCategory1st(),
+//                apiList.getCategory2nd(),
+//                "기관 수정",
+//                "TEST"
+//        );
+//        assertThat(update.getName()).isEqualTo("API 이름 수정");
+//    }
 
-    @Test
-    void ApiList_단건조회() {
-        ApiList apiList = apiListService.findBySeq(56).get();
-        assertThat(apiList.getSeq()).isEqualTo(56);
-    }
+//    @Test
+//    void ApiList_단건조회() {
+//        ApiList apiList = apiListService.findBySeq(56).get();
+//        assertThat(apiList.getSeq()).isEqualTo(56);
+//    }
 
 //    @Test
 //    void ApiList_Paging() {
@@ -104,44 +104,44 @@ public class ApiListServiceTest {
 //        assertThat(byPage.size()).isGreaterThan(0);
 //    }
 
-    @Test
-    void ApiList_Search() {
-        List<String> filteredDatahubList = new ArrayList<>();
-        List<String> filteredCategory1st = new ArrayList<>();
-        List<String> filteredOrganization = new ArrayList<>();
+//    @Test
+//    void ApiList_Search() {
+//        List<String> filteredDatahubList = new ArrayList<>();
+//        List<String> filteredCategory1st = new ArrayList<>();
+//        List<String> filteredOrganization = new ArrayList<>();
+//
+//        List<ApiList> search1 = apiListService.search(new ApiListSearchDTO(
+//                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, ""
+//        ));
+//
+//        Assertions.assertThat(search1.size()).isGreaterThan(0);
+//
+//        filteredDatahubList.add(datahubListService.fineBySeq(1).get().getName());
+//
+//        filteredCategory1st.add(category1stService.findOne("과학기술").getText());
+//        filteredCategory1st.add(category1stService.findOne("교육").getText());
+//
+//        List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
+//                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "가나다라마바사"
+//        ));
+//
+//        Assertions.assertThat(search2.size()).isEqualTo(1);
+//    }
 
-        List<ApiList> search1 = apiListService.search(new ApiListSearchDTO(
-                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, ""
-        ));
-
-        Assertions.assertThat(search1.size()).isGreaterThan(0);
-
-        filteredDatahubList.add(datahubListService.fineBySeq(1).get().getName());
-
-        filteredCategory1st.add(category1stService.findOne("과학기술").getText());
-        filteredCategory1st.add(category1stService.findOne("교육").getText());
-
-        List<ApiList> search2 = apiListService.search(new ApiListSearchDTO(
-                1, 10, filteredDatahubList, filteredCategory1st, filteredOrganization, "가나다라마바사"
-        ));
-
-        Assertions.assertThat(search2.size()).isEqualTo(1);
-    }
-
-    @Test
-    void ApiList_GetCount() {
-        Long count = apiListService.getCount(new ApiListSearchDTO(
-                1, 10, null, null, null, null
-        ));
-        assertThat(count).isNotNull();
-        assertThat(count).isGreaterThan(0);
-
-        Long count1 = apiListService.getCount(new ApiListSearchDTO(
-                1, 10, null, null, null, "가나다라마바사"
-        ));
-        assertThat(count1).isNotNull();
-        assertThat(count1).isEqualTo(1);
-    }
+//    @Test
+//    void ApiList_GetCount() {
+//        Long count = apiListService.getCount(new ApiListSearchDTO(
+//                1, 10, null, null, null, null
+//        ));
+//        assertThat(count).isNotNull();
+//        assertThat(count).isGreaterThan(0);
+//
+//        Long count1 = apiListService.getCount(new ApiListSearchDTO(
+//                1, 10, null, null, null, "가나다라마바사"
+//        ));
+//        assertThat(count1).isNotNull();
+//        assertThat(count1).isEqualTo(1);
+//    }
 
     @Test
     void ApiList_findByPublisher() {

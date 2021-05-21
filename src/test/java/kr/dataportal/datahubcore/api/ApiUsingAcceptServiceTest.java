@@ -49,18 +49,18 @@ public class ApiUsingAcceptServiceTest {
         assertThat(byPublisher.size()).isGreaterThan(0);
     }
 
-    @Test
-    @Transactional(readOnly = false)
-    @Rollback(value = true)
-    void ApiUsingAcceptService_save() {
-        ApiUsingList apiUsingList = new ApiUsingList(
-                apiListService.findBySeq(59).get(),
-                userService.findBySeq(36).get(),
-                ""
-        );
-        int save = apiUsingAcceptService.save(apiUsingList);
-        assertThat(save).isNotEqualTo(0);
-    }
+//    @Test
+//    @Transactional(readOnly = false)
+//    @Rollback(value = true)
+//    void ApiUsingAcceptService_save() {
+//        ApiUsingList apiUsingList = new ApiUsingList(
+//                apiListService.findBySeq(59).get(),
+//                userService.findBySeq(36).get(),
+//                ""
+//        );
+//        int save = apiUsingAcceptService.save(apiUsingList);
+//        assertThat(save).isNotEqualTo(0);
+//    }
 
     @Test
     void ApiUsingAcceptService_findByApiAndRequestUser() {

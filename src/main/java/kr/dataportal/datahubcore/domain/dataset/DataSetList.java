@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "dataset_list")
 @Getter
-@RequiredArgsConstructor
 public class DataSetList {
     @Id
     @Column(name = "dataset", length = 255)
@@ -20,13 +19,28 @@ public class DataSetList {
     @Column(name = "dataset_column")
     private final String datasetColumn;
 
-    @Column(name = "desc")
-    private final String desc;
+    @Column(name = "description")
+    private final String description;
+
+
+    public DataSetList(String dataset, String datasetRaw, String datasetColumn) {
+        this.dataset = dataset;
+        this.datasetRaw = datasetRaw;
+        this.datasetColumn = datasetColumn;
+        this.description = null;
+    }
+
+    public DataSetList(String dataset, String datasetRaw, String datasetColumn, String description) {
+        this.dataset = dataset;
+        this.datasetRaw = datasetRaw;
+        this.datasetColumn = datasetColumn;
+        this.description = description;
+    }
 
     public DataSetList() {
         this.dataset = null;
         this.datasetRaw = null;
         this.datasetColumn = null;
-        this.desc = null;
+        this.description = null;
     }
 }
