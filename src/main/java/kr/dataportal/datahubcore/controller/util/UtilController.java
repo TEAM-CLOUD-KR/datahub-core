@@ -49,8 +49,6 @@ public class UtilController {
             dataSetColumnDescs = tmp;
         }
 
-        System.out.println("dataSetColumnDescs = " + dataSetColumnDescs);
-
         return new JSONResponse(
                 HttpStatus.OK,
                 new DataSetListAndColumn(
