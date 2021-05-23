@@ -1,5 +1,7 @@
 package kr.dataportal.datahubcore.controller.api;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import kr.dataportal.datahubcore.domain.api.ApiList;
 import kr.dataportal.datahubcore.domain.api.ApiUsingList;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
@@ -41,6 +43,8 @@ public class ApiListController {
     private final DataSetCCTVService dataSetCCTVService;
     private final UserService userService;
     private final ApiUsingAcceptService apiUsingAcceptService;
+
+    private final Gson gson;
 
     // API 목록 조회 기능
     @PostMapping("/list")
@@ -129,17 +133,21 @@ public class ApiListController {
             ApiList apiList = byPath.get();
             Optional<Class<?>> classByClassName = CommonUtil.getClassByClassName(apiList.getTargetDataset().getDataset());
 
-            List<String> targetColumns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
 
             if (classByClassName.isPresent()) {
                 Class<?> extractClass = classByClassName.get();
+                List<String> targetColumns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
                 if (DataSetGwanbo.class.equals(extractClass)) {
                     return new JSONResponse(HttpStatus.OK, dataSetGwanboService.search(targetColumns, page, itemPerPage));
                 } else if (DataSetCCTV.class.equals(extractClass)) {
                     return new JSONResponse(HttpStatus.OK, dataSetCCTVService.search(targetColumns, page, itemPerPage));
                 }
             } else {
-                return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND THE DATASET");
+                return new JSONResponse(HttpStatus.OK,
+                        gson.fromJson(apiList.getTargetDataset().getDatasetRaw(),
+                                new TypeToken<ArrayList<Object>>() {
+                                }.getType())
+                );
             }
         }
         return new JSONResponse(HttpStatus.BAD_REQUEST, "CAN NOT FOUND THE PATH");
