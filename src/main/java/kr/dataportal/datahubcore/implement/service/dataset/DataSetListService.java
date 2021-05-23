@@ -16,8 +16,8 @@ public class DataSetListService implements DataSetListInterface {
     private final DataSetListRepository dataSetListRepository;
 
     @Override
-    public void save(DataSetList dataSetList) {
-        dataSetListRepository.save(dataSetList);
+    public int save(DataSetList dataSetList) {
+        return dataSetListRepository.save(dataSetList);
     }
 
     @Override

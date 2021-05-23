@@ -5,7 +5,7 @@ import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import java.util.List;
 
 public interface DataSetListInterface {
-    void save(DataSetList dataSetList);
+    int save(DataSetList dataSetList);
 
     List<DataSetList> findAll(String name);
     List<DataSetList> findAll(int seq);

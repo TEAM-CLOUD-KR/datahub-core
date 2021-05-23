@@ -33,7 +33,7 @@ public class UtilController {
     @GetMapping("/scheme/{target}")
     public JSONResponse getClassProperty(@PathVariable String target) {
         List<DataSetColumnDesc> dataSetColumnDescs = CommonUtil.parseClassProperty(target);
-        DataSetList one = null;
+        DataSetList one;
         if (target.matches("-?\\d+")) {
             one = dataSetListService.findOne(Integer.parseInt(target));
         } else {

@@ -34,8 +34,8 @@ public class DataSetListController {
                 dataSetCreateDTO.getDatasetColumn(),
                 dataSetCreateDTO.getDescription()
         );
-        dataSetListService.save(dataSetList);
-        return new JSONResponse(HttpStatus.OK, "SUCCESS");
+        return new JSONResponse(HttpStatus.OK,
+                dataSetListService.save(dataSetList));
     }
 
     @GetMapping("/search")

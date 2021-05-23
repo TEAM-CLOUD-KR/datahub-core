@@ -20,9 +20,10 @@ public class DataSetListRepository implements DataSetListInterface {
 
     @Override
     @Transactional(readOnly = false)
-    public void save(DataSetList dataSetList) {
+    public int save(DataSetList dataSetList) {
         em.persist(dataSetList);
         em.flush();
+        return dataSetList.getSeq();
     }
 
     @Override
