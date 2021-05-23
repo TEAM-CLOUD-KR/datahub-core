@@ -8,6 +8,7 @@ public interface DataSetListInterface {
     void save(DataSetList dataSetList);
 
     List<DataSetList> findAll(String name);
+    List<DataSetList> findAll(int seq);
 
     DataSetList findOne(String dataSetName);
 }

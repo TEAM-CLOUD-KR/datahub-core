@@ -37,6 +37,17 @@ public class DataSetListRepository implements DataSetListInterface {
     }
 
     @Override
+    public List<DataSetList> findAll(int seq) {
+        return queryFactory
+                .select(QDataSetList.dataSetList)
+                .from(QDataSetList.dataSetList)
+                .where(
+                        QDataSetList.dataSetList.seq.eq(seq)
+                )
+                .fetch();
+    }
+
+    @Override
     public DataSetList findOne(String dataSetName) {
         List<DataSetList> dataset = em.createQuery("" +
                 " SELECT dl FROM DataSetList dl" +

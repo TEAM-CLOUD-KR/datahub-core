@@ -26,6 +26,11 @@ public class DataSetListService implements DataSetListInterface {
     }
 
     @Override
+    public List<DataSetList> findAll(int seq) {
+        return dataSetListRepository.findAll(seq);
+    }
+
+    @Override
     public DataSetList findOne(String dataSetName) {
         return dataSetListRepository.findOne(dataSetName);
     }
