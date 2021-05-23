@@ -73,11 +73,11 @@ public class ApiListController {
                     }
                 } else {
                     String s = apiList.getTargetDataset().getDatasetColumn();
-                    List<String> tmp = new ArrayList<String>(Arrays.asList(s.substring(1,s.length() - 1).split(",")));
+                    List<String> tmp = new ArrayList<String>(Arrays.asList(s.substring(1, s.length() - 1).split(",")));
 
                     for (String setColumnDesc : tmp) {
-                        if (columns.contains(setColumnDesc)) {
-                            retColumnDesc.add(setColumnDesc);
+                        if (columns.contains(setColumnDesc.substring(1, setColumnDesc.length() - 1))) {
+                            retColumnDesc.add(setColumnDesc.substring(1, setColumnDesc.length() - 1));
                         }
                     }
                 }
