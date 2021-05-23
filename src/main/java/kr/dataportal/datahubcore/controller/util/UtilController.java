@@ -42,12 +42,14 @@ public class UtilController {
         List<?> dataSetColumnDescs;
 
         if (one.getDatasetColumn() == null) {
-            dataSetColumnDescs = CommonUtil.parseClassProperty(target);
+            dataSetColumnDescs = CommonUtil.parseClassProperty(one.getDataset());
         } else {
             List<String> tmp = new ArrayList<>();
             tmp.add(one.getDatasetColumn());
             dataSetColumnDescs = tmp;
         }
+
+        System.out.println("dataSetColumnDescs = " + dataSetColumnDescs);
 
         return new JSONResponse(
                 HttpStatus.OK,
