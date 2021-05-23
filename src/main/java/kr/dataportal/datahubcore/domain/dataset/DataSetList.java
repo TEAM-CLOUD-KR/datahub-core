@@ -10,6 +10,10 @@ import javax.persistence.*;
 @Getter
 public class DataSetList {
     @Id
+    @Column(name = "seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int seq;
+
     @Column(name = "dataset", length = 255)
     private final String dataset;
 
