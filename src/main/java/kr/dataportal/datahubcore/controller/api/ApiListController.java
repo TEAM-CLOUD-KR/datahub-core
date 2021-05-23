@@ -58,13 +58,27 @@ public class ApiListController {
             Optional<ApiList> bySeq = apiListService.findBySeq(Integer.parseInt(seq));
             if (bySeq.isPresent()) {
                 ApiList apiList = bySeq.get();
-                List<DataSetColumnDesc> retColumnDesc = new ArrayList<>();
-                List<DataSetColumnDesc> dataSetColumnDesc =
-                        CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataset());
+                List<Object> retColumnDesc = new ArrayList<>();
+                List<?> dataSetColumnDesc;
+
                 List<String> columns = new ArrayList<String>(Arrays.asList(apiList.getTargetColumn().split(",")));
-                for (int i = 0; i < dataSetColumnDesc.size(); i++) {
-                    if (columns.contains(dataSetColumnDesc.get(i).getColumnEn())) {
-                        retColumnDesc.add(dataSetColumnDesc.get(i));
+
+                if (apiList.getTargetDataset().getDatasetColumn() == null) {
+                    dataSetColumnDesc = CommonUtil.parseClassProperty(apiList.getTargetDataset().getDataset());
+
+                    for (Object setColumnDesc : dataSetColumnDesc) {
+                        if (columns.contains(((DataSetColumnDesc) setColumnDesc).getColumnEn())) {
+                            retColumnDesc.add(setColumnDesc);
+                        }
+                    }
+                } else {
+                    String s = apiList.getTargetDataset().getDatasetColumn();
+                    List<String> tmp = new ArrayList<String>(Arrays.asList(s.substring(1,s.length() - 1).split(",")));
+
+                    for (String setColumnDesc : tmp) {
+                        if (columns.contains(setColumnDesc)) {
+                            retColumnDesc.add(setColumnDesc);
+                        }
                     }
                 }
                 return new JSONResponse(HttpStatus.OK, new ApiListDetailAndDataSetColumn(apiList, retColumnDesc));
