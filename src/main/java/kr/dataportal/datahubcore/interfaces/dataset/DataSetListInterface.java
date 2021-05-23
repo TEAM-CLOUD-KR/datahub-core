@@ -11,4 +11,5 @@ public interface DataSetListInterface {
     List<DataSetList> findAll(int seq);
 
     DataSetList findOne(String dataSetName);
+    DataSetList findOne(int seq);
 }

@@ -61,4 +61,14 @@ public class DataSetListRepository implements DataSetListInterface {
             return null;
         }
     }
+
+    @Override
+    public DataSetList findOne(int seq) {
+        return queryFactory
+                .selectFrom(QDataSetList.dataSetList)
+                .where(
+                        QDataSetList.dataSetList.seq.eq(seq)
+                )
+                .fetchOne();
+    }
 }

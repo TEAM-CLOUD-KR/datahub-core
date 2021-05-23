@@ -34,4 +34,9 @@ public class DataSetListService implements DataSetListInterface {
     public DataSetList findOne(String dataSetName) {
         return dataSetListRepository.findOne(dataSetName);
     }
+
+    @Override
+    public DataSetList findOne(int seq) {
+        return dataSetListRepository.findOne(seq);
+    }
 }
