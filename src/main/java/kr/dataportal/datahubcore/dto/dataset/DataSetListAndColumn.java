@@ -21,5 +21,5 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DataSetListAndColumn {
     private final DataSetList dataSetList;
-    private final List<DataSetColumnDesc> dataSetColumnDesc;
+    private final List<?> dataSetColumnDesc;
 }

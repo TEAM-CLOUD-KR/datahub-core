@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,12 +33,20 @@ public class UtilController {
 
     @GetMapping("/scheme/{target}")
     public JSONResponse getClassProperty(@PathVariable String target) {
-        List<DataSetColumnDesc> dataSetColumnDescs = CommonUtil.parseClassProperty(target);
         DataSetList one;
         if (target.matches("-?\\d+")) {
             one = dataSetListService.findOne(Integer.parseInt(target));
         } else {
             one = dataSetListService.findOne(target);
+        }
+        List<?> dataSetColumnDescs;
+
+        if (one.getDatasetColumn().isBlank()) {
+            dataSetColumnDescs = CommonUtil.parseClassProperty(target);
+        } else {
+            List<String> tmp = new ArrayList<>();
+            tmp.add(one.getDatasetColumn());
+            dataSetColumnDescs = tmp;
         }
 
         return new JSONResponse(
