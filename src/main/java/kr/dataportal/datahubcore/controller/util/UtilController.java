@@ -14,6 +14,7 @@ package kr.dataportal.datahubcore.controller.util;
 import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.dataset.DataSetList;
 import kr.dataportal.datahubcore.dto.dataset.DataSetColumnDesc;
+import kr.dataportal.datahubcore.dto.dataset.DataSetListAndColumn;
 import kr.dataportal.datahubcore.implement.service.dataset.DataSetListService;
 import kr.dataportal.datahubcore.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
@@ -32,15 +33,15 @@ public class UtilController {
     @GetMapping("/scheme/{target}")
     public JSONResponse getClassProperty(@PathVariable String target) {
         List<DataSetColumnDesc> dataSetColumnDescs = CommonUtil.parseClassProperty(target);
-        if (dataSetColumnDescs.size() > 0) {
-            return new JSONResponse(
-                    HttpStatus.OK,
-                    dataSetColumnDescs
-            );
-        }
+
         DataSetList one = dataSetListService.findOne(target);
+
         return new JSONResponse(
-                HttpStatus.MOVED_PERMANENTLY, one
+                HttpStatus.OK,
+                new DataSetListAndColumn(
+                        one,
+                        dataSetColumnDescs
+                )
         );
     }
 }
