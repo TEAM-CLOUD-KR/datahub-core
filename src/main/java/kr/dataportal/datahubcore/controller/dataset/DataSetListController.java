@@ -31,7 +31,8 @@ public class DataSetListController {
         DataSetList dataSetList = new DataSetList(
                 dataSetCreateDTO.getDataset(),
                 dataSetCreateDTO.getDatasetRaw(),
-                dataSetCreateDTO.getDatasetColumn()
+                dataSetCreateDTO.getDatasetColumn(),
+                dataSetCreateDTO.getDescription()
         );
         dataSetListService.save(dataSetList);
         return new JSONResponse(HttpStatus.OK, "SUCCESS");
