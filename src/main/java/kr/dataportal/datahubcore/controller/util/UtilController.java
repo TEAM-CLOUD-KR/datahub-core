@@ -41,7 +41,7 @@ public class UtilController {
         }
         List<?> dataSetColumnDescs;
 
-        if (one.getDatasetColumn().isBlank()) {
+        if (one.getDatasetColumn() == null) {
             dataSetColumnDescs = CommonUtil.parseClassProperty(target);
         } else {
             List<String> tmp = new ArrayList<>();
