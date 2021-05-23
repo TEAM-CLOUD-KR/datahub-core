@@ -41,9 +41,9 @@ public class DataSetListController {
     @GetMapping("/search")
     public JSONResponse DataSetSearchAction(
             @RequestParam(name = "name", required = false, defaultValue = "") String name,
-            @RequestParam(name = "seq", required = false) int seq
+            @RequestParam(name = "seq", required = false, defaultValue = "") Integer seq
     ) {
-        if (name.isBlank()) {
+        if (seq != null) {
             return new JSONResponse(HttpStatus.OK, dataSetListService.findAll(seq));
         } else {
             return new JSONResponse(HttpStatus.OK, dataSetListService.findAll(name));
