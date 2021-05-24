@@ -39,21 +39,21 @@ public class UtilController {
         } else {
             one = dataSetListService.findOne(target);
         }
-        List<?> dataSetColumnDescs;
+        List<?> dataSetColumnDesc;
 
         if (one.getDatasetColumn() == null) {
-            dataSetColumnDescs = CommonUtil.parseClassProperty(one.getDataset());
+            dataSetColumnDesc = CommonUtil.parseClassProperty(one.getDataset());
         } else {
             List<String> tmp = new ArrayList<>();
             tmp.add(one.getDatasetColumn());
-            dataSetColumnDescs = tmp;
+            dataSetColumnDesc = tmp;
         }
 
         return new JSONResponse(
                 HttpStatus.OK,
                 new DataSetListAndColumn(
                         one,
-                        dataSetColumnDescs
+                        dataSetColumnDesc
                 )
         );
     }
