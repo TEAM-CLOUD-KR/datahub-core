@@ -55,6 +55,13 @@ public class ApiListController {
         );
     }
 
+    // API 목록 조회 기능 with User
+    @GetMapping("/search")
+    public JSONResponse ApiListSearchWithUser(@RequestParam int userSeq) {
+        List<ApiUsingList> byPublisher = apiUsingAcceptService.findByPublisher(userSeq);
+        return new JSONResponse(HttpStatus.OK, byPublisher);
+    }
+
     // API 상세 조회 기능
     @GetMapping("/{seq}")
     public JSONResponse ApiDetail(@PathVariable String seq) {
