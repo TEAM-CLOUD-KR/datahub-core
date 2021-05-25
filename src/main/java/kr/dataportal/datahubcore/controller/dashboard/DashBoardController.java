@@ -25,7 +25,7 @@ public class DashBoardController {
         return new JSONResponse(HttpStatus.OK, dashBoardService.save(new DashBoardList(
                 apiUsingAcceptService.findByApiSeq(dashBoardListDTO.getApiSeq()),
                 dashBoardListDTO.getPage(),
-                dashBoardListDTO.getItermPerPage(),
+                dashBoardListDTO.getItemPerPage(),
                 dashBoardListDTO.getLabels(),
                 dashBoardListDTO.getDatas(),
                 dashBoardListDTO.getType()

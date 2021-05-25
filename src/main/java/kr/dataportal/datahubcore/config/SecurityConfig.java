@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/common/util/**",
             "/api/**",
             "/user/**",
-            "/"
+            "/",
+            "/dashboard/**"
     };
 
     @Override
