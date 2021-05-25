@@ -32,6 +32,11 @@ public class ApiUsingAcceptService implements ApiUsingAcceptInterface {
     }
 
     @Override
+    public ApiUsingList findByApiSeq(int apiSeq) {
+        return apiUsingAcceptRepository.findByApiSeq(apiSeq);
+    }
+
+    @Override
     public ApiUsingList findByApiAndServiceKey(int apiSeq, String serviceKey) {
         return apiUsingAcceptRepository.findByApiAndServiceKey(apiSeq, serviceKey);
     }

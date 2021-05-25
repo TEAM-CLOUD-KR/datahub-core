@@ -1,6 +1,7 @@
 package kr.dataportal.datahubcore.implement.service.dashboard;
 
 import kr.dataportal.datahubcore.domain.dashboard.DashBoardList;
+import kr.dataportal.datahubcore.dto.dashboard.DashBoardListDTO;
 import kr.dataportal.datahubcore.implement.repository.dashboard.DashBoardRepository;
 import kr.dataportal.datahubcore.interfaces.dashboard.DashBoardListInterface;
 import lombok.RequiredArgsConstructor;
