@@ -17,7 +17,7 @@ public class DashBoardController {
     private final DashBoardService dashBoardService;
     private final ApiUsingAcceptService apiUsingAcceptService;
 
-    @PostMapping("/new")
+    @PostMapping("")
     public JSONResponse DashBoardCreate(@RequestBody DashBoardListDTO dashBoardListDTO) {
         ApiUsingList byApiSeq = apiUsingAcceptService.findByApiSeq(dashBoardListDTO.getApiSeq());
         DashBoardList dashBoardList = new DashBoardList(
