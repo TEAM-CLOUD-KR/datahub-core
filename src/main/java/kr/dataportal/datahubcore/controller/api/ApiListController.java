@@ -58,7 +58,7 @@ public class ApiListController {
     // API 목록 조회 기능 with User
     @GetMapping("/search")
     public JSONResponse ApiListSearchWithUser(@RequestParam int userSeq) {
-        List<ApiUsingList> byPublisher = apiUsingAcceptService.findByPublisher(userSeq);
+        List<ApiUsingList> byPublisher = apiUsingAcceptService.findByRequestUser(userSeq);
         return new JSONResponse(HttpStatus.OK, byPublisher);
     }
 
