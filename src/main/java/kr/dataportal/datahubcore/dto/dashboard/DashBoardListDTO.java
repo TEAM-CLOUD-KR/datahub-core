@@ -10,7 +10,7 @@ public class DashBoardListDTO {
 
     private final int page;
 
-    private final int itermPerPage;
+    private final int itemPerPage;
 
     private final String labels;
 
