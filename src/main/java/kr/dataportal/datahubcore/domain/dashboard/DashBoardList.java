@@ -28,8 +28,8 @@ public class DashBoardList {
     @Column(name = "page")
     private final int page;
 
-    @Column(name = "itermPerPage")
-    private final int itermPerPage;
+    @Column(name = "item_per_page")
+    private final int itemPerPage;
 
     @Column(name = "labels")
     private final String labels;
@@ -39,4 +39,13 @@ public class DashBoardList {
 
     @Column(name = "type")
     private final String type;
+
+    public DashBoardList() {
+        this.targetApi = null;
+        this.page = 1;
+        this.itemPerPage = 10;
+        this.labels = null;
+        this.datas = null;
+        this.type = null;
+    }
 }
