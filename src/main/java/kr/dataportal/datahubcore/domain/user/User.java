@@ -40,6 +40,9 @@ public class User {
     @Column(name = "erase_date")
     private final LocalDateTime eraseDate;
 
+    @Column(name = "dashboard_content")
+    private String dashboardContent;
+
     public User() {
         this.email = null;
         this.password = null;
