@@ -63,4 +63,9 @@ public class UserController {
     public JSONResponse UserDataHubNameAction(@RequestParam int userSeq) {
         return new JSONResponse(HttpStatus.OK, mapUserDatahubService.findAllDataHubNameByUserSeq(userSeq));
     }
+
+    @GetMapping("/dashboard")
+    public JSONResponse UserDashBoardAction(@RequestParam int userSeq) {
+        return new JSONResponse(HttpStatus.OK, userService.findBySeq(userSeq));
+    }
 }
