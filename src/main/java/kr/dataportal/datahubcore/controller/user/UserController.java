@@ -15,6 +15,7 @@ import kr.dataportal.datahubcore.domain.datacore.JSONResponse;
 import kr.dataportal.datahubcore.domain.user.SignInStatus;
 import kr.dataportal.datahubcore.domain.user.SignUpStatus;
 import kr.dataportal.datahubcore.domain.user.User;
+import kr.dataportal.datahubcore.dto.user.DashBoardContentUpdateDto;
 import kr.dataportal.datahubcore.dto.user.SignInResponse;
 import kr.dataportal.datahubcore.dto.user.UserSignInDto;
 import kr.dataportal.datahubcore.dto.user.UserSignupDto;
@@ -66,6 +67,16 @@ public class UserController {
 
     @GetMapping("/dashboard")
     public JSONResponse UserDashBoardAction(@RequestParam int userSeq) {
-        return new JSONResponse(HttpStatus.OK, userService.findBySeq(userSeq));
+        return new JSONResponse(HttpStatus.OK, userService.findBySeq(userSeq).get());
+    }
+
+    @PostMapping("/dashboard")
+    public JSONResponse UserDashBoardUpdate(@RequestBody DashBoardContentUpdateDto dashBoardContentUpdateDto) {
+        Optional<User> bySeq = userService.findBySeq(dashBoardContentUpdateDto.getUserSeq());
+
+        bySeq.ifPresent(user -> {
+            user.updateDashboardContent(dashBoardContentUpdateDto.getDashboardContent());
+        });
+        return new JSONResponse(HttpStatus.OK, "");
     }
 }

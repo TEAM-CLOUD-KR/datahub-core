@@ -59,6 +59,11 @@ public class User {
         this.eraseDate = null;
     }
 
+    public User updateDashboardContent(String dashboardContent) {
+        this.dashboardContent = dashboardContent;
+        return this;
+    }
+
     public static Optional<User> create(String email, String password_1, String password_2, String nickname) {
         if (password_1.equals(password_2)) {
             return Optional.of(new User(email, password_1, nickname));
