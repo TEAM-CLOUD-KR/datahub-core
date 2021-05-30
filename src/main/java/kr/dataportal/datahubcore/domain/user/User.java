@@ -50,6 +50,7 @@ public class User {
         this.nickname = null;
         regDate = LocalDateTime.now();
         eraseDate = null;
+        this.dashboardContent = null;
     }
 
     public User(String email, String password, String nickname) {
@@ -58,6 +59,7 @@ public class User {
         this.nickname = nickname;
         this.regDate = LocalDateTime.now();
         this.eraseDate = null;
+        this.dashboardContent = null;
     }
 
     public User updateDashboardContent(String dashboardContent) {
