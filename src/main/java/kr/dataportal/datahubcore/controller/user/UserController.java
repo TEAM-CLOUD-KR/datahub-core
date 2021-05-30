@@ -23,6 +23,7 @@ import kr.dataportal.datahubcore.implement.service.map.MapUserDatahubService;
 import kr.dataportal.datahubcore.implement.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -71,6 +72,7 @@ public class UserController {
     }
 
     @PostMapping("/dashboard")
+    @Transactional
     public JSONResponse UserDashBoardUpdate(@RequestBody DashBoardContentUpdateDto dashBoardContentUpdateDto) {
         Optional<User> bySeq = userService.findBySeq(dashBoardContentUpdateDto.getUserSeq());
 

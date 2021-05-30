@@ -19,6 +19,7 @@ public class UserRepository implements UserInterface {
 
     public int signUp(User user) {
         em.persist(user);
+        em.flush();
         return user.getSeq();
     }
 

@@ -67,4 +67,12 @@ public class UserServiceTest {
         User bySeq = userService.findBySeq(17).get();
         assertThat(bySeq.getSeq()).isEqualTo(17);
     }
+
+    @Test
+    void 대시보드아이템수정_테스트() {
+        User user = userService.findByEmail("sun@codefor.kr").get();
+        user.updateDashboardContent("TEST");
+
+        assertThat(user.getDashboardContent()).isEqualTo("TEST");
+    }
 }
