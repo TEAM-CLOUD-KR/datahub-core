@@ -41,6 +41,13 @@ public class UtilController {
         }
         List<?> dataSetColumnDesc;
 
+        if (one == null) {
+            return new JSONResponse(
+                    HttpStatus.OK,
+                    "ERROR"
+            );
+        }
+
         if (one.getDatasetColumn() == null) {
             dataSetColumnDesc = CommonUtil.parseClassProperty(one.getDataset());
         } else {

@@ -55,7 +55,7 @@ public class ApiListServiceTest {
     @Test
     @Transactional(readOnly = false)
     @Rollback(value = true)
-    void ApiList_저장() {
+    void Create_New_Api() {
         Category2nd category2nd = category2ndService.findOne("테스트");
         apiListService.save(new ApiList(
                 "API 이름 테스트123",
@@ -66,10 +66,29 @@ public class ApiListServiceTest {
                 category2nd.getParent(),
                 category2nd,
                 "컴퓨터정보과",
-                userService.findBySeq(36).get())
+                userService.findBySeq(71).get())
         );
         ApiList apiList = apiListService.findByName("API 이름 테스트123");
         assertThat(apiList).isNotNull();
+    }
+
+    @Test
+    @Transactional(readOnly = false)
+    @Rollback(value = true)
+    void Create_New_Api_with_null() {
+        int seq = apiListService.save(new ApiList(
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null)
+        );
+        Optional<ApiList> bySeq = apiListService.findBySeq(seq);
+        assertThat(bySeq.isPresent()).isTrue();
     }
 
 //    @Test

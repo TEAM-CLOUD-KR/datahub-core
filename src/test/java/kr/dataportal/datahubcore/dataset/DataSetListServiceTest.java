@@ -27,11 +27,26 @@ public class DataSetListServiceTest {
     @Rollback(value = true)
     @Transactional(readOnly = false)
     void DataSetList_save() {
-        DataSetList test = new DataSetList("avbcdaf", "{'a':'b'}", "['a']");
+        DataSetList test = new DataSetList(
+                "avbcdaf",
+                "{'a':'b'}",
+                "['a']"
+        );
         dataSetListService.save(test);
         DataSetList test1 = dataSetListService.findOne("avbcdaf");
         assertThat(test1).isNotNull();
         assertThat(test1.getDataset()).isEqualTo("avbcdaf");
+    }
+
+    @Test
+    @Rollback(value = true)
+    @Transactional(readOnly = false)
+    void DataSetList_save_with_null() {
+        int save = dataSetListService.save(new DataSetList(
+                null, null, null, null
+        ));
+        DataSetList one = dataSetListService.findOne(save);
+        assertThat(one).isNull();
     }
 
     @Test
